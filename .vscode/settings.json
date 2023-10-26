@@ -59,6 +59,7 @@
     "dotnet.defaultSolution": "UnknownKnights.sln",
     "cSpell.words": [
         "Behaviour",
+        "cooldown",
         "Targetable",
         "Targeter"
     ]
