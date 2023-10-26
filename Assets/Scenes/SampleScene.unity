@@ -229,6 +229,8 @@ GameObject:
   - component: {fileID: 578772604}
   - component: {fileID: 578772603}
   - component: {fileID: 578772602}
+  - component: {fileID: 578772608}
+  - component: {fileID: 578772607}
   m_Layer: 0
   m_Name: SampleCharacter
   m_TagString: Untagged
@@ -353,3 +355,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 200
+--- !u!114 &578772607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578772600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c00ee194fe74ae283b9278efe0a638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 10000
+--- !u!114 &578772608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578772600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd3f8eec59ff4d14a2d5a67a24defc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 30
+  sqrRange: 1
+  cooldown: 750

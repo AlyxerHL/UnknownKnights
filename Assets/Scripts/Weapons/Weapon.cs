@@ -2,42 +2,43 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-[RequireComponent(typeof(TargetTagFinder))]
 public abstract class Weapon : MonoBehaviour
 {
     [SerializeField]
-    protected float damage = 30f;
+    protected float damage;
 
     [SerializeField]
-    protected float sqrRange = 1f;
+    protected float range;
 
     [SerializeField]
-    private int cooldown = 500;
+    private int cooldown;
 
-    protected TargetTagFinder targeter;
-    private CancellationTokenSource cancellation;
+    protected TargetTag targetTag;
+    private CancellationTokenSource autoFire;
 
     private bool CanAttack =>
-        targeter.TargetTag == null
-        || (transform.position - targeter.TargetTag.transform.position).sqrMagnitude > sqrRange;
+        targetTag != null
+        && (transform.position - targetTag.transform.position).sqrMagnitude > range;
 
     private void Awake()
     {
-        targeter = GetComponent<TargetTagFinder>();
-        cancellation = new CancellationTokenSource();
+        autoFire = new CancellationTokenSource();
+        targetTag = TargetTag.ActiveTargetTags.MinBy(
+            (e) => (transform.position - e.transform.position).sqrMagnitude
+        );
     }
 
     private void OnEnable()
     {
-        Attack(cancellation.Token).Forget();
+        AutoFire(autoFire.Token).Forget();
     }
 
     private void OnDisable()
     {
-        cancellation.Cancel();
+        autoFire.Cancel();
     }
 
-    private async UniTaskVoid Attack(CancellationToken cancellationToken)
+    private async UniTaskVoid AutoFire(CancellationToken cancellationToken)
     {
         while (true)
         {
@@ -47,10 +48,10 @@ public abstract class Weapon : MonoBehaviour
                 continue;
             }
 
-            targeter.TargetTag.Health.TakeDamage(damage);
+            targetTag.Health.TakeDamage(damage);
             await UniTask.Delay(cooldown, cancellationToken: cancellationToken);
         }
     }
 
-    public abstract void Use();
+    protected abstract void Fire();
 }

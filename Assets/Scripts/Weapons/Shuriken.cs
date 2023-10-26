@@ -1,6 +1,6 @@
 public class Shuriken : Weapon
 {
-    public override void Use()
+    protected override void Fire()
     {
         // 대충 공격하는 코드
     }

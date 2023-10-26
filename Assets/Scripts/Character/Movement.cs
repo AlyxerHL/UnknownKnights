@@ -1,16 +1,17 @@
 using UnityEngine;
 
-[RequireComponent(typeof(TargetTagFinder))]
 public class Movement : MonoBehaviour
 {
     [SerializeField]
     private float moveSpeed = 5f;
 
-    private TargetTagFinder targeter;
+    private TargetTag targetTag;
 
-    private void Awake()
+    private void Start()
     {
-        targeter = GetComponent<TargetTagFinder>();
+        targetTag = TargetTag.ActiveTargetTags.MinBy(
+            (e) => (transform.position - e.transform.position).sqrMagnitude
+        );
     }
 
     private void Update()
