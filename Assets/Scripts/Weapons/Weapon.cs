@@ -5,13 +5,13 @@ using UnityEngine;
 public abstract class Weapon : MonoBehaviour
 {
     [SerializeField]
+    private int cooldown;
+
+    [SerializeField]
     protected float damage;
 
     [SerializeField]
     protected float range;
-
-    [SerializeField]
-    private int cooldown;
 
     protected TargetTag targetTag;
     private CancellationTokenSource autoFire;

@@ -3,7 +3,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [SerializeField]
-    private float moveSpeed = 5f;
+    private float speed = 5.5f;
 
     private TargetTag targetTag;
 

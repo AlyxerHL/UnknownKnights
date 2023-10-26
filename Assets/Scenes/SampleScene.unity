@@ -225,14 +225,13 @@ GameObject:
   m_Component:
   - component: {fileID: 578772601}
   - component: {fileID: 578772605}
+  - component: {fileID: 578772603}
   - component: {fileID: 578772606}
   - component: {fileID: 578772604}
-  - component: {fileID: 578772603}
-  - component: {fileID: 578772602}
   - component: {fileID: 578772608}
   - component: {fileID: 578772607}
   m_Layer: 0
-  m_Name: SampleCharacter
+  m_Name: Genji
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,18 +252,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &578772602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 578772600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 663cb3a34c87a4b369edcd69df3fc9ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &578772603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 448a8b35c94e84002bf1bbda8d9e602c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  speed: 6
 --- !u!212 &578772605
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -367,7 +354,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c00ee194fe74ae283b9278efe0a638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 10000
+  cooldown: 8000
+  damage: 70
 --- !u!114 &578772608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +368,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bd3f8eec59ff4d14a2d5a67a24defc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
-  sqrRange: 1
-  cooldown: 750
+  cooldown: 680
+  damage: 10
+  range: 0
