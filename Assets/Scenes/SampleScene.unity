@@ -225,10 +225,10 @@ GameObject:
   m_Component:
   - component: {fileID: 578772601}
   - component: {fileID: 578772605}
+  - component: {fileID: 578772606}
+  - component: {fileID: 578772604}
   - component: {fileID: 578772603}
   - component: {fileID: 578772602}
-  - component: {fileID: 578772604}
-  - component: {fileID: 578772606}
   m_Layer: 0
   m_Name: SampleCharacter
   m_TagString: Untagged

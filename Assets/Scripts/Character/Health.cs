@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
 
-public class CharacterHealth : MonoBehaviour
+public class Health : MonoBehaviour
 {
-    public event Action OnDeath;
-
     [SerializeField]
     private float health = 200f;
+
+    public event Action OnDeath;
 
     public void TakeDamage(float amount)
     {

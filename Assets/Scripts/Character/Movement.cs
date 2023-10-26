@@ -1,16 +1,16 @@
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterTargeter))]
-public class CharacterMovement : MonoBehaviour
+[RequireComponent(typeof(TargetTagFinder))]
+public class Movement : MonoBehaviour
 {
     [SerializeField]
     private float moveSpeed = 5f;
 
-    private CharacterTargeter targeter;
+    private TargetTagFinder targeter;
 
     private void Awake()
     {
-        targeter = GetComponent<CharacterTargeter>();
+        targeter = GetComponent<TargetTagFinder>();
     }
 
     private void Update()
