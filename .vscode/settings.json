@@ -56,5 +56,10 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "UnknownKnights.sln"
+    "dotnet.defaultSolution": "UnknownKnights.sln",
+    "cSpell.words": [
+        "Behaviour",
+        "Targetable",
+        "Targeter"
+    ]
 }
