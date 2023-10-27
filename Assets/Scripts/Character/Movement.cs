@@ -3,16 +3,13 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [SerializeField]
-    private float speed = 5.5f;
+    private float speed;
 
-    private TargetTag targetTag;
+    [SerializeField]
+    private float distanceToTarget;
 
-    private void Start()
-    {
-        targetTag = TargetTag.ActiveTargetTags.MinBy(
-            (e) => (transform.position - e.transform.position).sqrMagnitude
-        );
-    }
+    [SerializeField]
+    private TargetTagFinder targetTagFinder;
 
     private void Update()
     {

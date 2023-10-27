@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
     public event Action OnDeath;
 
     [SerializeField]
-    private float health = 200f;
+    private float health;
 
     public void TakeDamage(float amount)
     {

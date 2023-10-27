@@ -8,29 +8,20 @@ public abstract class Weapon : MonoBehaviour
     private int cooldown;
 
     [SerializeField]
-    protected float damage;
+    protected TargetTagFinder targetTagFinder;
 
-    [SerializeField]
-    protected float range;
-
-    protected TargetTag targetTag;
     private CancellationTokenSource autoFire;
 
-    private bool CanAttack =>
-        targetTag != null
-        && (transform.position - targetTag.transform.position).sqrMagnitude > range;
+    protected abstract bool CanFire { get; }
 
     private void Awake()
     {
         autoFire = new CancellationTokenSource();
-        targetTag = TargetTag.ActiveTargetTags.MinBy(
-            (e) => (transform.position - e.transform.position).sqrMagnitude
-        );
     }
 
     private void OnEnable()
     {
-        AutoFire(autoFire.Token).Forget();
+        FireAutomatically(autoFire.Token).Forget();
     }
 
     private void OnDisable()
@@ -38,20 +29,20 @@ public abstract class Weapon : MonoBehaviour
         autoFire.Cancel();
     }
 
-    private async UniTaskVoid AutoFire(CancellationToken cancellationToken)
+    private async UniTaskVoid FireAutomatically(CancellationToken cancellationToken)
     {
         while (true)
         {
-            if (!CanAttack)
+            if (!CanFire)
             {
                 await UniTask.NextFrame(cancellationToken: cancellationToken);
                 continue;
             }
 
-            targetTag.Health.TakeDamage(damage);
+            await Fire();
             await UniTask.Delay(cooldown, cancellationToken: cancellationToken);
         }
     }
 
-    protected abstract void Fire();
+    protected abstract UniTask<bool> Fire();
 }

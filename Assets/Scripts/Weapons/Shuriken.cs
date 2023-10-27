@@ -1,7 +1,11 @@
+using Cysharp.Threading.Tasks;
+
 public class Shuriken : Weapon
 {
-    protected override void Fire()
+    protected override bool CanFire => throw new System.NotImplementedException();
+
+    protected override UniTask<bool> Fire()
     {
-        // 대충 공격하는 코드
+        throw new System.NotImplementedException();
     }
 }
