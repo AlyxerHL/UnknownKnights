@@ -17,25 +17,18 @@ public class Shuriken : Weapon
     private int burstInterval;
 
     protected override bool CanFire =>
-        targetTagFinder.TargetTag != null
-        && (transform.position - targetTagFinder.TargetTag.transform.position).sqrMagnitude
-            <= range;
+        tagFinder.TargetTag != null
+        && (transform.position - tagFinder.TargetTag.transform.position).sqrMagnitude <= range;
 
     protected override async UniTask Fire()
     {
-        for (int i = 0; i < burstCount; i++)
+        for (int i = 0; i < burstCount && CanFire; i++)
         {
-            if (i != 0)
+            tagFinder.TargetTag.Health.GetDamaged(damage);
+            if (i < burstCount - 1)
             {
                 await UniTask.Delay(burstInterval);
             }
-
-            if (targetTagFinder.TargetTag == null)
-            {
-                break;
-            }
-
-            targetTagFinder.TargetTag.Health.TakeDamage(damage);
         }
     }
 }

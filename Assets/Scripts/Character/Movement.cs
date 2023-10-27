@@ -9,22 +9,19 @@ public class Movement : MonoBehaviour
     private float targetDistance;
 
     [SerializeField]
-    private TargetTagFinder targetTagFinder;
+    private TargetTagFinder tagFinder;
 
     private bool IsWithinTargetDistance =>
-        (targetTagFinder.TargetTag.transform.position - transform.position).sqrMagnitude
-        < targetDistance;
+        (tagFinder.TargetTag.transform.position - transform.position).sqrMagnitude < targetDistance;
 
     private void Update()
     {
-        if (targetTagFinder.TargetTag == null || IsWithinTargetDistance)
+        if (tagFinder.TargetTag == null || IsWithinTargetDistance)
         {
             return;
         }
 
-        var direction = (
-            targetTagFinder.TargetTag.transform.position - transform.position
-        ).normalized;
+        var direction = (tagFinder.TargetTag.transform.position - transform.position).normalized;
         transform.Translate(speed * Time.deltaTime * direction);
     }
 }

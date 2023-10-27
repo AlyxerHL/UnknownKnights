@@ -8,7 +8,7 @@ public abstract class Weapon : MonoBehaviour
     private int cooldown;
 
     [SerializeField]
-    protected TargetTagFinder targetTagFinder;
+    protected TargetTagFinder tagFinder;
 
     private CancellationTokenSource autoFire;
 

@@ -15,7 +15,7 @@ public class Health : MonoBehaviour
         remove => onDeath.RemoveListener(value);
     }
 
-    public void TakeDamage(float amount)
+    public void GetDamaged(float amount)
     {
         health -= amount;
         Debug.Log(health);
