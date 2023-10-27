@@ -35,14 +35,14 @@ public abstract class Weapon : MonoBehaviour
         {
             if (!CanFire)
             {
-                await UniTask.NextFrame(cancellationToken: cancellationToken);
+                await UniTask.NextFrame(cancellationToken);
                 continue;
             }
 
-            await Fire();
+            await Fire(cancellationToken);
             await UniTask.Delay(cooldown, cancellationToken: cancellationToken);
         }
     }
 
-    protected abstract UniTask Fire();
+    protected abstract UniTask Fire(CancellationToken cancellationToken);
 }

@@ -2,11 +2,20 @@ using UnityEngine;
 
 public class DragonBlade : Skill
 {
+    [Header(nameof(DragonBlade))]
     [SerializeField]
     private float damage;
 
     public override void Use()
     {
-        // 대충 용검으로 때리는 코드
+        tagFinder.TargetTag.Health.GetDamaged(damage);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Use();
+        }
     }
 }

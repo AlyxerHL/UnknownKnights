@@ -281,7 +281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   targetDistance: 2
-  targetTagFinder: {fileID: 578772609}
+  tagFinder: {fileID: 578772609}
 --- !u!212 &578772605
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -363,6 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 8000
+  tagFinder: {fileID: 578772609}
   damage: 70
 --- !u!114 &578772608
 MonoBehaviour:
@@ -377,11 +378,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 680
-  targetTagFinder: {fileID: 578772609}
+  tagFinder: {fileID: 578772609}
   damage: 10
   range: 2
   burstCount: 3
-  burstInterval: 100
+  burstInterval: 1000
 --- !u!114 &578772609
 MonoBehaviour:
   m_ObjectHideFlags: 0

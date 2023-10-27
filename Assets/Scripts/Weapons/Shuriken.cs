@@ -1,3 +1,4 @@
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -20,14 +21,14 @@ public class Shuriken : Weapon
         tagFinder.TargetTag != null
         && (transform.position - tagFinder.TargetTag.transform.position).sqrMagnitude <= range;
 
-    protected override async UniTask Fire()
+    protected override async UniTask Fire(CancellationToken cancellationToken)
     {
         for (int i = 0; i < burstCount && CanFire; i++)
         {
             tagFinder.TargetTag.Health.GetDamaged(damage);
             if (i < burstCount - 1)
             {
-                await UniTask.Delay(burstInterval);
+                await UniTask.Delay(burstInterval, cancellationToken: cancellationToken);
             }
         }
     }
