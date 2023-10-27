@@ -10,5 +10,14 @@ public abstract class Skill : MonoBehaviour
     [SerializeField]
     private int cooldown;
 
+    public bool IsCooldown { get; private set; } = true;
+
+    public async UniTask Cooldown()
+    {
+        IsCooldown = true;
+        await UniTask.Delay(cooldown);
+        IsCooldown = false;
+    }
+
     public abstract UniTask Use(CancellationToken cancellationToken);
 }

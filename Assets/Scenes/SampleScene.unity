@@ -229,6 +229,7 @@ GameObject:
   - component: {fileID: 578772609}
   - component: {fileID: 578772606}
   - component: {fileID: 578772604}
+  - component: {fileID: 578772610}
   - component: {fileID: 578772608}
   - component: {fileID: 578772607}
   m_Layer: 0
@@ -363,10 +364,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c00ee194fe74ae283b9278efe0a638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 8000
   tagFinder: {fileID: 578772609}
+  cooldown: 8000
   damage: 70
   range: 2
+  recoveryTime: 900
 --- !u!114 &578772608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,12 +381,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bd3f8eec59ff4d14a2d5a67a24defc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 680
   tagFinder: {fileID: 578772609}
   damage: 10
   range: 4
-  burstCount: 3
-  burstInterval: 100
+  recoveryTime: 680
 --- !u!114 &578772609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,6 +397,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2dee7ae9ad0d4cf4b1da910d1197a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &578772610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578772600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b74e1c4ccd1439498110ff1d0b795b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 578772608}
+  skill: {fileID: 578772607}
 --- !u!1 &1015478365
 GameObject:
   m_ObjectHideFlags: 0
