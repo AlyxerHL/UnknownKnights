@@ -11,17 +11,27 @@ public class Movement : MonoBehaviour
     [SerializeField]
     private TargetTagFinder tagFinder;
 
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
     private bool IsWithinTargetDistance =>
         (tagFinder.TargetTag.transform.position - transform.position).sqrMagnitude < targetDistance;
 
     private void Update()
     {
-        if (tagFinder.TargetTag == null || IsWithinTargetDistance)
+        if (tagFinder.TargetTag == null)
         {
             return;
         }
 
-        var direction = (tagFinder.TargetTag.transform.position - transform.position).normalized;
-        transform.Translate(speed * Time.deltaTime * direction);
+        if (!IsWithinTargetDistance)
+        {
+            var direction = (
+                tagFinder.TargetTag.transform.position - transform.position
+            ).normalized;
+            transform.Translate(speed * Time.deltaTime * direction);
+        }
+
+        spriteRenderer.flipX = tagFinder.TargetTag.transform.position.x < transform.position.x;
     }
 }

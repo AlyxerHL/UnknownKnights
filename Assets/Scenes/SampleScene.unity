@@ -282,6 +282,7 @@ MonoBehaviour:
   speed: 6
   targetDistance: 2
   tagFinder: {fileID: 578772609}
+  spriteRenderer: {fileID: 578772605}
 --- !u!212 &578772605
 SpriteRenderer:
   m_ObjectHideFlags: 0
