@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Shuriken : Weapon
 {
-    [Header(nameof(Shuriken))]
     [SerializeField]
     private float damage;
 
@@ -12,10 +11,7 @@ public class Shuriken : Weapon
     private float range;
 
     [SerializeField]
-    private int burstCount;
-
-    [SerializeField]
-    private int burstInterval;
+    private int recoveryTime;
 
     protected override bool CanFire =>
         tagFinder.TargetTag != null
@@ -23,13 +19,7 @@ public class Shuriken : Weapon
 
     protected override async UniTask Fire(CancellationToken cancellationToken)
     {
-        for (int i = 0; i < burstCount && CanFire; i++)
-        {
-            tagFinder.TargetTag.Health.GetDamaged(damage);
-            if (i < burstCount - 1)
-            {
-                await UniTask.Delay(burstInterval, cancellationToken: cancellationToken);
-            }
-        }
+        tagFinder.TargetTag.Health.GetDamaged(damage);
+        await UniTask.Delay(recoveryTime, cancellationToken: cancellationToken);
     }
 }

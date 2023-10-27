@@ -4,25 +4,24 @@ using UnityEngine;
 
 public class DragonBlade : Skill
 {
-    [Header(nameof(DragonBlade))]
     [SerializeField]
     private float damage;
 
     [SerializeField]
     private float range;
 
-    protected override bool CanUse =>
-        tagFinder.TargetTag != null
-        && (transform.position - tagFinder.TargetTag.transform.position).sqrMagnitude <= range;
+    [SerializeField]
+    private int recoveryTime;
 
-    protected override UniTask Use(CancellationToken cancellationToken)
+    private bool IsWithinRange =>
+        (transform.position - tagFinder.TargetTag.transform.position).sqrMagnitude <= range;
+
+    public override async UniTask Use(CancellationToken cancellationToken)
     {
-        if (!CanUse)
+        if (IsWithinRange)
         {
-            return UniTask.CompletedTask;
+            tagFinder.TargetTag.Health.GetDamaged(damage);
         }
-
-        tagFinder.TargetTag.Health.GetDamaged(damage);
-        return UniTask.CompletedTask;
+        await UniTask.Delay(recoveryTime, cancellationToken: cancellationToken);
     }
 }
