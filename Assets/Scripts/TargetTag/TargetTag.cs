@@ -11,11 +11,6 @@ public class TargetTag : MonoBehaviour
     [field: SerializeField]
     public Health Health { get; private set; }
 
-    private void Awake()
-    {
-        Health = GetComponent<Health>();
-    }
-
     private void OnEnable()
     {
         ActiveTargetTags.Add(this);

@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  targetDistance: 1
+  targetDistance: 2
   targetTagFinder: {fileID: 578772609}
 --- !u!212 &578772605
 SpriteRenderer:
@@ -347,6 +347,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 200
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &578772607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,6 +378,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 680
   targetTagFinder: {fileID: 578772609}
+  damage: 10
+  range: 2
+  burstCount: 3
+  burstInterval: 100
 --- !u!114 &578772609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,6 +426,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 200
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1015478365}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1015478371
 MonoBehaviour:
   m_ObjectHideFlags: 0

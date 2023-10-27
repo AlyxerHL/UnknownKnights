@@ -17,6 +17,10 @@ public class NearestEnemyFinder : TargetTagFinder
         TargetTag = TargetTag.ActiveTargetTags
             .Where((tag) => !tag.IsFriendly)
             .MinBy((tag) => (transform.position - tag.transform.position).sqrMagnitude);
-        TargetTag.Health.OnDeath += FindTargetTag;
+
+        if (TargetTag != null)
+        {
+            TargetTag.Health.OnDeath += FindTargetTag;
+        }
     }
 }
