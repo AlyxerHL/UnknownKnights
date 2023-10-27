@@ -28,14 +28,9 @@ public abstract class Weapon : MonoBehaviour
     {
         while (true)
         {
-            if (!CanFire)
-            {
-                await UniTask.NextFrame(cancellationToken);
-                continue;
-            }
-
-            await Fire(cancellationToken);
             await UniTask.Delay(cooldown, cancellationToken: cancellationToken);
+            await UniTask.WaitUntil(() => CanFire, cancellationToken: cancellationToken);
+            await Fire(cancellationToken);
         }
     }
 

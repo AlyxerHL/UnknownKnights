@@ -28,14 +28,9 @@ public abstract class Skill : MonoBehaviour
     {
         while (true)
         {
-            if (!CanUse)
-            {
-                await UniTask.NextFrame(cancellationToken);
-                continue;
-            }
-
-            await Use(cancellationToken);
             await UniTask.Delay(cooldown, cancellationToken: cancellationToken);
+            await UniTask.WaitUntil(() => CanUse, cancellationToken: cancellationToken);
+            await Use(cancellationToken);
         }
     }
 
