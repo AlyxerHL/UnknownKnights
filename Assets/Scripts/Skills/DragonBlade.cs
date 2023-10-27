@@ -1,3 +1,5 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class DragonBlade : Skill
@@ -6,16 +8,21 @@ public class DragonBlade : Skill
     [SerializeField]
     private float damage;
 
-    public override void Use()
-    {
-        tagFinder.TargetTag.Health.GetDamaged(damage);
-    }
+    [SerializeField]
+    private float range;
 
-    private void Update()
+    protected override bool CanUse =>
+        tagFinder.TargetTag != null
+        && (transform.position - tagFinder.TargetTag.transform.position).sqrMagnitude <= range;
+
+    protected override UniTask Use(CancellationToken cancellationToken)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!CanUse)
         {
-            Use();
+            return UniTask.CompletedTask;
         }
+
+        tagFinder.TargetTag.Health.GetDamaged(damage);
+        return UniTask.CompletedTask;
     }
 }

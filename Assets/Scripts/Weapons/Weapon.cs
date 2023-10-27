@@ -4,20 +4,15 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+    private readonly CancellationTokenSource autoFire = new();
+
     [SerializeField]
     private int cooldown;
 
     [SerializeField]
     protected TargetTagFinder tagFinder;
 
-    private CancellationTokenSource autoFire;
-
     protected abstract bool CanFire { get; }
-
-    private void Awake()
-    {
-        autoFire = new CancellationTokenSource();
-    }
 
     private void OnEnable()
     {
