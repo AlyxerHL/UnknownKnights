@@ -6,13 +6,25 @@ public class Movement : MonoBehaviour
     private float speed;
 
     [SerializeField]
-    private float distanceToTarget;
+    private float targetDistance;
 
     [SerializeField]
     private TargetTagFinder targetTagFinder;
 
+    private bool IsWithinTargetDistance =>
+        (targetTagFinder.TargetTag.transform.position - transform.position).sqrMagnitude
+        < targetDistance;
+
     private void Update()
     {
-        // 대충 타겟이 있으면 타겟 방향으로 이동하는 코드
+        if (targetTagFinder.TargetTag == null || IsWithinTargetDistance)
+        {
+            return;
+        }
+
+        var direction = (
+            targetTagFinder.TargetTag.transform.position - transform.position
+        ).normalized;
+        transform.Translate(speed * Time.deltaTime * direction);
     }
 }

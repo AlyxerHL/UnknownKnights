@@ -2,10 +2,10 @@ using Cysharp.Threading.Tasks;
 
 public class Shuriken : Weapon
 {
-    protected override bool CanFire => throw new System.NotImplementedException();
+    protected override bool CanFire => false;
 
-    protected override UniTask<bool> Fire()
+    protected override async UniTask Fire()
     {
-        throw new System.NotImplementedException();
+        await UniTask.CompletedTask;
     }
 }

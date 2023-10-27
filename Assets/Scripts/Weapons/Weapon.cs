@@ -44,5 +44,5 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
-    protected abstract UniTask<bool> Fire();
+    protected abstract UniTask Fire();
 }
