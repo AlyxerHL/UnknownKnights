@@ -9,17 +9,15 @@ public class DragonBlade : Skill
     private const int RecoveryTime = 900;
 
     [SerializeField]
-    private NearestEnemyFinder finder;
+    private NearestCharacterFinder finder;
 
-    private bool IsWithinRange =>
-        (transform.position - finder.TargetTag.transform.position).sqrMagnitude <= Range;
+    protected override bool CanUse =>
+        finder.Tag != null
+        && (transform.position - finder.Tag.transform.position).sqrMagnitude <= Range;
 
     protected override async UniTask Use(CancellationToken cancellationToken)
     {
-        if (IsWithinRange)
-        {
-            finder.TargetTag.Health.GetDamaged(Damage);
-        }
+        finder.Tag.Health.GetDamaged(Damage);
         await UniTask.Delay(RecoveryTime, cancellationToken: cancellationToken);
     }
 }

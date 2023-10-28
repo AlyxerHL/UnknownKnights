@@ -14,6 +14,7 @@ public abstract class Skill : MonoBehaviour
     [SerializeField]
     private int cooldown;
 
+    private bool isCooldown = true;
     private CancellationTokenSource cancellation;
 
     public event UnityAction OnBeginUse
@@ -28,7 +29,7 @@ public abstract class Skill : MonoBehaviour
         remove => onEndUse.RemoveListener(value);
     }
 
-    public bool IsCooldown { get; private set; } = true;
+    protected abstract bool CanUse { get; }
 
     // TODO: Replace with UI
     private void Update()
@@ -39,32 +40,32 @@ public abstract class Skill : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        cancellation = new();
         Cooldown().Forget();
     }
 
     private void OnDisable()
     {
-        cancellation.Cancel();
+        cancellation?.Cancel();
     }
 
     public async UniTask Cooldown()
     {
-        IsCooldown = true;
+        isCooldown = true;
         await UniTask.Delay(cooldown);
-        IsCooldown = false;
+        isCooldown = false;
     }
 
     public async UniTask UseSkill()
     {
-        if (IsCooldown)
+        if (isCooldown || !CanUse)
         {
             return;
         }
 
         Cooldown().Forget();
+        cancellation = new();
         onBeginUse.Invoke();
         await Use(cancellation.Token);
         onEndUse.Invoke();

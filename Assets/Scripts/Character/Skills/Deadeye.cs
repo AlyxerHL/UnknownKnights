@@ -9,12 +9,14 @@ public class Deadeye : Skill
     private const int RecoveryTime = 300;
 
     [SerializeField]
-    private NearestEnemyFinder finder;
+    private NearestCharacterFinder finder;
+
+    protected override bool CanUse => finder.Tag != null;
 
     protected override async UniTask Use(CancellationToken cancellationToken)
     {
         await UniTask.Delay(AimingTime, cancellationToken: cancellationToken);
-        finder.TargetTag.Health.GetDamaged(Damage);
+        finder.Tag.Health.GetDamaged(Damage);
         await UniTask.Delay(RecoveryTime, cancellationToken: cancellationToken);
     }
 }

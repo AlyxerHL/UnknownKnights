@@ -1,15 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetTag : MonoBehaviour
+public class CharacterTag : MonoBehaviour
 {
-    public static readonly List<TargetTag> ActiveTargetTags = new();
+    public static readonly List<CharacterTag> ActiveTargetTags = new();
 
     [field: SerializeField]
     public bool IsFriendly { get; private set; }
 
     [field: SerializeField]
     public Health Health { get; private set; }
+
+    [field: SerializeField]
+    public Movement Movement { get; private set; }
+
+    [field: SerializeField]
+    public Weapon Weapon { get; private set; }
+
+    [field: SerializeField]
+    public Skill Skill { get; private set; }
 
     private void OnEnable()
     {

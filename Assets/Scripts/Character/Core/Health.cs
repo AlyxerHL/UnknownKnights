@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
     public void GetDamaged(float amount)
     {
         health -= amount;
-        Debug.Log(health);
+        Debug.Log($"{gameObject.name} health: {health}");
         if (health <= 0f)
         {
             onDeath?.Invoke();

@@ -4,12 +4,25 @@ using UnityEngine;
 
 public class Hack : Skill
 {
-    [SerializeField]
-    private NearestEnemyFinder finder;
+    private const float Range = 15f;
+    private const int EffectDuration = 1500;
 
-    protected override UniTask Use(CancellationToken cancellationToken)
+    [SerializeField]
+    private NearestCharacterFinder finder;
+
+    protected override bool CanUse =>
+        finder.Tag != null
+        && (transform.position - finder.Tag.transform.position).sqrMagnitude <= Range;
+
+    protected override async UniTask Use(CancellationToken cancellationToken)
     {
-        // TODO: 적 스턴 걸기
-        return UniTask.CompletedTask;
+        finder.Tag.Movement.enabled = false;
+        finder.Tag.Weapon.enabled = false;
+        finder.Tag.Skill.enabled = false;
+
+        await UniTask.Delay(EffectDuration, cancellationToken: cancellationToken);
+        finder.Tag.Movement.enabled = true;
+        finder.Tag.Weapon.enabled = true;
+        finder.Tag.Skill.enabled = true;
     }
 }

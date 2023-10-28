@@ -104,6 +104,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <IsFriendly>k__BackingField: 1
   <Health>k__BackingField: {fileID: 6171701233884385789}
+  <Movement>k__BackingField: {fileID: 4217649862283822665}
+  <Weapon>k__BackingField: {fileID: 8448233526197495697}
+  <Skill>k__BackingField: {fileID: 2128080687443226698}
 --- !u!114 &7909235214455502689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2dee7ae9ad0d4cf4b1da910d1197a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  findFriendly: 0
 --- !u!114 &6171701233884385789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +135,19 @@ MonoBehaviour:
   health: 1000
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 18946159159150324}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4217649862283822665
 MonoBehaviour:
   m_ObjectHideFlags: 0

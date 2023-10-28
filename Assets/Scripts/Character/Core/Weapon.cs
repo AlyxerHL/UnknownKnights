@@ -14,13 +14,13 @@ public class Weapon : MonoBehaviour
     private int recoveryTime = 680;
 
     [SerializeField]
-    private TargetFinder finder;
+    private CharacterFinder finder;
 
     private CancellationTokenSource cancellation;
 
     private bool CanFire =>
-        finder.TargetTag != null
-        && (transform.position - finder.TargetTag.transform.position).sqrMagnitude <= range;
+        finder.Tag != null
+        && (transform.position - finder.Tag.transform.position).sqrMagnitude <= range;
 
     private void OnEnable()
     {
@@ -42,7 +42,7 @@ public class Weapon : MonoBehaviour
             while (!cancellation.Token.IsCancellationRequested)
             {
                 await UniTask.WaitUntil(() => CanFire, cancellationToken: cancellation.Token);
-                finder.TargetTag.Health.GetDamaged(damage);
+                finder.Tag.Health.GetDamaged(damage);
                 await UniTask.Delay(recoveryTime, cancellationToken: cancellation.Token);
             }
         }
@@ -50,6 +50,6 @@ public class Weapon : MonoBehaviour
 
     public void StopFiring()
     {
-        cancellation.Cancel();
+        cancellation?.Cancel();
     }
 }
