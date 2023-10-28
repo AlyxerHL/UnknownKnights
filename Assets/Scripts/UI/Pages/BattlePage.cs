@@ -2,13 +2,15 @@ using Cysharp.Threading.Tasks;
 
 public class BattlePage : Page
 {
-    public override async UniTask Hide()
+    public override UniTask Hide()
     {
-        await UniTask.CompletedTask;
+        gameObject.SetActive(false);
+        return UniTask.CompletedTask;
     }
 
-    public override async UniTask Show()
+    public override UniTask Show()
     {
-        await UniTask.CompletedTask;
+        gameObject.SetActive(true);
+        return UniTask.CompletedTask;
     }
 }
