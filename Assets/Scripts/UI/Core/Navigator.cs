@@ -31,7 +31,7 @@ public class Navigator : MonoBehaviour
         pageStack.Push(rootPage);
     }
 
-    public static async UniTask Push(string pageName)
+    public static async UniTask PushPage(string pageName)
     {
         if (isNavigating)
         {
@@ -48,7 +48,7 @@ public class Navigator : MonoBehaviour
         isNavigating = false;
     }
 
-    public static async UniTask<Page> Pop()
+    public static async UniTask<Page> PopPage()
     {
         if (isNavigating)
         {
@@ -63,5 +63,15 @@ public class Navigator : MonoBehaviour
         await currentPage.Hide();
         isNavigating = false;
         return currentPage;
+    }
+
+    public static async UniTask ShowPopup(string pageName)
+    {
+        await pageMap[pageName].Show();
+    }
+
+    public static async UniTask HidePopup(string pageName)
+    {
+        await pageMap[pageName].Hide();
     }
 }
