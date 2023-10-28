@@ -6,13 +6,13 @@ using UnityEngine.Events;
 public abstract class Skill : MonoBehaviour
 {
     [SerializeField]
-    private int cooldown;
-
-    [SerializeField]
     private UnityEvent onBeginUse;
 
     [SerializeField]
     private UnityEvent onEndUse;
+
+    [SerializeField]
+    private int cooldown;
 
     private CancellationTokenSource cancellation;
 
