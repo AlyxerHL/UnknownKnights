@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
@@ -11,9 +12,9 @@ public class Navigator : MonoBehaviour
     [SerializeField]
     private Page[] pages;
 
-    private static bool isNavigating;
-    private static Dictionary<string, Page> pageMap;
+    private static readonly Queue<Func<UniTask>> navigationQueue = new();
     private static readonly Stack<Page> pageStack = new();
+    private static Dictionary<string, Page> pageMap;
 
     private void Awake()
     {
@@ -29,40 +30,51 @@ public class Navigator : MonoBehaviour
 
         rootPage.gameObject.SetActive(true);
         pageStack.Push(rootPage);
+        ProcessNavigationQueue().Forget();
     }
 
-    public static async UniTask PushPage(string pageName)
+    private static async UniTaskVoid ProcessNavigationQueue()
     {
-        if (isNavigating)
+        while (true)
         {
-            return;
+            await UniTask.WaitWhile(() => navigationQueue.Count == 0);
+            await navigationQueue.Dequeue().Invoke();
         }
+    }
 
-        isNavigating = true;
-        var currentPage = pageStack.Peek();
-        var newPage = pageMap[pageName];
+    public static async UniTask<Page> PushPage(string pageName)
+    {
+        var tcs = new UniTaskCompletionSource<Page>();
+        navigationQueue.Enqueue(Push);
+        return await tcs.Task;
 
-        pageStack.Push(newPage);
-        await newPage.Show();
-        currentPage.gameObject.SetActive(false);
-        isNavigating = false;
+        async UniTask Push()
+        {
+            var currentPage = pageStack.Peek();
+            var newPage = pageMap[pageName];
+
+            pageStack.Push(newPage);
+            await newPage.Show();
+            currentPage.gameObject.SetActive(false);
+            tcs.TrySetResult(newPage);
+        }
     }
 
     public static async UniTask<Page> PopPage()
     {
-        if (isNavigating)
+        var tcs = new UniTaskCompletionSource<Page>();
+        navigationQueue.Enqueue(Pop);
+        return await tcs.Task;
+
+        async UniTask Pop()
         {
-            return null;
+            var currentPage = pageStack.Pop();
+            var newPage = pageStack.Peek();
+
+            newPage.gameObject.SetActive(true);
+            await currentPage.Hide();
+            tcs.TrySetResult(currentPage);
         }
-
-        isNavigating = true;
-        var currentPage = pageStack.Pop();
-        var newPage = pageStack.Peek();
-
-        newPage.gameObject.SetActive(true);
-        await currentPage.Hide();
-        isNavigating = false;
-        return currentPage;
     }
 
     public static async UniTask ShowPopup(string pageName)
