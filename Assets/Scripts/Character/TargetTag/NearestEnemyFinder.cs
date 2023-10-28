@@ -1,13 +1,13 @@
 using System.Linq;
 
-public class NearestEnemyFinder : TargetTagFinder
+public class NearestEnemyFinder : TargetFinder
 {
     private void Start()
     {
-        FindTargetTag();
+        FindNearestEnemy();
     }
 
-    private void FindTargetTag()
+    private void FindNearestEnemy()
     {
         TargetTag = TargetTag.ActiveTargetTags
             .Where((tag) => !tag.IsFriendly)
@@ -15,7 +15,7 @@ public class NearestEnemyFinder : TargetTagFinder
 
         if (TargetTag != null)
         {
-            TargetTag.Health.OnDeath += FindTargetTag;
+            TargetTag.Health.OnDeath += FindNearestEnemy;
         }
     }
 }

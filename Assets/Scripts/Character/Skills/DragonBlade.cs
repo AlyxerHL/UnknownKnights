@@ -9,7 +9,7 @@ public class DragonBlade : Skill
     private const int RecoveryTime = 900;
 
     [SerializeField]
-    private TargetTagFinder finder;
+    private NearestEnemyFinder finder;
 
     private bool IsWithinRange =>
         (transform.position - finder.TargetTag.transform.position).sqrMagnitude <= Range;

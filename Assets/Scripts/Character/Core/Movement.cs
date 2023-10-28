@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
     private float targetDistance;
 
     [SerializeField]
-    private TargetTagFinder tagFinder;
+    private TargetFinder tagFinder;
 
     [SerializeField]
     private SpriteRenderer spriteRenderer;
