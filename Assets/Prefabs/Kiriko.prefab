@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 6171701233884385789}
   - component: {fileID: 4217649862283822665}
   - component: {fileID: 8448233526197495697}
-  - component: {fileID: 2128080687443226698}
+  - component: {fileID: 7380872655101912786}
   m_Layer: 0
-  m_Name: Cassidy
+  m_Name: Kiriko
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8cc48a45b46424b42a8628453778ea82, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ad37aeb79959b4402aae7fb7c6042009, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
   <Health>k__BackingField: {fileID: 6171701233884385789}
   <Movement>k__BackingField: {fileID: 4217649862283822665}
   <Weapon>k__BackingField: {fileID: 8448233526197495697}
-  <Skill>k__BackingField: {fileID: 2128080687443226698}
+  <Skill>k__BackingField: {fileID: 7380872655101912786}
 --- !u!114 &7909235214455502689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5.5
-  targetDistance: 25
+  targetDistance: 10
   tagFinder: {fileID: 7909235214455502689}
   spriteRenderer: {fileID: 1882709630282880308}
 --- !u!114 &8448233526197495697
@@ -176,11 +176,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7129700b9f25b4fa986f1e7904bf8a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 70
-  range: 25
+  damage: 45
+  range: 10
   recoveryTime: 500
   finder: {fileID: 7909235214455502689}
---- !u!114 &2128080687443226698
+--- !u!114 &7380872655101912786
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,38 +189,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 18946159159150324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43802aea2679f493c8bd7860aaa338cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 31079b3d1400f4f80ad60fcb7bc374ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   onBeginUse:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8448233526197495697}
-        m_TargetAssemblyTypeName: Weapon, Assembly-CSharp
-        m_MethodName: StopFiring
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onEndUse:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8448233526197495697}
-        m_TargetAssemblyTypeName: Weapon, Assembly-CSharp
-        m_MethodName: StopFiring
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  cooldown: 8000
-  finder: {fileID: 7909235214455502689}
+      m_Calls: []
+  cooldown: 4000
