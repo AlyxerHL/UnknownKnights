@@ -15,7 +15,7 @@ public class Health : MonoBehaviour
         remove => onDeath.RemoveListener(value);
     }
 
-    public bool IsImmortal { get; set; }
+    public float DamageRate { get; set; } = 1f;
     private float CurrentHealth { get; set; }
 
     private void Awake()
@@ -25,12 +25,7 @@ public class Health : MonoBehaviour
 
     public void GetDamaged(float amount)
     {
-        if (IsImmortal)
-        {
-            return;
-        }
-
-        CurrentHealth -= amount;
+        CurrentHealth -= amount * DamageRate;
         Debug.Log($"{gameObject.name} health: {CurrentHealth}");
         if (CurrentHealth <= 0f)
         {

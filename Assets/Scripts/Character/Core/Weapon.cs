@@ -18,6 +18,8 @@ public class Weapon : MonoBehaviour
 
     private CancellationTokenSource cancellation;
 
+    public float DamageRate { get; set; } = 1f;
+
     private bool CanFire =>
         finder.Tag != null
         && (transform.position - finder.Tag.transform.position).sqrMagnitude <= range;
@@ -42,7 +44,7 @@ public class Weapon : MonoBehaviour
             while (!cancellation.Token.IsCancellationRequested)
             {
                 await UniTask.WaitUntil(() => CanFire, cancellationToken: cancellation.Token);
-                finder.Tag.Health.GetDamaged(damage);
+                finder.Tag.Health.GetDamaged(damage * DamageRate);
                 await UniTask.Delay(recoveryTime, cancellationToken: cancellation.Token);
             }
         }

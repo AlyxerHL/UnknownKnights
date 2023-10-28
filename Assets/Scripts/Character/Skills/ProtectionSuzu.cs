@@ -15,10 +15,10 @@ public class ProtectionSuzu : Skill
         foreach (var tag in tags)
         {
             tag.Health.GetHealed(HealAmount);
-            tag.Health.IsImmortal = true;
+            tag.Health.DamageRate = 0f;
         }
 
         await UniTask.Delay(EffectDuration, cancellationToken: cancellationToken);
-        tags.ForEach((tag) => tag.Health.IsImmortal = false);
+        tags.ForEach((tag) => tag.Health.DamageRate = 1f);
     }
 }
