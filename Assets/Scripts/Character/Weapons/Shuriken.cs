@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class Shuriken : Weapon
 {
-    [SerializeField]
-    private float damage;
+    private const float Damage = 10f;
+    private const float Range = 4f;
+    private const int RecoveryTime = 680;
 
     [SerializeField]
-    private float range;
+    private NearestEnemyFinder finder;
 
-    [SerializeField]
-    private int recoveryTime;
-
-    protected override bool CanFire =>
-        tagFinder.TargetTag != null
-        && (transform.position - tagFinder.TargetTag.transform.position).sqrMagnitude <= range;
+    private bool CanFire =>
+        finder.TargetTag != null
+        && (transform.position - finder.TargetTag.transform.position).sqrMagnitude <= Range;
 
     protected override async UniTask Fire(CancellationToken cancellationToken)
     {
-        tagFinder.TargetTag.Health.GetDamaged(damage);
-        await UniTask.Delay(recoveryTime, cancellationToken: cancellationToken);
+        await UniTask.WaitUntil(() => CanFire, cancellationToken: cancellationToken);
+        finder.TargetTag.Health.GetDamaged(Damage);
+        await UniTask.Delay(RecoveryTime, cancellationToken: cancellationToken);
     }
 }

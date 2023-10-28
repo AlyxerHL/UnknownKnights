@@ -4,24 +4,22 @@ using UnityEngine;
 
 public class DragonBlade : Skill
 {
-    [SerializeField]
-    private float damage;
+    private const float Damage = 70f;
+    private const float Range = 2f;
+    private const int RecoveryTime = 900;
 
     [SerializeField]
-    private float range;
-
-    [SerializeField]
-    private int recoveryTime;
+    private TargetTagFinder finder;
 
     private bool IsWithinRange =>
-        (transform.position - tagFinder.TargetTag.transform.position).sqrMagnitude <= range;
+        (transform.position - finder.TargetTag.transform.position).sqrMagnitude <= Range;
 
-    public override async UniTask Use(CancellationToken cancellationToken)
+    protected override async UniTask Use(CancellationToken cancellationToken)
     {
         if (IsWithinRange)
         {
-            tagFinder.TargetTag.Health.GetDamaged(damage);
+            finder.TargetTag.Health.GetDamaged(Damage);
         }
-        await UniTask.Delay(recoveryTime, cancellationToken: cancellationToken);
+        await UniTask.Delay(RecoveryTime, cancellationToken: cancellationToken);
     }
 }

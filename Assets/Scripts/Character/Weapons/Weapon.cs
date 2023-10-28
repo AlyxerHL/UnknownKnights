@@ -4,19 +4,36 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    [SerializeField]
-    protected TargetTagFinder tagFinder;
+    private CancellationTokenSource cancellation;
 
-    protected abstract bool CanFire { get; }
-
-    protected abstract UniTask Fire(CancellationToken cancellationToken);
-
-    public async UniTaskVoid FireAutomatically(CancellationToken cancellationToken)
+    private void OnEnable()
     {
-        while (!cancellationToken.IsCancellationRequested)
+        StartFiring();
+    }
+
+    private void OnDisable()
+    {
+        StopFiring();
+    }
+
+    public void StartFiring()
+    {
+        cancellation = new();
+        StartFiring().Forget();
+
+        async UniTaskVoid StartFiring()
         {
-            await UniTask.WaitUntil(() => CanFire, cancellationToken: cancellationToken);
-            await Fire(cancellationToken);
+            while (!cancellation.Token.IsCancellationRequested)
+            {
+                await Fire(cancellation.Token);
+            }
         }
     }
+
+    public void StopFiring()
+    {
+        cancellation.Cancel();
+    }
+
+    protected abstract UniTask Fire(CancellationToken cancellationToken);
 }
