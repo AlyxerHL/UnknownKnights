@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 6171701233884385789}
   - component: {fileID: 4217649862283822665}
   - component: {fileID: 8448233526197495697}
-  - component: {fileID: 4324443216374650618}
+  - component: {fileID: 7843565230642728970}
   m_Layer: 0
-  m_Name: Genji
+  m_Name: Sombra
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 46a58b8799d464653a70522ff0e2f45f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1b73a533f32934098b770e8fb76983c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 448a8b35c94e84002bf1bbda8d9e602c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
-  targetDistance: 1
+  speed: 5.5
+  targetDistance: 15
   tagFinder: {fileID: 7909235214455502689}
   spriteRenderer: {fileID: 1882709630282880308}
 --- !u!114 &8448233526197495697
@@ -160,11 +160,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7129700b9f25b4fa986f1e7904bf8a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 80
-  range: 10
-  recoveryTime: 680
+  damage: 8
+  range: 15
+  recoveryTime: 50
   finder: {fileID: 7909235214455502689}
---- !u!114 &4324443216374650618
+--- !u!114 &7843565230642728970
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 18946159159150324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7c00ee194fe74ae283b9278efe0a638, type: 3}
+  m_Script: {fileID: 11500000, guid: 36b1501c4427c495b9ce23bd7cdcb6a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   onBeginUse:
@@ -206,5 +206,5 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  cooldown: 6000
+  cooldown: 4000
   finder: {fileID: 7909235214455502689}
