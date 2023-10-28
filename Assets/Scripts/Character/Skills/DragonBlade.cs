@@ -5,7 +5,7 @@ using UnityEngine;
 public class DragonBlade : Skill
 {
     private const float Damage = 70f;
-    private const float Range = 2f;
+    private const float Range = 1f;
     private const int RecoveryTime = 900;
 
     [SerializeField]

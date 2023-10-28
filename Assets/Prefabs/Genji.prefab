@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e0294fbdb7d48b298d4159785055bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
+  health: 1000
   onDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  targetDistance: 2
+  targetDistance: 1
   tagFinder: {fileID: 7909235214455502689}
   spriteRenderer: {fileID: 1882709630282880308}
 --- !u!114 &8448233526197495697
@@ -160,8 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7129700b9f25b4fa986f1e7904bf8a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  range: 4
+  damage: 80
+  range: 10
   recoveryTime: 680
   finder: {fileID: 7909235214455502689}
 --- !u!114 &4324443216374650618
