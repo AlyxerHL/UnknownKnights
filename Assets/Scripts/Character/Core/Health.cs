@@ -35,6 +35,5 @@ public class Health : MonoBehaviour
     public void GetHealed(float amount)
     {
         CurrentHealth = Mathf.Min(CurrentHealth + amount, maxHealth);
-        print(CurrentHealth);
     }
 }

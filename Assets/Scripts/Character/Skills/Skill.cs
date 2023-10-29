@@ -32,15 +32,6 @@ public abstract class Skill : MonoBehaviour
 
     protected abstract bool CanUse { get; }
 
-    // TODO: Replace with UI
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            UseSkill().Forget();
-        }
-    }
-
     private void Start()
     {
         Cooldown().Forget();
