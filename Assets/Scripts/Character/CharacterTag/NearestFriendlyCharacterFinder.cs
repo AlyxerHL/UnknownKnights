@@ -15,6 +15,7 @@ public class NearestFriendlyCharacterFinder : SingleCharacterFinder
         }
 
         Tag = CharacterTag.ActiveTags
+            .Where((tag) => tag.gameObject != gameObject)
             .Where((tag) => tag.CompareTag(gameObject.tag))
             .MinBy((tag) => (transform.position - tag.transform.position).sqrMagnitude);
 
