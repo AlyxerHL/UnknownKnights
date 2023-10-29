@@ -2118,7 +2118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845e0e1766d694374a12e56d7c91b0b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characters:
+  charactersSpawnData:
   - <Team>k__BackingField: 0
     <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: 6d2553244090d44879830cd804905870, type: 3}
     <Position>k__BackingField: {x: -6, y: 1, z: 0}

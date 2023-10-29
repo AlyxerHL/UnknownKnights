@@ -1,20 +1,39 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class BattleManager : MonoBehaviour
 {
     [SerializeField]
-    private Character[] characters;
+    private CharacterSpawnData[] charactersSpawnData;
 
     private void Start()
     {
-        characters.ForEach(InitializeCharacter);
+        charactersSpawnData.ForEach(SpawnCharacter);
     }
 
-    private void InitializeCharacter(Character ch)
+    private void SpawnCharacter(CharacterSpawnData data)
     {
-        var gameObject = Instantiate(ch.Prefab, ch.Position, Quaternion.identity, transform);
-        gameObject.tag = ch.Team + nameof(Team);
+        var character = Instantiate(data.Prefab, data.Position, Quaternion.identity, transform);
+        character.tag = data.Team + nameof(Team);
+        character.Health.OnDeath += DetermineBattleStatus;
+    }
+
+    private void DetermineBattleStatus()
+    {
+        if (CharacterTag.ActiveTags.Count == 0)
+        {
+            Debug.Log("Is this even possible?");
+            return;
+        }
+        
+        var firstTag = CharacterTag.ActiveTags.First().tag;
+        var isFinished = CharacterTag.ActiveTags.All((tag) => tag.CompareTag(firstTag));
+
+        if (isFinished)
+        {
+            Debug.Log(firstTag + " Win!");
+        }
     }
 
     public enum Team
@@ -24,7 +43,7 @@ public class BattleManager : MonoBehaviour
     }
 
     [Serializable]
-    private struct Character
+    private struct CharacterSpawnData
     {
         [field: SerializeField]
         public Team Team { get; set; }
