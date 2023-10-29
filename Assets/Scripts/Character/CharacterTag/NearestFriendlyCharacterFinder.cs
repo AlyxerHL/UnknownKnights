@@ -4,18 +4,23 @@ public class NearestFriendlyCharacterFinder : SingleCharacterFinder
 {
     private void Start()
     {
-        FindNearestEnemy();
+        FindNearestFriendlyCharacter();
     }
 
-    private void FindNearestEnemy()
+    private void FindNearestFriendlyCharacter()
     {
-        Tag = CharacterTag.ActiveTargetTags
+        if (Tag != null)
+        {
+            Tag.Health.OnDeath -= FindNearestFriendlyCharacter;
+        }
+
+        Tag = CharacterTag.ActiveTags
             .Where((tag) => tag.CompareTag(gameObject.tag))
             .MinBy((tag) => (transform.position - tag.transform.position).sqrMagnitude);
 
         if (Tag != null)
         {
-            Tag.Health.OnDeath += FindNearestEnemy;
+            Tag.Health.OnDeath += FindNearestFriendlyCharacter;
         }
     }
 }

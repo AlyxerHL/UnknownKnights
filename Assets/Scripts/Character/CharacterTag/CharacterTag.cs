@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CharacterTag : MonoBehaviour
 {
-    public static readonly List<CharacterTag> ActiveTargetTags = new();
+    public static readonly List<CharacterTag> ActiveTags = new();
 
     [field: SerializeField]
     public Health Health { get; private set; }
@@ -19,11 +19,11 @@ public class CharacterTag : MonoBehaviour
 
     private void OnEnable()
     {
-        ActiveTargetTags.Add(this);
+        ActiveTags.Add(this);
     }
 
     private void OnDisable()
     {
-        ActiveTargetTags.Remove(this);
+        ActiveTags.Remove(this);
     }
 }

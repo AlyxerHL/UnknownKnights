@@ -4,11 +4,13 @@ public class FriendlyCharactersFinder : MultipleCharactersFinder
 {
     private void Start()
     {
-        FindNearestEnemy();
+        FindFriendlyCharacters();
     }
 
-    private void FindNearestEnemy()
+    private void FindFriendlyCharacters()
     {
-        Tags = CharacterTag.ActiveTargetTags.Where((tag) => tag.CompareTag(gameObject.tag));
+        Tags.ForEach((tag) => tag.Health.OnDeath -= FindFriendlyCharacters);
+        Tags = CharacterTag.ActiveTags.Where((tag) => tag.CompareTag(gameObject.tag));
+        Tags.ForEach((tag) => tag.Health.OnDeath += FindFriendlyCharacters);
     }
 }
