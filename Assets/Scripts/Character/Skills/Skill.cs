@@ -15,7 +15,8 @@ public abstract class Skill : MonoBehaviour
     private int cooldown;
 
     private bool isCooldown = true;
-    private CancellationTokenSource cancellation;
+    private CancellationTokenSource skillCancellation;
+    private CancellationTokenSource autoSkillCancellation;
 
     public event UnityAction OnBeginUse
     {
@@ -43,11 +44,13 @@ public abstract class Skill : MonoBehaviour
     private void Start()
     {
         Cooldown().Forget();
+        StartAutoSkill().Forget();
     }
 
     private void OnDisable()
     {
-        cancellation?.Cancel();
+        CancelSkill();
+        StopAutoSkill();
     }
 
     public async UniTask Cooldown()
@@ -59,16 +62,37 @@ public abstract class Skill : MonoBehaviour
 
     public async UniTask UseSkill()
     {
-        if (isCooldown || !CanUse)
-        {
-            return;
-        }
-
         Cooldown().Forget();
-        cancellation = new();
+        skillCancellation = new();
         onBeginUse.Invoke();
-        await Use(cancellation.Token);
+        await Use(skillCancellation.Token);
         onEndUse.Invoke();
+    }
+
+    public void CancelSkill()
+    {
+        skillCancellation?.Cancel();
+    }
+
+    public async UniTask StartAutoSkill()
+    {
+        autoSkillCancellation = new();
+        StartAutoSkill().Forget();
+
+        while (!autoSkillCancellation.Token.IsCancellationRequested)
+        {
+            await UniTask.WaitWhile(
+                () => isCooldown || !CanUse,
+                cancellationToken: autoSkillCancellation.Token
+            );
+
+            await UseSkill();
+        }
+    }
+
+    public void StopAutoSkill()
+    {
+        autoSkillCancellation?.Cancel();
     }
 
     protected abstract UniTask Use(CancellationToken cancellationToken);
