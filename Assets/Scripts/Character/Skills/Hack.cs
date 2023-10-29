@@ -8,7 +8,7 @@ public class Hack : Skill
     private const int EffectDuration = 1500;
 
     [SerializeField]
-    private NearestCharacterFinder finder;
+    private NearestEnemyCharacterFinder finder;
 
     protected override bool CanUse =>
         finder.Tag != null

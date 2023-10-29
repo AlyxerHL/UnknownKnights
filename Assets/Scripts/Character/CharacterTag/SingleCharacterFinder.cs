@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class CharacterFinder : MonoBehaviour
+public abstract class SingleCharacterFinder : MonoBehaviour
 {
     public CharacterTag Tag { get; protected set; }
 }

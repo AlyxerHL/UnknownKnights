@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
     private int recoveryTime = 680;
 
     [SerializeField]
-    private CharacterFinder finder;
+    private SingleCharacterFinder finder;
 
     private CancellationTokenSource cancellation;
 

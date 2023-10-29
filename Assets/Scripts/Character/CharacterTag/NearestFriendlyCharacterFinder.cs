@@ -1,11 +1,7 @@
 using System.Linq;
-using UnityEngine;
 
-public class NearestCharacterFinder : CharacterFinder
+public class NearestFriendlyCharacterFinder : SingleCharacterFinder
 {
-    [SerializeField]
-    private bool findFriendly;
-
     private void Start()
     {
         FindNearestEnemy();
@@ -14,7 +10,7 @@ public class NearestCharacterFinder : CharacterFinder
     private void FindNearestEnemy()
     {
         Tag = CharacterTag.ActiveTargetTags
-            .Where((tag) => tag.IsFriendly == findFriendly)
+            .Where((tag) => tag.CompareTag(gameObject.tag))
             .MinBy((tag) => (transform.position - tag.transform.position).sqrMagnitude);
 
         if (Tag != null)

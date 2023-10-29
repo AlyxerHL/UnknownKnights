@@ -9,7 +9,7 @@ public class DragonBlade : Skill
     private const int RecoveryTime = 900;
 
     [SerializeField]
-    private NearestCharacterFinder finder;
+    private NearestEnemyCharacterFinder finder;
 
     protected override bool CanUse =>
         finder.Tag != null

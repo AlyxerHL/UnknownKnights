@@ -7,7 +7,7 @@ public class NanoBoost : Skill
     private const int EffectDuration = 4000;
 
     [SerializeField]
-    private NearestCharacterFinder finder;
+    private NearestFriendlyCharacterFinder finder;
 
     protected override bool CanUse => true;
 

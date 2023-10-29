@@ -9,7 +9,7 @@ public class Deadeye : Skill
     private const int RecoveryTime = 300;
 
     [SerializeField]
-    private NearestCharacterFinder finder;
+    private NearestEnemyCharacterFinder finder;
 
     protected override bool CanUse => finder.Tag != null;
 

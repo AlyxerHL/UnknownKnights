@@ -6,9 +6,6 @@ public class CharacterTag : MonoBehaviour
     public static readonly List<CharacterTag> ActiveTargetTags = new();
 
     [field: SerializeField]
-    public bool IsFriendly { get; private set; }
-
-    [field: SerializeField]
     public Health Health { get; private set; }
 
     [field: SerializeField]

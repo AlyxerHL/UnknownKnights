@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1882709630282880308}
   - component: {fileID: 3734937030930835064}
   - component: {fileID: 7909235214455502689}
+  - component: {fileID: 4370349916302172419}
   - component: {fileID: 6171701233884385789}
   - component: {fileID: 4217649862283822665}
   - component: {fileID: 8448233526197495697}
@@ -103,7 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3f77ce2dcbc42669321a2d59947ed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <IsFriendly>k__BackingField: 1
   <Health>k__BackingField: {fileID: 6171701233884385789}
   <Movement>k__BackingField: {fileID: 4217649862283822665}
   <Weapon>k__BackingField: {fileID: 8448233526197495697}
@@ -120,7 +120,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2dee7ae9ad0d4cf4b1da910d1197a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  findFriendly: 0
+--- !u!114 &4370349916302172419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18946159159150324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626d9b908fdd042aaab10a32ad9f1eef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6171701233884385789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,7 +211,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   cooldown: 10000
-  finder: {fileID: 1330827280978489837}
+  finder: {fileID: 4370349916302172419}
 --- !u!1 &6105885087109193379
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,4 +256,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2dee7ae9ad0d4cf4b1da910d1197a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  findFriendly: 1

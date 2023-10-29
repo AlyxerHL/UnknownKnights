@@ -9,7 +9,7 @@ public class Railgun : Skill
     private const int RecoveryTime = 650;
 
     [SerializeField]
-    private NearestCharacterFinder finder;
+    private NearestEnemyCharacterFinder finder;
 
     protected override bool CanUse =>
         finder.Tag != null
