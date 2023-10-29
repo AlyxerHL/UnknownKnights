@@ -1,16 +1,6 @@
-using Cysharp.Threading.Tasks;
+using Slash.Unity.DataBind.Core.Data;
 
-public class BattlePage : Page
+public class BattlePage : Context
 {
-    public override UniTask Hide()
-    {
-        gameObject.SetActive(false);
-        return UniTask.CompletedTask;
-    }
-
-    public override UniTask Show()
-    {
-        gameObject.SetActive(true);
-        return UniTask.CompletedTask;
-    }
+    //
 }
