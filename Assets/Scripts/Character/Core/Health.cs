@@ -26,7 +26,6 @@ public class Health : MonoBehaviour
     public void GetDamaged(float amount)
     {
         CurrentHealth -= amount * DamageRate;
-        Debug.Log($"{gameObject.name} health: {CurrentHealth}");
         if (CurrentHealth <= 0f)
         {
             onDeath?.Invoke();
@@ -35,7 +34,6 @@ public class Health : MonoBehaviour
 
     public void GetHealed(float amount)
     {
-        CurrentHealth += amount;
-        Debug.Log($"{gameObject.name} health: {CurrentHealth}");
+        CurrentHealth = Mathf.Min(CurrentHealth + amount, maxHealth);
     }
 }

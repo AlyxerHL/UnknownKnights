@@ -168,7 +168,6 @@ GameObject:
   - component: {fileID: 1262034409372647045}
   - component: {fileID: 7666410794183714005}
   - component: {fileID: 8036343369031958302}
-  - component: {fileID: 1101591912610871928}
   - component: {fileID: 2521323884264530907}
   m_Layer: 5
   m_Name: Text
@@ -294,24 +293,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &1101591912610871928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1333313306135688342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d595aecc698984de19b9af6dddec0918, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Argument:
-    Constant: 
-    Path: TimeInSeconds
-    Provider: {fileID: 0}
-    Reference: {fileID: 0}
-    Type: 0
 --- !u!114 &2521323884264530907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,10 +307,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     Constant: 
-    Path: 
-    Provider: {fileID: 1101591912610871928}
+    Path: TimeInSeconds
+    Provider: {fileID: 0}
     Reference: {fileID: 0}
-    Type: 1
+    Type: 0
   TargetBinding:
     Constant: 
     Path: 

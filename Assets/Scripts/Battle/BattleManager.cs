@@ -26,7 +26,7 @@ public class BattleManager : MonoBehaviour
             Debug.Log("Is this even possible?");
             return;
         }
-        
+
         var firstTag = CharacterTag.ActiveTags.First().tag;
         var isFinished = CharacterTag.ActiveTags.All((tag) => tag.CompareTag(firstTag));
 
