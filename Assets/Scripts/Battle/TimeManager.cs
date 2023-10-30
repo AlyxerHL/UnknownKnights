@@ -15,15 +15,19 @@ public class TimeManager : MonoBehaviour
     {
         timeRemaining = timeLimit;
         OnTimeChanged?.Invoke(timeRemaining);
+
+        DOTween
+            .To(() => timeRemaining, (x) => timeRemaining = x, 0, timeLimit)
+            .SetEase(Ease.Linear)
+            .OnUpdate(() => OnTimeChanged?.Invoke(timeRemaining))
+            .OnComplete(() => Debug.Log("Time's up!"));
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            timeRemaining -= 1;
-            OnTimeChanged?.Invoke(timeRemaining);
-            Debug.Log(timeRemaining);
+            Time.timeScale = Time.timeScale == 0 ? 1 : 0;
         }
     }
 }

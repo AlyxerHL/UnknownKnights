@@ -66,6 +66,7 @@
         "Shuriken",
         "Suzu",
         "Targetable",
-        "Targeter"
+        "Targeter",
+        "Tweening"
     ]
 }
