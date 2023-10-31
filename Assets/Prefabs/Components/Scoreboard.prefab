@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1401886485628366222}
+  - component: {fileID: 2460287001265123930}
   m_Layer: 5
   m_Name: Scoreboard
   m_TagString: Untagged
@@ -38,6 +39,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2460287001265123930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452986461727043933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a7feb43ff684d1189a35f347a1ece0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  greenTeamHealth: {fileID: 7641984349638915287}
+  redTeamHealth: {fileID: 2783846423976910117}
+  timer: {fileID: 8036343369031958302}
 --- !u!1 &766231212041009921
 GameObject:
   m_ObjectHideFlags: 0
