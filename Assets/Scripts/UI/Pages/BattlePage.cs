@@ -18,6 +18,12 @@ public class BattlePage : Page
     [SerializeField]
     private Image redTeamHealth;
 
+    [SerializeField]
+    private CharacterSpawner characterSpawner;
+
+    [SerializeField]
+    private BattleTimer battleTimer;
+
     private void Awake()
     {
         timeLeft.OnValueChanged += (time) =>
@@ -29,11 +35,7 @@ public class BattlePage : Page
 
         greenTeamScore.OnValueChanged += (score) => greenTeamHealth.fillAmount = score;
         redTeamScore.OnValueChanged += (score) => redTeamHealth.fillAmount = score;
-    }
-
-    private void Start()
-    {
-        BattleScene.Instance.OnTimeChanged += (time) => timeLeft.Value = time;
+        battleTimer.OnTimeChanged += (time) => timeLeft.Value = time;
     }
 
     public override UniTask Hide()

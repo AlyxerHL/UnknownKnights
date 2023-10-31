@@ -411,9 +411,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1677754511}
+  - component: {fileID: 1677754513}
   - component: {fileID: 1677754512}
   m_Layer: 0
-  m_Name: BattleScene
+  m_Name: BattleManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -446,7 +447,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845e0e1766d694374a12e56d7c91b0b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 60
   charactersSpawnData:
   - <Team>k__BackingField: 0
     <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: 6d2553244090d44879830cd804905870, type: 3}
@@ -466,6 +466,19 @@ MonoBehaviour:
   - <Team>k__BackingField: 1
     <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: d3335c3f7695847eab8c47b79b5c174c, type: 3}
     <Position>k__BackingField: {x: 8, y: 0, z: 0}
+--- !u!114 &1677754513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677754510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44bd64bdec3d046599b901cf04041513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeLimitInSeconds: 60
 --- !u!224 &285674233678169655
 RectTransform:
   m_ObjectHideFlags: 0
@@ -704,6 +717,8 @@ MonoBehaviour:
   timer: {fileID: 869100457575215157}
   greenTeamHealth: {fileID: 685868426572545020}
   redTeamHealth: {fileID: 4984161419654320654}
+  characterSpawner: {fileID: 1677754512}
+  battleTimer: {fileID: 1677754513}
 --- !u!1 &1114037793788548110
 GameObject:
   m_ObjectHideFlags: 0
