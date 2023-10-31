@@ -745,7 +745,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3617a7b1e8e04a13a54f65f478ca8b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreboard: {fileID: 4732658736231513457}
+  timer: {fileID: 0}
+  greenTeamHealth: {fileID: 0}
+  redTeamHealth: {fileID: 0}
 --- !u!1 &1114037793788548110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1526,21 +1528,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &4732658736231513457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7331909931775065718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3a7feb43ff684d1189a35f347a1ece0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: {fileID: 869100457575215157}
-  greenTeamHealth: {fileID: 685868426572545020}
-  redTeamHealth: {fileID: 4984161419654320654}
 --- !u!222 &4772374870569329327
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2058,7 +2045,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8141938171586667173}
-  - component: {fileID: 4732658736231513457}
   m_Layer: 5
   m_Name: Scoreboard
   m_TagString: Untagged
