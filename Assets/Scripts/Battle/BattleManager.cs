@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,16 +8,20 @@ public class BattleManager : MonoBehaviour
     [SerializeField]
     private CharacterSpawnData[] charactersSpawnData;
 
+    public static event Action<IEnumerable<CharacterTag>> OnInitialized;
+
     private void Start()
     {
-        charactersSpawnData.ForEach(SpawnCharacter);
+        var characters = charactersSpawnData.Select(SpawnCharacter).ToList();
+        OnInitialized?.Invoke(characters);
     }
 
-    private void SpawnCharacter(CharacterSpawnData data)
+    private CharacterTag SpawnCharacter(CharacterSpawnData data)
     {
         var character = Instantiate(data.Prefab, data.Position, Quaternion.identity, transform);
-        character.tag = data.Team + nameof(Team);
+        character.tag = data.Team.ToString();
         character.Health.OnDeath += DetermineBattleStatus;
+        return character;
     }
 
     private void DetermineBattleStatus()

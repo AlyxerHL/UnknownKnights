@@ -53,6 +53,8 @@ public abstract class Skill : MonoBehaviour
 
     public async UniTask UseSkill()
     {
+        Debug.Log($"{name} used skill!");
+
         Cooldown().Forget();
         skillCancellation = new();
         onBeginUse.Invoke();
