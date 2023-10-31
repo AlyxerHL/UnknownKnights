@@ -13,10 +13,10 @@ public class NanoBoost : Skill
 
     protected override async UniTask Use(CancellationToken cancellationToken)
     {
-        var damageBuffID = finder.Tag.ApplyDamageBuff(2f);
-        var damageReductionID = finder.Tag.ApplyDamageReduction(0.5f);
+        var damageBuffID = finder.Tag.SetDamageBuff(2f);
+        var damageReductionID = finder.Tag.SetDamageReduction(0.5f);
         await UniTask.Delay(EffectDuration, cancellationToken: cancellationToken);
-        finder.Tag.RemoveDamageBuff(damageBuffID);
-        finder.Tag.RemoveDamageReduction(damageReductionID);
+        finder.Tag.ClearDamageBuff(damageBuffID);
+        finder.Tag.ClearDamageReduction(damageReductionID);
     }
 }

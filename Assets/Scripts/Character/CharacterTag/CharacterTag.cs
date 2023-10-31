@@ -33,61 +33,61 @@ public class CharacterTag : MonoBehaviour
         ActiveTags.Remove(this);
     }
 
-    public int ApplyStun()
+    public int SetStun()
     {
         var effectID = NewEffectID();
         stunEffectIDs.Add(effectID);
-        RefreshStun();
+        ApplyStun();
         return effectID;
     }
 
-    public void RemoveStun(int effectID)
+    public void ClearStun(int effectID)
     {
         stunEffectIDs.Remove(effectID);
-        RefreshStun();
+        ApplyStun();
     }
 
-    public int ApplyDamageBuff(float multiplier)
+    public int SetDamageBuff(float multiplier)
     {
         var effectID = NewEffectID();
         damageBuffEffectIDs.Add(effectID, multiplier);
-        RefreshDamageBuff();
+        ApplyDamageBuff();
         return effectID;
     }
 
-    public void RemoveDamageBuff(int effectID)
+    public void ClearDamageBuff(int effectID)
     {
         damageBuffEffectIDs.Remove(effectID);
-        RefreshDamageBuff();
+        ApplyDamageBuff();
     }
 
-    public int ApplyDamageReduction(float multiplier)
+    public int SetDamageReduction(float multiplier)
     {
         var effectID = NewEffectID();
         damageReductionEffectIDs.Add(effectID, multiplier);
-        RefreshDamageReduction();
+        ApplyDamageReduction();
         return effectID;
     }
 
-    public void RemoveDamageReduction(int effectID)
+    public void ClearDamageReduction(int effectID)
     {
         damageReductionEffectIDs.Remove(effectID);
-        RefreshDamageReduction();
+        ApplyDamageReduction();
     }
 
-    private void RefreshStun()
+    private void ApplyStun()
     {
         Movement.enabled = stunEffectIDs.Count == 0;
         Weapon.enabled = stunEffectIDs.Count == 0;
         Skill.enabled = stunEffectIDs.Count == 0;
     }
 
-    private void RefreshDamageBuff()
+    private void ApplyDamageBuff()
     {
         Weapon.DamageMultiplier = damageBuffEffectIDs.Values.Aggregate(1f, Multiply);
     }
 
-    private void RefreshDamageReduction()
+    private void ApplyDamageReduction()
     {
         Health.DamageReduction = damageReductionEffectIDs.Values.Aggregate(1f, Multiply);
     }
