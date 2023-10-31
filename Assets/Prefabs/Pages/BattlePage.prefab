@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6101462109129891023}
   - component: {fileID: 6298005537978439405}
   - component: {fileID: 3051715421029428795}
-  - component: {fileID: 1838218743502269844}
   m_Layer: 5
   m_Name: BattlePage
   m_TagString: Untagged
@@ -105,20 +104,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1838218743502269844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 299250741629685406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0353de6b5a9e8fa4eaded0354856aa9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  contextType: BattlePage, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  createContext: 1
 --- !u!1 &1245080992085476177
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +395,6 @@ GameObject:
   - component: {fileID: 1315930173542407711}
   - component: {fileID: 4944571396233036410}
   - component: {fileID: 3518209203693900251}
-  - component: {fileID: 3156432337141663146}
   m_Layer: 5
   m_Name: PauseButton
   m_TagString: Untagged
@@ -521,21 +505,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3156432337141663146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3350111358850660537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c7aab7f21b3fc04b9d4949573c4830c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AdditionalArguments: []
-  Path: Pause
-  Target: {fileID: 3518209203693900251}
 --- !u!1 &4778327880759786299
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,7 +865,6 @@ GameObject:
   - component: {fileID: 1701458453155677396}
   - component: {fileID: 4969736758636477039}
   - component: {fileID: 6401764634766965969}
-  - component: {fileID: 7105083329513979741}
   m_Layer: 5
   m_Name: GameSpeedButton
   m_TagString: Untagged
@@ -1007,21 +975,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7105083329513979741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5818509982184320809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c7aab7f21b3fc04b9d4949573c4830c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AdditionalArguments: []
-  Path: ToggleGameSpeed
-  Target: {fileID: 6401764634766965969}
 --- !u!1 &6571350103491848903
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,7 +987,6 @@ GameObject:
   - component: {fileID: 4326179000712682501}
   - component: {fileID: 2438226891119124408}
   - component: {fileID: 5590115250331040861}
-  - component: {fileID: 9104631495906450525}
   m_Layer: 5
   m_Name: AutoSkillButton
   m_TagString: Untagged
@@ -1145,21 +1097,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &9104631495906450525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6571350103491848903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c7aab7f21b3fc04b9d4949573c4830c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AdditionalArguments: []
-  Path: ToggleAutoSkill
-  Target: {fileID: 5590115250331040861}
 --- !u!1 &7934244884092162259
 GameObject:
   m_ObjectHideFlags: 0

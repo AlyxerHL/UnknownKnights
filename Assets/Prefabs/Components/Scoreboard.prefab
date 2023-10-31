@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1401886485628366222}
-  - component: {fileID: 6513711871646531323}
   m_Layer: 5
   m_Name: Scoreboard
   m_TagString: Untagged
@@ -39,20 +38,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6513711871646531323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452986461727043933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0353de6b5a9e8fa4eaded0354856aa9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  contextType: Scoreboard, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  createContext: 1
 --- !u!1 &766231212041009921
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,7 +49,6 @@ GameObject:
   - component: {fileID: 202547320240899823}
   - component: {fileID: 1406113475106558836}
   - component: {fileID: 7641984349638915287}
-  - component: {fileID: 4371174026115883753}
   m_Layer: 5
   m_Name: GreenTeam
   m_TagString: Untagged
@@ -130,33 +114,6 @@ MonoBehaviour:
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4371174026115883753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 766231212041009921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6641a5718a78ca440a924e816259c0fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Data:
-    Constant: 
-    Path: GreenTeamScore
-    Provider: {fileID: 0}
-    Reference: {fileID: 0}
-    Type: 0
-  TargetBinding:
-    Constant: 
-    Path: 
-    Provider: {fileID: 0}
-    Reference: {fileID: 7641984349638915287}
-    Type: 3
-  constantTarget: {fileID: 0}
-  ChangePerSecond: 1
-  NeverReduceFillAmount: 0
 --- !u!1 &1333313306135688342
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +125,6 @@ GameObject:
   - component: {fileID: 1262034409372647045}
   - component: {fileID: 7666410794183714005}
   - component: {fileID: 8036343369031958302}
-  - component: {fileID: 2521323884264530907}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -293,31 +249,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &2521323884264530907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1333313306135688342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c26e4a44e9491654a945d71b81a23552, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Data:
-    Constant: 
-    Path: TimeInSeconds
-    Provider: {fileID: 0}
-    Reference: {fileID: 0}
-    Type: 0
-  TargetBinding:
-    Constant: 
-    Path: 
-    Provider: {fileID: 0}
-    Reference: {fileID: 8036343369031958302}
-    Type: 3
-  constantTarget: {fileID: 0}
 --- !u!1 &7748580462692838191
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +260,6 @@ GameObject:
   - component: {fileID: 4898464949074036879}
   - component: {fileID: 8529734568270896585}
   - component: {fileID: 2783846423976910117}
-  - component: {fileID: 1436800587490768794}
   m_Layer: 5
   m_Name: RedTeam
   m_TagString: Untagged
@@ -395,33 +325,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1436800587490768794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7748580462692838191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6641a5718a78ca440a924e816259c0fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Data:
-    Constant: 
-    Path: RedTeamScore
-    Provider: {fileID: 0}
-    Reference: {fileID: 0}
-    Type: 0
-  TargetBinding:
-    Constant: 
-    Path: 
-    Provider: {fileID: 0}
-    Reference: {fileID: 2783846423976910117}
-    Type: 3
-  constantTarget: {fileID: 0}
-  ChangePerSecond: 1
-  NeverReduceFillAmount: 0
 --- !u!1 &8919543216067443120
 GameObject:
   m_ObjectHideFlags: 0
