@@ -28,5 +28,7 @@ public class Scoreboard : MonoBehaviour
 
         greenTeamScore.OnValueChanged += (score) => greenTeamHealth.fillAmount = score;
         redTeamScore.OnValueChanged += (score) => redTeamHealth.fillAmount = score;
+
+        TimeManager.OnTimeChanged += (time) => timeLeft.Value = time;
     }
 }
