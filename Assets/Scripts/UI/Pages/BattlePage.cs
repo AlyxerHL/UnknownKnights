@@ -29,8 +29,11 @@ public class BattlePage : Page
 
         greenTeamScore.OnValueChanged += (score) => greenTeamHealth.fillAmount = score;
         redTeamScore.OnValueChanged += (score) => redTeamHealth.fillAmount = score;
+    }
 
-        TimeManager.OnTimeChanged += (time) => timeLeft.Value = time;
+    private void Start()
+    {
+        BattleScene.Instance.OnTimeChanged += (time) => timeLeft.Value = time;
     }
 
     public override UniTask Hide()

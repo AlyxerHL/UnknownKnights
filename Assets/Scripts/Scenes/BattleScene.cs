@@ -1,15 +1,44 @@
 using System;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
-public class BattleManager : MonoBehaviour
+public class BattleScene : MonoBehaviour
 {
     [SerializeField]
+    private int timeLimit;
+
+    [SerializeField]
     private CharacterSpawnData[] charactersSpawnData;
+
+    private int timeLeft;
+
+    public static BattleScene Instance { get; private set; }
+
+    public event Action<int> OnTimeChanged;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
 
     private void Start()
     {
         charactersSpawnData.ForEach(SpawnCharacter);
+
+        timeLeft = timeLimit;
+        OnTimeChanged?.Invoke(timeLeft);
+
+        DOTween
+            .To(() => timeLeft, (x) => timeLeft = x, 0, timeLimit)
+            .SetEase(Ease.Linear)
+            .OnUpdate(() => OnTimeChanged?.Invoke(timeLeft))
+            .OnComplete(() => Debug.Log("Time's up!"));
     }
 
     private void SpawnCharacter(CharacterSpawnData data)
