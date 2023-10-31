@@ -22,7 +22,7 @@ public class BattlePage : Page
     private CharacterSpawner characterSpawner;
 
     [SerializeField]
-    private BattleTimer battleTimer;
+    private BattleReferee referee;
 
     private void Awake()
     {
@@ -35,7 +35,7 @@ public class BattlePage : Page
 
         greenTeamScore.OnValueChanged += (score) => greenTeamHealth.fillAmount = score;
         redTeamScore.OnValueChanged += (score) => redTeamHealth.fillAmount = score;
-        battleTimer.OnTimeChanged += (time) => timeLeft.Value = time;
+        referee.OnTimeChanged += (time) => timeLeft.Value = time;
     }
 
     public override UniTask Hide()

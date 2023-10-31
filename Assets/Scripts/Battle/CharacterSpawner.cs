@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using UnityEngine;
 
 public class CharacterSpawner : MonoBehaviour
@@ -29,24 +28,7 @@ public class CharacterSpawner : MonoBehaviour
         );
 
         character.tag = tag;
-        character.Health.OnDeath += DetermineBattleStatus;
-    }
-
-    private void DetermineBattleStatus()
-    {
-        if (CharacterTag.ActiveTags.Count == 0)
-        {
-            Debug.Log("Is this even possible?");
-            return;
-        }
-
-        var firstTag = CharacterTag.ActiveTags.First().tag;
-        var isFinished = CharacterTag.ActiveTags.All((tag) => tag.CompareTag(firstTag));
-
-        if (isFinished)
-        {
-            Debug.Log(firstTag + " Win!");
-        }
+        character.Health.OnDeath += BattleReferee.MakeDecision;
     }
 
     [Serializable]
