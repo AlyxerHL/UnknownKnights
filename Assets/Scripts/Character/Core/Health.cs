@@ -15,8 +15,8 @@ public class Health : MonoBehaviour
         remove => onDeath.RemoveListener(value);
     }
 
-    public float DamageRate { get; set; } = 1f;
-    private float CurrentHealth { get; set; }
+    public float CurrentHealth { get; set; }
+    public float DamageReduction { get; set; } = 1f;
 
     private void Awake()
     {
@@ -25,7 +25,7 @@ public class Health : MonoBehaviour
 
     public void GetDamaged(float amount)
     {
-        CurrentHealth -= amount * DamageRate;
+        CurrentHealth -= amount * DamageReduction;
         if (CurrentHealth <= 0f)
         {
             onDeath?.Invoke();

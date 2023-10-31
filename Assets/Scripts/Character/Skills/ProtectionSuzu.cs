@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -14,13 +15,16 @@ public class ProtectionSuzu : Skill
 
     protected override async UniTask Use(CancellationToken cancellationToken)
     {
-        foreach (var tag in finder.Tags)
-        {
-            tag.Health.GetHealed(HealAmount);
-            tag.Health.DamageRate = 0f;
-        }
+        var effects = finder.Tags.Select(
+            (tag) =>
+            {
+                tag.Health.GetHealed(HealAmount);
+                var id = tag.ApplyDamageReduction(0f);
+                return (tag, id);
+            }
+        );
 
         await UniTask.Delay(EffectDuration, cancellationToken: cancellationToken);
-        finder.Tags.ForEach((tag) => tag.Health.DamageRate = 1f);
+        effects.ForEach((effect) => effect.tag.RemoveDamageReduction(effect.id));
     }
 }

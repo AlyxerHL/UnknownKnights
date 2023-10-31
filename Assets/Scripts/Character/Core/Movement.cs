@@ -26,9 +26,7 @@ public class Movement : MonoBehaviour
 
         if (!IsWithinTargetDistance)
         {
-            var direction = (
-                tagFinder.Tag.transform.position - transform.position
-            ).normalized;
+            var direction = (tagFinder.Tag.transform.position - transform.position).normalized;
             transform.Translate(speed * Time.deltaTime * direction);
         }
 

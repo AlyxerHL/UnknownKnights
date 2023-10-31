@@ -16,13 +16,8 @@ public class Hack : Skill
 
     protected override async UniTask Use(CancellationToken cancellationToken)
     {
-        finder.Tag.Movement.enabled = false;
-        finder.Tag.Weapon.enabled = false;
-        finder.Tag.Skill.enabled = false;
-
+        var effectID = finder.Tag.ApplyStun();
         await UniTask.Delay(EffectDuration, cancellationToken: cancellationToken);
-        finder.Tag.Movement.enabled = true;
-        finder.Tag.Weapon.enabled = true;
-        finder.Tag.Skill.enabled = true;
+        finder.Tag.RemoveStun(effectID);
     }
 }
