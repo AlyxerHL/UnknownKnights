@@ -8,17 +8,27 @@ public class CharacterSpawner : MonoBehaviour
     public static readonly string RedTeamTag = "RedTeam";
 
     [SerializeField]
-    private CharacterSpawnData[] charactersSpawnData;
+    private SpawnData[] greenTeamCharacters;
+
+    [SerializeField]
+    private SpawnData[] redTeamCharacters;
 
     private void Start()
     {
-        charactersSpawnData.ForEach(SpawnCharacter);
+        greenTeamCharacters.ForEach((spawnData) => SpawnCharacter(spawnData, GreenTeamTag));
+        redTeamCharacters.ForEach((spawnData) => SpawnCharacter(spawnData, RedTeamTag));
     }
 
-    private void SpawnCharacter(CharacterSpawnData data)
+    private void SpawnCharacter(SpawnData spawnData, string tag)
     {
-        var character = Instantiate(data.Prefab, data.Position, Quaternion.identity, transform);
-        character.tag = data.Team.ToString();
+        var character = Instantiate(
+            spawnData.Prefab,
+            spawnData.Position,
+            Quaternion.identity,
+            transform
+        );
+
+        character.tag = tag;
         character.Health.OnDeath += DetermineBattleStatus;
     }
 
@@ -39,18 +49,9 @@ public class CharacterSpawner : MonoBehaviour
         }
     }
 
-    public enum Team
-    {
-        Green,
-        Red
-    }
-
     [Serializable]
-    private struct CharacterSpawnData
+    private struct SpawnData
     {
-        [field: SerializeField]
-        public Team Team { get; set; }
-
         [field: SerializeField]
         public CharacterTag Prefab { get; set; }
 
