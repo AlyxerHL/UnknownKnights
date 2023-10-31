@@ -19,12 +19,12 @@ public class ProtectionSuzu : Skill
             (tag) =>
             {
                 tag.Health.GetHealed(HealAmount);
-                var id = tag.SetDamageReduction(0f);
-                return (tag, id);
+                var id = tag.Effector.SetDamageReduction(0f);
+                return (effecter: tag.Effector, id);
             }
         );
 
         await UniTask.Delay(EffectDuration, cancellationToken: cancellationToken);
-        effects.ForEach((effect) => effect.tag.ClearDamageReduction(effect.id));
+        effects.ForEach((e) => e.effecter.ClearDamageReduction(e.id));
     }
 }
