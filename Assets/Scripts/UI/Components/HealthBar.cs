@@ -32,7 +32,7 @@ public class HealthBar : MonoBehaviour
     {
         target = health.transform;
         image.fillAmount = health.CurrentHealth / health.MaxHealth;
-        health.OnHealthChanged += (_) => image.fillAmount = health.CurrentHealth / health.MaxHealth;
-        health.OnDeath += () => gameObject.SetActive(false);
+        health.Changed += (_) => image.fillAmount = health.CurrentHealth / health.MaxHealth;
+        health.Dead += () => gameObject.SetActive(false);
     }
 }

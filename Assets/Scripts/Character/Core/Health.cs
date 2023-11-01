@@ -1,28 +1,13 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
     [field: SerializeField]
     public float MaxHealth { get; private set; }
 
-    [SerializeField]
-    private UnityEvent onDeath;
-
-    [SerializeField]
-    private UnityEvent<float> onHealthChanged;
-
-    public event UnityAction OnDeath
-    {
-        add => onDeath.AddListener(value);
-        remove => onDeath.RemoveListener(value);
-    }
-
-    public event UnityAction<float> OnHealthChanged
-    {
-        add => onHealthChanged.AddListener(value);
-        remove => onHealthChanged.RemoveListener(value);
-    }
+    public event Action Dead;
+    public event Action<float> Changed;
 
     public float CurrentHealth { get; private set; }
     public float DamageReduction { get; set; } = 1f;
@@ -36,11 +21,12 @@ public class Health : MonoBehaviour
     {
         amount = Mathf.Min(CurrentHealth, amount * DamageReduction);
         CurrentHealth -= amount;
-        onHealthChanged?.Invoke(-amount);
+        Changed?.Invoke(-amount);
 
         if (CurrentHealth.Approximately(0f))
         {
-            onDeath?.Invoke();
+            gameObject.SetActive(false);
+            Dead?.Invoke();
         }
     }
 
@@ -48,6 +34,6 @@ public class Health : MonoBehaviour
     {
         amount = Mathf.Min(MaxHealth - CurrentHealth, amount);
         CurrentHealth += amount;
-        onHealthChanged?.Invoke(amount);
+        Changed?.Invoke(amount);
     }
 }

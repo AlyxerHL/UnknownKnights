@@ -11,7 +11,7 @@ public class NearestEnemyCharacterFinder : SingleCharacterFinder
     {
         if (Tag != null)
         {
-            Tag.Health.OnDeath -= FindNearestEnemyCharacter;
+            Tag.Health.Dead -= FindNearestEnemyCharacter;
         }
 
         Tag = CharacterTag.ActiveTags
@@ -20,7 +20,7 @@ public class NearestEnemyCharacterFinder : SingleCharacterFinder
 
         if (Tag != null)
         {
-            Tag.Health.OnDeath += FindNearestEnemyCharacter;
+            Tag.Health.Dead += FindNearestEnemyCharacter;
         }
     }
 }

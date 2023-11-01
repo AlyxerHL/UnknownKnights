@@ -13,7 +13,7 @@ public class CharacterSpawner : MonoBehaviour
     [SerializeField]
     private SpawnData[] redTeamCharacters;
 
-    public event Action<CharacterTag> OnCharacterSpawned;
+    public event Action<CharacterTag> CharacterSpawned;
 
     private void Start()
     {
@@ -31,8 +31,8 @@ public class CharacterSpawner : MonoBehaviour
         );
 
         character.tag = tag;
-        character.Health.OnDeath += BattleReferee.MakeDecision;
-        OnCharacterSpawned?.Invoke(character);
+        character.Health.Dead += BattleReferee.MakeDecision;
+        CharacterSpawned?.Invoke(character);
     }
 
     [Serializable]

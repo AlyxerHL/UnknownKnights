@@ -11,7 +11,7 @@ public class NearestFriendlyCharacterFinder : SingleCharacterFinder
     {
         if (Tag != null)
         {
-            Tag.Health.OnDeath -= FindNearestFriendlyCharacter;
+            Tag.Health.Dead -= FindNearestFriendlyCharacter;
         }
 
         Tag = CharacterTag.ActiveTags
@@ -21,7 +21,7 @@ public class NearestFriendlyCharacterFinder : SingleCharacterFinder
 
         if (Tag != null)
         {
-            Tag.Health.OnDeath += FindNearestFriendlyCharacter;
+            Tag.Health.Dead += FindNearestFriendlyCharacter;
         }
     }
 }

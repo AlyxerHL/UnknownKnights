@@ -44,20 +44,20 @@ public class BattlePageScoreboard : MonoBehaviour
 
     public void Initialize(CharacterSpawner characterSpawner, BattleReferee battleReferee)
     {
-        characterSpawner.OnCharacterSpawned += (character) =>
+        characterSpawner.CharacterSpawned += (character) =>
         {
             if (character.CompareTag(CharacterSpawner.GreenTeamTag))
             {
                 greenTeamMaxHealth += character.Health.MaxHealth;
                 greenTeamTotalHealth.Value = greenTeamMaxHealth;
-                character.Health.OnHealthChanged += (changeAmount) =>
+                character.Health.Changed += (changeAmount) =>
                     greenTeamTotalHealth.Value += changeAmount;
             }
             else if (character.CompareTag(CharacterSpawner.RedTeamTag))
             {
                 redTeamMaxHealth += character.Health.MaxHealth;
                 redTeamTotalHealth.Value = redTeamMaxHealth;
-                character.Health.OnHealthChanged += (changeAmount) =>
+                character.Health.Changed += (changeAmount) =>
                     redTeamTotalHealth.Value += changeAmount;
             }
         };
