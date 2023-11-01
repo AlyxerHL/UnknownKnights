@@ -11,6 +11,9 @@ public class BattlePage : Page
     private readonly State<float> redTeamTotalHealth = new();
 
     [SerializeField]
+    private HealthBar healthBarPrefab;
+
+    [SerializeField]
     private TextMeshProUGUI timer;
 
     [SerializeField]
@@ -80,6 +83,9 @@ public class BattlePage : Page
                 character.Health.OnHealthChanged += (changeAmount) =>
                     redTeamTotalHealth.Value += changeAmount;
             }
+
+            var healthBar = Instantiate(healthBarPrefab, transform);
+            healthBar.Initialize(character.Health);
         };
     }
 

@@ -12,8 +12,6 @@ public class Health : MonoBehaviour
     [SerializeField]
     private UnityEvent<float> onHealthChanged;
 
-    private float currentHealth;
-
     public event UnityAction OnDeath
     {
         add => onDeath.AddListener(value);
@@ -26,20 +24,21 @@ public class Health : MonoBehaviour
         remove => onHealthChanged.RemoveListener(value);
     }
 
+    public float CurrentHealth { get; private set; }
     public float DamageReduction { get; set; } = 1f;
 
     private void Awake()
     {
-        currentHealth = MaxHealth;
+        CurrentHealth = MaxHealth;
     }
 
     public void GetDamaged(float amount)
     {
-        amount = Mathf.Min(currentHealth, amount * DamageReduction);
-        currentHealth -= amount;
+        amount = Mathf.Min(CurrentHealth, amount * DamageReduction);
+        CurrentHealth -= amount;
         onHealthChanged?.Invoke(-amount);
 
-        if (currentHealth.Approximately(0f))
+        if (CurrentHealth.Approximately(0f))
         {
             onDeath?.Invoke();
         }
@@ -47,8 +46,8 @@ public class Health : MonoBehaviour
 
     public void GetHealed(float amount)
     {
-        amount = Mathf.Min(MaxHealth - currentHealth, amount);
-        currentHealth += amount;
+        amount = Mathf.Min(MaxHealth - CurrentHealth, amount);
+        CurrentHealth += amount;
         onHealthChanged?.Invoke(amount);
     }
 }
