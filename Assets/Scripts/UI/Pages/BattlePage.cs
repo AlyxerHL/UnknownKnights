@@ -1,5 +1,6 @@
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,8 +26,13 @@ public class BattlePage : Page
     [SerializeField]
     private BattleReferee referee;
 
+    [SerializeField]
+    private float healthFillDuration;
+
     private float greenTeamMaxHealth;
     private float redTeamMaxHealth;
+    private Tweener greenTeamHealthTweener;
+    private Tweener redTeamHealthTweener;
 
     private void Awake()
     {
@@ -37,16 +43,24 @@ public class BattlePage : Page
             timer.text = $"{minutes:00}:{seconds:00}";
         };
 
+        greenTeamHealthTweener = greenTeamHealth
+            .DOFillAmount(1f, healthFillDuration)
+            .SetAutoKill(false);
+
         greenTeamTotalHealth.OnValueChanged += (totalHealth) =>
         {
             var fillAmount = totalHealth / greenTeamMaxHealth;
-            greenTeamHealth.fillAmount = fillAmount;
+            greenTeamHealthTweener.ChangeEndValue(fillAmount, true).Restart();
         };
+
+        redTeamHealthTweener = redTeamHealth
+            .DOFillAmount(1f, healthFillDuration)
+            .SetAutoKill(false);
 
         redTeamTotalHealth.OnValueChanged += (totalHealth) =>
         {
             var fillAmount = totalHealth / redTeamMaxHealth;
-            redTeamHealth.fillAmount = fillAmount;
+            redTeamHealthTweener.ChangeEndValue(fillAmount, true).Restart();
         };
     }
 

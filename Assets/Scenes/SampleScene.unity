@@ -745,6 +745,7 @@ MonoBehaviour:
   redTeamHealth: {fileID: 4984161419654320654}
   characterSpawner: {fileID: 585552564}
   referee: {fileID: 1677754513}
+  healthFillDuration: 0.1
 --- !u!1 &1114037793788548110
 GameObject:
   m_ObjectHideFlags: 0
