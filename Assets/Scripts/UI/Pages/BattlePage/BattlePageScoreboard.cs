@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class BattlePageScoreboard : MonoBehaviour
 {
-    private readonly State<float> greenTeamTotalHealth = new();
-    private readonly State<float> redTeamTotalHealth = new();
-
     [SerializeField]
     private TextMeshProUGUI timer;
 
@@ -20,8 +17,11 @@ public class BattlePageScoreboard : MonoBehaviour
     [SerializeField]
     private float gaugeSpeed;
 
+    private readonly State<float> greenTeamTotalHealth = new();
+    private readonly State<float> redTeamTotalHealth = new();
     private float greenTeamMaxHealth;
     private float redTeamMaxHealth;
+
     private Tweener greenTeamGaugeTweener;
     private Tweener redTeamGaugeTweener;
 
