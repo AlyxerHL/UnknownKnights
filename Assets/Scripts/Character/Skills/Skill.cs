@@ -47,18 +47,23 @@ public abstract class Skill : MonoBehaviour
     {
         skillQueue.Enqueue(this);
         await UniTask.WaitUntil(() => skillQueue.Peek() == this);
-        Time.timeScale = 0f;
-        weapon.enabled = false;
-
-        await (BeganUsing?.Invoke() ?? UniTask.CompletedTask);
-        Cooldown().Forget();
-        skillCancellation = new();
-        await UseInternal(skillCancellation.Token);
-        await (EndedUsing?.Invoke() ?? UniTask.CompletedTask);
-
-        weapon.enabled = true;
-        Time.timeScale = 1f;
+        await Use();
         skillQueue.Dequeue();
+
+        async UniTask Use()
+        {
+            Time.timeScale = 0f;
+            weapon.enabled = false;
+            await (BeganUsing?.Invoke() ?? UniTask.CompletedTask);
+
+            Cooldown().Forget();
+            skillCancellation = new();
+            await UseInternal(skillCancellation.Token);
+
+            await (EndedUsing?.Invoke() ?? UniTask.CompletedTask);
+            weapon.enabled = true;
+            Time.timeScale = 1f;
+        }
     }
 
     public void Cancel()
