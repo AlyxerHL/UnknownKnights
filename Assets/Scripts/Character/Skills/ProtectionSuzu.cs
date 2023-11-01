@@ -15,16 +15,9 @@ public class ProtectionSuzu : Skill
 
     protected override async UniTask Use(CancellationToken cancellationToken)
     {
-        var effects = finder.Tags.Select(
-            (tag) =>
-            {
-                tag.Health.GetHealed(HealAmount);
-                var id = tag.Effector.SetDamageReduction(0f);
-                return (effecter: tag.Effector, id);
-            }
-        );
-
+        var effects = finder.Tags.Select((tag) => (tag, id: tag.Effector.SetDamageReduction(0f)));
+        effects.ForEach((e) => e.tag.Health.GetHealed(HealAmount));
         await UniTask.Delay(EffectDuration, cancellationToken: cancellationToken);
-        effects.ForEach((e) => e.effecter.ClearDamageReduction(e.id));
+        effects.ForEach((e) => e.tag.Effector.ClearDamageReduction(e.id));
     }
 }
