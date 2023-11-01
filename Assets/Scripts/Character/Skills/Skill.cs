@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public abstract class Skill : MonoBehaviour
 {
+    private static readonly Queue<Skill> skillQueue = new();
+
     [SerializeField]
     private Weapon weapon;
 
@@ -42,17 +45,20 @@ public abstract class Skill : MonoBehaviour
 
     public async UniTask Use()
     {
+        skillQueue.Enqueue(this);
+        await UniTask.WaitUntil(() => skillQueue.Peek() == this);
         Time.timeScale = 0f;
         weapon.enabled = false;
-        await (BeganUsing?.Invoke() ?? UniTask.CompletedTask);
 
+        await (BeganUsing?.Invoke() ?? UniTask.CompletedTask);
         Cooldown().Forget();
         skillCancellation = new();
         await UseInternal(skillCancellation.Token);
-
         await (EndedUsing?.Invoke() ?? UniTask.CompletedTask);
+
         weapon.enabled = true;
         Time.timeScale = 1f;
+        skillQueue.Dequeue();
     }
 
     public void Cancel()
