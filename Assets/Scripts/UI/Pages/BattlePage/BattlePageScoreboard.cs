@@ -1,70 +1,49 @@
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattlePage : Page
+public class BattlePageScoreboard : MonoBehaviour
 {
     private readonly State<float> greenTeamTotalHealth = new();
     private readonly State<float> redTeamTotalHealth = new();
 
     [SerializeField]
-    private HealthBar healthBarPrefab;
-
-    [SerializeField]
     private TextMeshProUGUI timer;
 
     [SerializeField]
-    private Image greenTeamHealth;
+    private Image greenTeamGauge;
 
     [SerializeField]
-    private Image redTeamHealth;
+    private Image redTeamGauge;
 
     [SerializeField]
-    private CharacterSpawner characterSpawner;
-
-    [SerializeField]
-    private BattleReferee referee;
-
-    [SerializeField]
-    private float healthFillDuration;
+    private float gaugeSpeed;
 
     private float greenTeamMaxHealth;
     private float redTeamMaxHealth;
-    private Tweener greenTeamHealthTweener;
-    private Tweener redTeamHealthTweener;
+    private Tweener greenTeamGaugeTweener;
+    private Tweener redTeamGaugeTweener;
 
     private void Awake()
     {
-        greenTeamHealthTweener = greenTeamHealth
-            .DOFillAmount(1f, healthFillDuration)
-            .SetAutoKill(false);
-
+        greenTeamGaugeTweener = greenTeamGauge.DOFillAmount(1f, gaugeSpeed).SetAutoKill(false);
         greenTeamTotalHealth.OnValueChanged += (totalHealth) =>
         {
             var fillAmount = totalHealth / greenTeamMaxHealth;
-            greenTeamHealthTweener.ChangeEndValue(fillAmount, true).Restart();
+            greenTeamGaugeTweener.ChangeEndValue(fillAmount, true).Restart();
         };
 
-        redTeamHealthTweener = redTeamHealth
-            .DOFillAmount(1f, healthFillDuration)
-            .SetAutoKill(false);
-
+        redTeamGaugeTweener = redTeamGauge.DOFillAmount(1f, gaugeSpeed).SetAutoKill(false);
         redTeamTotalHealth.OnValueChanged += (totalHealth) =>
         {
             var fillAmount = totalHealth / redTeamMaxHealth;
-            redTeamHealthTweener.ChangeEndValue(fillAmount, true).Restart();
+            redTeamGaugeTweener.ChangeEndValue(fillAmount, true).Restart();
         };
+    }
 
-        referee.OnTimeChanged += (time) =>
-        {
-            var ceilTime = Mathf.CeilToInt(time);
-            var minutes = ceilTime / 60;
-            var seconds = ceilTime % 60;
-            timer.text = $"{minutes:00}:{seconds:00}";
-        };
-
+    public void Initialize(CharacterSpawner characterSpawner, BattleReferee battleReferee)
+    {
         characterSpawner.OnCharacterSpawned += (character) =>
         {
             if (character.CompareTag(CharacterSpawner.GreenTeamTag))
@@ -81,21 +60,14 @@ public class BattlePage : Page
                 character.Health.OnHealthChanged += (changeAmount) =>
                     redTeamTotalHealth.Value += changeAmount;
             }
-
-            var healthBar = Instantiate(healthBarPrefab, transform);
-            healthBar.Initialize(character.Health);
         };
-    }
 
-    public override UniTask Hide()
-    {
-        gameObject.SetActive(false);
-        return UniTask.CompletedTask;
-    }
-
-    public override UniTask Show()
-    {
-        gameObject.SetActive(true);
-        return UniTask.CompletedTask;
+        battleReferee.OnTimeChanged += (time) =>
+        {
+            var ceilTime = Mathf.CeilToInt(time);
+            var minutes = ceilTime / 60;
+            var seconds = ceilTime % 60;
+            timer.text = $"{minutes:00}:{seconds:00}";
+        };
     }
 }
