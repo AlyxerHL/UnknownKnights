@@ -25,6 +25,11 @@ public class DragonBlade : Skill
         {
             finder.Character.Health.GetDamaged(damage);
         }
-        await UniTask.WaitForSeconds(recoveryTime, cancellationToken: cancellationToken);
+
+        await UniTask.WaitForSeconds(
+            recoveryTime,
+            cancellationToken: cancellationToken,
+            ignoreTimeScale: true
+        );
     }
 }

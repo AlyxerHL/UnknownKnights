@@ -1,27 +1,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
-// use duration instead of set and clear
-public class Effector : MonoBehaviour
+public class Effector
 {
-    [SerializeField]
-    private Health health;
-
-    [SerializeField]
-    private Movement movement;
-
-    [SerializeField]
-    private Weapon weapon;
-
-    [SerializeField]
-    private Skill skill;
+    private readonly Health health;
+    private readonly Movement movement;
+    private readonly Weapon weapon;
+    private readonly Skill skill;
 
     private readonly HashSet<int> stunEffectIDs = new();
     private readonly Dictionary<int, float> damageBuffEffectIDs = new();
     private readonly Dictionary<int, float> damageReductionEffectIDs = new();
     private int newEffectID = 0;
+
+    public Effector(Character character)
+    {
+        health = character.Health;
+        movement = character.Movement;
+        weapon = character.Weapon;
+        skill = character.Skill;
+    }
 
     public async UniTask ApplyStun(float duration)
     {

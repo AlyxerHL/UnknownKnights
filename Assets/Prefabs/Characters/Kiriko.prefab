@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3734937030930835064}
   - component: {fileID: 7909235214455502689}
   - component: {fileID: 7690431393178877130}
-  - component: {fileID: 7927118660609924215}
   - component: {fileID: 6171701233884385789}
   - component: {fileID: 4217649862283822665}
   - component: {fileID: 8448233526197495697}
@@ -105,7 +104,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Health>k__BackingField: {fileID: 6171701233884385789}
-  <Effector>k__BackingField: {fileID: 7927118660609924215}
+  <Movement>k__BackingField: {fileID: 4217649862283822665}
+  <Weapon>k__BackingField: {fileID: 8448233526197495697}
+  <Skill>k__BackingField: {fileID: 7380872655101912786}
 --- !u!114 &7909235214455502689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,22 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be788f403726d45f1aa1c68f198972bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7927118660609924215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 18946159159150324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49a94a7b4de84405d81ec1b5b6b643b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: {fileID: 6171701233884385789}
-  movement: {fileID: 4217649862283822665}
-  weapon: {fileID: 8448233526197495697}
-  skill: {fileID: 7380872655101912786}
 --- !u!114 &6171701233884385789
 MonoBehaviour:
   m_ObjectHideFlags: 0
