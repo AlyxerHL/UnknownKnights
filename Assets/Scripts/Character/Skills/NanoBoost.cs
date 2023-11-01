@@ -16,7 +16,7 @@ public class NanoBoost : Skill
     [SerializeField]
     private NearestFriendlyCharacterFinder finder;
 
-    protected override UniTask Use(CancellationToken cancellationToken)
+    protected override UniTask UseInternal(CancellationToken cancellationToken)
     {
         if (finder.Character == null)
         {

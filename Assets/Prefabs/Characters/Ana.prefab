@@ -204,12 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a789c10d37a64559b9e4a964f05813c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onBeginUse:
-    m_PersistentCalls:
-      m_Calls: []
-  onEndUse:
-    m_PersistentCalls:
-      m_Calls: []
+  weapon: {fileID: 8448233526197495697}
   cooldown: 10
   damageBuff: 2
   damageReduction: 0.5

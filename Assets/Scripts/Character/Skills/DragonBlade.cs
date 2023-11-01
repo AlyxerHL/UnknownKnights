@@ -19,7 +19,7 @@ public class DragonBlade : Skill
     private bool IsWithinRange =>
         (transform.position - finder.Character.transform.position).sqrMagnitude <= range;
 
-    protected override async UniTask Use(CancellationToken cancellationToken)
+    protected override async UniTask UseInternal(CancellationToken cancellationToken)
     {
         if (finder.Character != null && IsWithinRange)
         {

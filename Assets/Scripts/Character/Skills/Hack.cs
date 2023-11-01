@@ -16,7 +16,7 @@ public class Hack : Skill
     private bool IsWithinRange =>
         (transform.position - finder.Character.transform.position).sqrMagnitude <= range;
 
-    protected override UniTask Use(CancellationToken _)
+    protected override UniTask UseInternal(CancellationToken _)
     {
         if (finder.Character == null || !IsWithinRange)
         {

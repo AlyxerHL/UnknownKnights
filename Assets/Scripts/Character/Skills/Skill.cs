@@ -1,15 +1,12 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Events;
 
 public abstract class Skill : MonoBehaviour
 {
     [SerializeField]
-    private UnityEvent onBeginUse;
-
-    [SerializeField]
-    private UnityEvent onEndUse;
+    private Weapon weapon;
 
     [SerializeField]
     private float cooldown;
@@ -18,17 +15,7 @@ public abstract class Skill : MonoBehaviour
     private CancellationTokenSource skillCancellation;
     private CancellationTokenSource autoSkillCancellation;
 
-    public event UnityAction OnBeginUse
-    {
-        add => onBeginUse.AddListener(value);
-        remove => onBeginUse.RemoveListener(value);
-    }
-
-    public event UnityAction OnEndUse
-    {
-        add => onEndUse.AddListener(value);
-        remove => onEndUse.RemoveListener(value);
-    }
+    public event Action Used;
 
     private void Start()
     {
@@ -38,7 +25,7 @@ public abstract class Skill : MonoBehaviour
 
     private void OnDisable()
     {
-        CancelSkill();
+        Cancel();
         StopAutoSkill();
     }
 
@@ -49,18 +36,18 @@ public abstract class Skill : MonoBehaviour
         isCooldown = false;
     }
 
-    public async UniTask UseSkill()
+    public async UniTask Use()
     {
-        Debug.Log($"{name} used skill!");
-
+        Used?.Invoke();
         Cooldown().Forget();
         skillCancellation = new();
-        onBeginUse.Invoke();
-        await Use(skillCancellation.Token);
-        onEndUse.Invoke();
+
+        weapon.enabled = false;
+        await UseInternal(skillCancellation.Token);
+        weapon.enabled = true;
     }
 
-    public void CancelSkill()
+    public void Cancel()
     {
         skillCancellation?.Cancel();
     }
@@ -76,7 +63,7 @@ public abstract class Skill : MonoBehaviour
                 cancellationToken: autoSkillCancellation.Token
             );
 
-            await UseSkill();
+            await Use();
         }
     }
 
@@ -85,5 +72,5 @@ public abstract class Skill : MonoBehaviour
         autoSkillCancellation?.Cancel();
     }
 
-    protected abstract UniTask Use(CancellationToken cancellationToken);
+    protected abstract UniTask UseInternal(CancellationToken cancellationToken);
 }

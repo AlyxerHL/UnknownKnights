@@ -203,12 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31079b3d1400f4f80ad60fcb7bc374ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onBeginUse:
-    m_PersistentCalls:
-      m_Calls: []
-  onEndUse:
-    m_PersistentCalls:
-      m_Calls: []
+  weapon: {fileID: 8448233526197495697}
   cooldown: 4
   healAmount: 40
   effectDuration: 0.85

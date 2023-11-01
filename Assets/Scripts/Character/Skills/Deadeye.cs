@@ -16,7 +16,7 @@ public class Deadeye : Skill
     [SerializeField]
     private NearestEnemyCharacterFinder finder;
 
-    protected override async UniTask Use(CancellationToken cancellationToken)
+    protected override async UniTask UseInternal(CancellationToken cancellationToken)
     {
         await UniTask.WaitForSeconds(aimingTime, cancellationToken: cancellationToken);
         if (finder.Character != null)

@@ -14,7 +14,7 @@ public class ProtectionSuzu : Skill
     [SerializeField]
     private FriendlyCharactersFinder finder;
 
-    protected override UniTask Use(CancellationToken cancellationToken)
+    protected override UniTask UseInternal(CancellationToken cancellationToken)
     {
         foreach (var character in finder.Characters)
         {
