@@ -18,6 +18,7 @@ public class NearestFriendlyCharacterFinder : SingleCharacterFinder
             .Where((character) => character.gameObject != gameObject)
             .Where((character) => character.CompareTag(gameObject.tag))
             .MinBy((character) => (transform.position - character.transform.position).sqrMagnitude);
+        Character = Character == null ? gameObject.GetComponent<Character>() : Character;
 
         if (Character != null)
         {

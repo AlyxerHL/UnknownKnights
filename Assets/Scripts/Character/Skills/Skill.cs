@@ -75,10 +75,9 @@ public abstract class Skill : MonoBehaviour
         while (!autoSkillCancellation.Token.IsCancellationRequested)
         {
             await UniTask.WaitWhile(
-                () => isCooldown,
+                () => isCooldown || !CanUse,
                 cancellationToken: autoSkillCancellation.Token
             );
-
             await Use();
         }
     }

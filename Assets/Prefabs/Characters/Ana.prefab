@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7129700b9f25b4fa986f1e7904bf8a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 70
+  damage: 75
   range: 40
   recoveryTime: 0.8
   finder: {fileID: 7909235214455502689}
@@ -190,8 +190,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 8448233526197495697}
   <Quote>k__BackingField: You're powered up, get in there.
-  cooldown: 10
+  cooldown: 6
   damageBuff: 1.5
   damageReduction: 0.5
-  effectDuration: 4
+  effectDuration: 6
   finder: {fileID: 4370349916302172419}

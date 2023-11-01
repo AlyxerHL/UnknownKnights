@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 8448233526197495697}
   <Quote>k__BackingField: Systems hacked!
-  cooldown: 5
+  cooldown: 7
   range: 15
   effectDuration: 1.5
   finder: {fileID: 7909235214455502689}

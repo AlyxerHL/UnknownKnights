@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 8448233526197495697}
   <Quote>k__BackingField: "Ry\u016Bjin no ken wo kurae!"
-  cooldown: 6
+  cooldown: 7
   damage: 220
   range: 1
   recoveryTime: 0.9

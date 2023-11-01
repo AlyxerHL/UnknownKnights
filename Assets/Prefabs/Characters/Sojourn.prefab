@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 8448233526197495697}
   <Quote>k__BackingField: This ends now!
-  cooldown: 7
+  cooldown: 10
   damage: 200
   range: 40
   recoveryTime: 0.65

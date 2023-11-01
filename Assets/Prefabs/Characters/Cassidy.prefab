@@ -178,7 +178,7 @@ MonoBehaviour:
   weapon: {fileID: 8448233526197495697}
   <Quote>k__BackingField: It's high noon.
   cooldown: 8
-  damage: 520
+  damage: 400
   aimingTime: 1.5
   recoveryTime: 0.3
   finder: {fileID: 7909235214455502689}

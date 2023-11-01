@@ -191,6 +191,6 @@ MonoBehaviour:
   weapon: {fileID: 8448233526197495697}
   <Quote>k__BackingField: Kanezaka-jinja protects you.
   cooldown: 4
-  healAmount: 40
-  effectDuration: 0.85
+  healAmount: 70
+  effectDuration: 1.5
   finder: {fileID: 7690431393178877130}
