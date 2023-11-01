@@ -8,21 +8,21 @@ public class Deadeye : Skill
     private float damage = 250f;
 
     [SerializeField]
-    private int aimingTime = 3000;
+    private float aimingTime = 3f;
 
     [SerializeField]
-    private int recoveryTime = 300;
+    private float recoveryTime = 0.3f;
 
     [SerializeField]
     private NearestEnemyCharacterFinder finder;
 
     protected override async UniTask Use(CancellationToken cancellationToken)
     {
-        await UniTask.Delay(aimingTime, cancellationToken: cancellationToken);
+        await UniTask.WaitForSeconds(aimingTime, cancellationToken: cancellationToken);
         if (finder.Tag != null)
         {
             finder.Tag.Health.GetDamaged(damage);
         }
-        await UniTask.Delay(recoveryTime, cancellationToken: cancellationToken);
+        await UniTask.WaitForSeconds(recoveryTime, cancellationToken: cancellationToken);
     }
 }

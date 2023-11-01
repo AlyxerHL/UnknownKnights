@@ -23,24 +23,24 @@ public class Effector : MonoBehaviour
     private readonly Dictionary<int, float> damageReductionEffectIDs = new();
     private int newEffectID = 0;
 
-    public async UniTask ApplyStun(int duration)
+    public async UniTask ApplyStun(float duration)
     {
         var effectID = SetStun();
-        await UniTask.Delay(duration);
+        await UniTask.WaitForSeconds(duration);
         ClearStun(effectID);
     }
 
-    public async UniTask ApplyDamageBuff(float multiplier, int duration)
+    public async UniTask ApplyDamageBuff(float multiplier, float duration)
     {
         var effectID = SetDamageBuff(multiplier);
-        await UniTask.Delay(duration);
+        await UniTask.WaitForSeconds(duration);
         ClearDamageBuff(effectID);
     }
 
-    public async UniTask ApplyDamageReduction(float multiplier, int duration)
+    public async UniTask ApplyDamageReduction(float multiplier, float duration)
     {
         var effectID = SetDamageReduction(multiplier);
-        await UniTask.Delay(duration);
+        await UniTask.WaitForSeconds(duration);
         ClearDamageReduction(effectID);
     }
 

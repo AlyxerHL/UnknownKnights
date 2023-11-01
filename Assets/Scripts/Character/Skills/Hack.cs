@@ -8,7 +8,7 @@ public class Hack : Skill
     private float range = 15f;
 
     [SerializeField]
-    private int effectDuration = 1500;
+    private float effectDuration = 1.5f;
 
     [SerializeField]
     private NearestEnemyCharacterFinder finder;

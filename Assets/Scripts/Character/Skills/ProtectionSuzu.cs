@@ -9,7 +9,7 @@ public class ProtectionSuzu : Skill
     private float healAmount = 40f;
 
     [SerializeField]
-    private int effectDuration = 850;
+    private float effectDuration = 0.85f;
 
     [SerializeField]
     private FriendlyCharactersFinder finder;

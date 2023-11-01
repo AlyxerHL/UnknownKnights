@@ -11,7 +11,7 @@ public class DragonBlade : Skill
     private float range = 1f;
 
     [SerializeField]
-    private int recoveryTime = 900;
+    private float recoveryTime = 0.9f;
 
     [SerializeField]
     private NearestEnemyCharacterFinder finder;
@@ -25,6 +25,6 @@ public class DragonBlade : Skill
         {
             finder.Tag.Health.GetDamaged(damage);
         }
-        await UniTask.Delay(recoveryTime, cancellationToken: cancellationToken);
+        await UniTask.WaitForSeconds(recoveryTime, cancellationToken: cancellationToken);
     }
 }

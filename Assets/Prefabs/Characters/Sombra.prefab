@@ -161,7 +161,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onHealthChange:
+  onHealthChanged:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &4217649862283822665
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 8
   range: 15
-  recoveryTime: 50
+  recoveryTime: 0.05
   finder: {fileID: 7909235214455502689}
 --- !u!114 &7843565230642728970
 MonoBehaviour:
@@ -214,5 +214,7 @@ MonoBehaviour:
   onEndUse:
     m_PersistentCalls:
       m_Calls: []
-  cooldown: 4000
+  cooldown: 4
+  range: 15
+  effectDuration: 1.5
   finder: {fileID: 7909235214455502689}

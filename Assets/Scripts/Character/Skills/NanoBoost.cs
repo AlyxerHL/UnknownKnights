@@ -11,7 +11,7 @@ public class NanoBoost : Skill
     private float damageReduction = 0.5f;
 
     [SerializeField]
-    private int effectDuration = 4000;
+    private float effectDuration = 4f;
 
     [SerializeField]
     private NearestFriendlyCharacterFinder finder;

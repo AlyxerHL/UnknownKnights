@@ -5,13 +5,13 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField]
-    private float damage = 10f;
+    private float damage;
 
     [SerializeField]
-    private float range = 4f;
+    private float range;
 
     [SerializeField]
-    private int recoveryTime = 680;
+    private float recoveryTime;
 
     [SerializeField]
     private SingleCharacterFinder finder;
@@ -45,7 +45,7 @@ public class Weapon : MonoBehaviour
             {
                 await UniTask.WaitUntil(() => CanFire, cancellationToken: cancellation.Token);
                 finder.Tag.Health.GetDamaged(damage * DamageMultiplier);
-                await UniTask.Delay(recoveryTime, cancellationToken: cancellation.Token);
+                await UniTask.WaitForSeconds(recoveryTime, cancellationToken: cancellation.Token);
             }
         }
     }

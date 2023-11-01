@@ -12,7 +12,7 @@ public abstract class Skill : MonoBehaviour
     private UnityEvent onEndUse;
 
     [SerializeField]
-    private int cooldown;
+    private float cooldown;
 
     private bool isCooldown = true;
     private CancellationTokenSource skillCancellation;
@@ -45,7 +45,7 @@ public abstract class Skill : MonoBehaviour
     public async UniTask Cooldown()
     {
         isCooldown = true;
-        await UniTask.Delay(cooldown);
+        await UniTask.WaitForSeconds(cooldown);
         isCooldown = false;
     }
 

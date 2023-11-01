@@ -161,6 +161,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4217649862283822665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,7 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 80
   range: 10
-  recoveryTime: 680
+  recoveryTime: 0.68
   finder: {fileID: 7909235214455502689}
 --- !u!114 &4324443216374650618
 MonoBehaviour:
@@ -235,5 +238,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  cooldown: 6000
+  cooldown: 6
+  damage: 70
+  range: 1
+  recoveryTime: 0.9
   finder: {fileID: 7909235214455502689}

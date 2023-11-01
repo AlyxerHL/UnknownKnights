@@ -11,7 +11,7 @@ public class Railgun : Skill
     private float range = 40f;
 
     [SerializeField]
-    private int recoveryTime = 650;
+    private float recoveryTime = 0.65f;
 
     [SerializeField]
     private NearestEnemyCharacterFinder finder;
@@ -27,6 +27,6 @@ public class Railgun : Skill
         }
 
         finder.Tag.Health.GetDamaged(damage);
-        await UniTask.Delay(recoveryTime, cancellationToken: cancellationToken);
+        await UniTask.WaitForSeconds(recoveryTime, cancellationToken: cancellationToken);
     }
 }
