@@ -189,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 45
   range: 10
-  recoveryTime: 0.6
+  recoveryTime: 0.5
   finder: {fileID: 7909235214455502689}
 --- !u!114 &7380872655101912786
 MonoBehaviour:
