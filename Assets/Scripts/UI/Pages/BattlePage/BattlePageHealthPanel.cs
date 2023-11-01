@@ -31,7 +31,7 @@ public class BattlePageHealthPanel : MonoBehaviour
 
                 var damageAmount = Mathf.RoundToInt(-amount);
                 var damageView = damageViewPool.Get();
-                damageView.Show(character.transform, damageAmount).Forget();
+                damageView.Show(character.transform, damageAmount);
             };
         };
 

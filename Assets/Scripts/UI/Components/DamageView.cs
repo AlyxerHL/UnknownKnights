@@ -27,7 +27,7 @@ public class DamageView : MonoBehaviour
         rectTransform = transform as RectTransform;
     }
 
-    public async UniTask Show(Transform target, float damage)
+    public void Show(Transform target, float damage)
     {
         text.text = damage.ToString();
 
@@ -36,11 +36,10 @@ public class DamageView : MonoBehaviour
             + Random.insideUnitCircle * randomness;
         rectTransform.anchoredPosition = position;
 
-        await rectTransform
+        rectTransform
             .DOAnchorPos(position + offset, duration)
             .SetEase(Ease.OutExpo)
             .SetUpdate(true)
-            .OnComplete(() => PoolToReturn.Release(this))
-            .AsyncWaitForCompletion();
+            .OnComplete(() => PoolToReturn.Release(this));
     }
 }
