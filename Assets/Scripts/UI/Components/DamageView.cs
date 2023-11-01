@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class DamageView : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class DamageView : MonoBehaviour
     private Vector2 randomness;
 
     private RectTransform rectTransform;
+
+    public IObjectPool<DamageView> PoolToReturn { get; set; }
 
     private void Awake()
     {
@@ -37,8 +40,7 @@ public class DamageView : MonoBehaviour
             .DOAnchorPos(position + offset, duration)
             .SetEase(Ease.OutExpo)
             .SetUpdate(true)
+            .OnComplete(() => PoolToReturn.Release(this))
             .AsyncWaitForCompletion();
-
-        Destroy(gameObject);
     }
 }
