@@ -4,20 +4,32 @@ using UnityEngine;
 
 public class Hack : Skill
 {
-    private const float Range = 15f;
-    private const int EffectDuration = 1500;
+    [SerializeField]
+    private float range = 15f;
+
+    [SerializeField]
+    private int effectDuration = 1500;
 
     [SerializeField]
     private NearestEnemyCharacterFinder finder;
 
-    protected override bool CanUse =>
-        finder.Tag != null
-        && (transform.position - finder.Tag.transform.position).sqrMagnitude <= Range;
+    private bool IsWithinRange =>
+        (transform.position - finder.Tag.transform.position).sqrMagnitude <= range;
 
     protected override async UniTask Use(CancellationToken cancellationToken)
     {
-        var effectID = finder.Tag.Effector.SetStun();
-        await UniTask.Delay(EffectDuration, cancellationToken: cancellationToken);
-        finder.Tag.Effector.ClearStun(effectID);
+        if (finder.Tag == null || !IsWithinRange)
+        {
+            return;
+        }
+
+        var effector = finder.Tag.Effector;
+        var effectID = effector.SetStun();
+        await UniTask.Delay(effectDuration, cancellationToken: cancellationToken);
+
+        if (effector != null)
+        {
+            effector.ClearStun(effectID);
+        }
     }
 }

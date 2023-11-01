@@ -5,19 +5,30 @@ using UnityEngine;
 
 public class ProtectionSuzu : Skill
 {
-    private const float HealAmount = 40f;
-    private const int EffectDuration = 850;
+    [SerializeField]
+    private float healAmount = 40f;
+
+    [SerializeField]
+    private int effectDuration = 850;
 
     [SerializeField]
     private FriendlyCharactersFinder finder;
 
-    protected override bool CanUse => true;
-
     protected override async UniTask Use(CancellationToken cancellationToken)
     {
-        var effects = finder.Tags.Select((tag) => (tag, id: tag.Effector.SetDamageReduction(0f)));
-        effects.ForEach((e) => e.tag.Health.GetHealed(HealAmount));
-        await UniTask.Delay(EffectDuration, cancellationToken: cancellationToken);
-        effects.ForEach((e) => e.tag.Effector.ClearDamageReduction(e.id));
+        var targets = finder.Tags.Select(
+            (tag) =>
+                (
+                    health: tag.Health,
+                    effector: tag.Effector,
+                    effectID: tag.Effector.SetDamageReduction(0f)
+                )
+        );
+
+        targets.Where((t) => t.health != null).ForEach((e) => e.health.GetHealed(healAmount));
+        await UniTask.Delay(effectDuration, cancellationToken: cancellationToken);
+        targets
+            .Where((t) => t.effector != null)
+            .ForEach((t) => t.effector.ClearDamageReduction(t.effectID));
     }
 }

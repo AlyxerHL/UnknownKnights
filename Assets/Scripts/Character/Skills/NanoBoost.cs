@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class NanoBoost : Skill
 {
-    private const int EffectDuration = 4000;
+    [SerializeField]
+    private int effectDuration = 4000;
 
     [SerializeField]
     private NearestFriendlyCharacterFinder finder;
 
-    protected override bool CanUse => true;
-
     protected override async UniTask Use(CancellationToken cancellationToken)
     {
-        var damageBuffID = finder.Tag.Effector.SetDamageBuff(2f);
-        var damageReductionID = finder.Tag.Effector.SetDamageReduction(0.5f);
-        await UniTask.Delay(EffectDuration, cancellationToken: cancellationToken);
-        finder.Tag.Effector.ClearDamageBuff(damageBuffID);
-        finder.Tag.Effector.ClearDamageReduction(damageReductionID);
+        if (finder.Tag == null)
+        {
+            return;
+        }
+
+        var effector = finder.Tag.Effector;
+        var damageBuffID = effector.SetDamageBuff(2f);
+        var damageReductionID = effector.SetDamageReduction(0.5f);
+        await UniTask.Delay(effectDuration, cancellationToken: cancellationToken);
+
+        if (effector != null)
+        {
+            effector.ClearDamageBuff(damageBuffID);
+            effector.ClearDamageReduction(damageReductionID);
+        }
     }
 }

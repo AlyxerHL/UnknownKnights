@@ -30,8 +30,6 @@ public abstract class Skill : MonoBehaviour
         remove => onEndUse.RemoveListener(value);
     }
 
-    protected abstract bool CanUse { get; }
-
     private void Start()
     {
         Cooldown().Forget();
@@ -74,7 +72,7 @@ public abstract class Skill : MonoBehaviour
         while (!autoSkillCancellation.Token.IsCancellationRequested)
         {
             await UniTask.WaitWhile(
-                () => isCooldown || !CanUse,
+                () => isCooldown,
                 cancellationToken: autoSkillCancellation.Token
             );
 

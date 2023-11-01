@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class Railgun : Skill
 {
-    private const float Damage = 135f;
-    private const float Range = 40f;
-    private const int RecoveryTime = 650;
+    [SerializeField]
+    private float damage = 135f;
+
+    [SerializeField]
+    private float range = 40f;
+
+    [SerializeField]
+    private int recoveryTime = 650;
 
     [SerializeField]
     private NearestEnemyCharacterFinder finder;
 
-    protected override bool CanUse =>
-        finder.Tag != null
-        && (transform.position - finder.Tag.transform.position).sqrMagnitude <= Range;
+    private bool IsWithinRange =>
+        (transform.position - finder.Tag.transform.position).sqrMagnitude <= range;
 
     protected override async UniTask Use(CancellationToken cancellationToken)
     {
-        finder.Tag.Health.GetDamaged(Damage);
-        await UniTask.Delay(RecoveryTime, cancellationToken: cancellationToken);
+        if (finder.Tag == null || !IsWithinRange)
+        {
+            return;
+        }
+
+        finder.Tag.Health.GetDamaged(damage);
+        await UniTask.Delay(recoveryTime, cancellationToken: cancellationToken);
     }
 }
