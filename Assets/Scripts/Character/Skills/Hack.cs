@@ -1,4 +1,3 @@
-using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -13,16 +12,12 @@ public class Hack : Skill
     [SerializeField]
     private NearestEnemyCharacterFinder finder;
 
+    protected override bool CanUse => finder.Character != null && IsWithinRange;
     private bool IsWithinRange =>
         (transform.position - finder.Character.transform.position).sqrMagnitude <= range;
 
-    protected override UniTask UseInternal(CancellationToken _)
+    protected override UniTask ApplyEffect()
     {
-        if (finder.Character == null || !IsWithinRange)
-        {
-            return UniTask.CompletedTask;
-        }
-
         finder.Character.Effector.ApplyStun(effectDuration).Forget();
         return UniTask.CompletedTask;
     }

@@ -1,5 +1,3 @@
-using System.Linq;
-using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -14,7 +12,9 @@ public class ProtectionSuzu : Skill
     [SerializeField]
     private FriendlyCharactersFinder finder;
 
-    protected override UniTask UseInternal(CancellationToken cancellationToken)
+    protected override bool CanUse => true;
+
+    protected override UniTask ApplyEffect()
     {
         foreach (var character in finder.Characters)
         {

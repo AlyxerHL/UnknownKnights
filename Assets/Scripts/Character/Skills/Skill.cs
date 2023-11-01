@@ -6,8 +6,6 @@ using UnityEngine;
 
 public abstract class Skill : MonoBehaviour
 {
-    private static readonly Queue<Skill> skillQueue = new();
-
     [SerializeField]
     private Weapon weapon;
 
@@ -18,11 +16,13 @@ public abstract class Skill : MonoBehaviour
     private float cooldown;
 
     private bool isCooldown = true;
-    private CancellationTokenSource skillCancellation;
     private CancellationTokenSource autoSkillCancellation;
+    private static readonly Queue<Skill> skillQueue = new();
 
     public event Func<UniTask> BeganUsing;
     public event Func<UniTask> EndedUsing;
+
+    protected abstract bool CanUse { get; }
 
     private void Start()
     {
@@ -32,7 +32,6 @@ public abstract class Skill : MonoBehaviour
 
     private void OnDisable()
     {
-        Cancel();
         StopAutoSkill();
     }
 
@@ -57,18 +56,12 @@ public abstract class Skill : MonoBehaviour
             await (BeganUsing?.Invoke() ?? UniTask.CompletedTask);
 
             Cooldown().Forget();
-            skillCancellation = new();
-            await UseInternal(skillCancellation.Token);
+            await ApplyEffect();
 
             await (EndedUsing?.Invoke() ?? UniTask.CompletedTask);
             weapon.enabled = true;
             Time.timeScale = 1f;
         }
-    }
-
-    public void Cancel()
-    {
-        skillCancellation?.Cancel();
     }
 
     public async UniTask StartAutoSkill()
@@ -91,5 +84,5 @@ public abstract class Skill : MonoBehaviour
         autoSkillCancellation?.Cancel();
     }
 
-    protected abstract UniTask UseInternal(CancellationToken cancellationToken);
+    protected abstract UniTask ApplyEffect();
 }

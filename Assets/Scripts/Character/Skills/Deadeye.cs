@@ -1,11 +1,10 @@
-using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class Deadeye : Skill
 {
     [SerializeField]
-    private float damage = 250f;
+    private float damage = 780f;
 
     [SerializeField]
     private float aimingTime = 3f;
@@ -16,23 +15,12 @@ public class Deadeye : Skill
     [SerializeField]
     private NearestEnemyCharacterFinder finder;
 
-    protected override async UniTask UseInternal(CancellationToken cancellationToken)
+    protected override bool CanUse => finder.Character != null;
+
+    protected override async UniTask ApplyEffect()
     {
-        await UniTask.WaitForSeconds(
-            aimingTime,
-            cancellationToken: cancellationToken,
-            ignoreTimeScale: true
-        );
-
-        if (finder.Character != null)
-        {
-            finder.Character.Health.GetDamaged(damage);
-        }
-
-        await UniTask.WaitForSeconds(
-            recoveryTime,
-            cancellationToken: cancellationToken,
-            ignoreTimeScale: true
-        );
+        await UniTask.WaitForSeconds(aimingTime, ignoreTimeScale: true);
+        finder.Character.Health.GetDamaged(damage);
+        await UniTask.WaitForSeconds(recoveryTime, ignoreTimeScale: true);
     }
 }
