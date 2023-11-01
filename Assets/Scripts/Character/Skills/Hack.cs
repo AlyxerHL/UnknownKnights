@@ -16,20 +16,14 @@ public class Hack : Skill
     private bool IsWithinRange =>
         (transform.position - finder.Tag.transform.position).sqrMagnitude <= range;
 
-    protected override async UniTask Use(CancellationToken cancellationToken)
+    protected override UniTask Use(CancellationToken _)
     {
         if (finder.Tag == null || !IsWithinRange)
         {
-            return;
+            return UniTask.CompletedTask;
         }
 
-        var effector = finder.Tag.Effector;
-        var effectID = effector.SetStun();
-        await UniTask.Delay(effectDuration, cancellationToken: cancellationToken);
-
-        if (effector != null)
-        {
-            effector.ClearStun(effectID);
-        }
+        finder.Tag.Effector.ApplyStun(effectDuration).Forget();
+        return UniTask.CompletedTask;
     }
 }

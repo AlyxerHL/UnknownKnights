@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
+// use duration instead of set and clear
 public class Effector : MonoBehaviour
 {
     [SerializeField]
@@ -21,63 +23,84 @@ public class Effector : MonoBehaviour
     private readonly Dictionary<int, float> damageReductionEffectIDs = new();
     private int newEffectID = 0;
 
-    public int SetStun()
+    public async UniTask ApplyStun(int duration)
+    {
+        var effectID = SetStun();
+        await UniTask.Delay(duration);
+        ClearStun(effectID);
+    }
+
+    public async UniTask ApplyDamageBuff(float multiplier, int duration)
+    {
+        var effectID = SetDamageBuff(multiplier);
+        await UniTask.Delay(duration);
+        ClearDamageBuff(effectID);
+    }
+
+    public async UniTask ApplyDamageReduction(float multiplier, int duration)
+    {
+        var effectID = SetDamageReduction(multiplier);
+        await UniTask.Delay(duration);
+        ClearDamageReduction(effectID);
+    }
+
+    private int SetStun()
     {
         var effectID = NewEffectID();
         stunEffectIDs.Add(effectID);
-        ApplyStun();
+        RefreshStun();
         return effectID;
     }
 
-    public void ClearStun(int effectID)
-    {
-        stunEffectIDs.Remove(effectID);
-        ApplyStun();
-    }
-
-    public int SetDamageBuff(float multiplier)
-    {
-        var effectID = NewEffectID();
-        damageBuffEffectIDs.Add(effectID, multiplier);
-        ApplyDamageBuff();
-        return effectID;
-    }
-
-    public void ClearDamageBuff(int effectID)
-    {
-        damageBuffEffectIDs.Remove(effectID);
-        ApplyDamageBuff();
-    }
-
-    public int SetDamageReduction(float multiplier)
-    {
-        var effectID = NewEffectID();
-        damageReductionEffectIDs.Add(effectID, multiplier);
-        ApplyDamageReduction();
-        return effectID;
-    }
-
-    public void ClearDamageReduction(int effectID)
-    {
-        damageReductionEffectIDs.Remove(effectID);
-        ApplyDamageReduction();
-    }
-
-    private void ApplyStun()
+    private void RefreshStun()
     {
         movement.enabled = stunEffectIDs.Count == 0;
         weapon.enabled = stunEffectIDs.Count == 0;
         skill.enabled = stunEffectIDs.Count == 0;
     }
 
-    private void ApplyDamageBuff()
+    private void ClearStun(int effectID)
+    {
+        stunEffectIDs.Remove(effectID);
+        RefreshStun();
+    }
+
+    private int SetDamageBuff(float multiplier)
+    {
+        var effectID = NewEffectID();
+        damageBuffEffectIDs.Add(effectID, multiplier);
+        RefreshDamageBuff();
+        return effectID;
+    }
+
+    private void RefreshDamageBuff()
     {
         weapon.DamageMultiplier = damageBuffEffectIDs.Values.Aggregate(1f, Multiply);
     }
 
-    private void ApplyDamageReduction()
+    private void ClearDamageBuff(int effectID)
+    {
+        damageBuffEffectIDs.Remove(effectID);
+        RefreshDamageBuff();
+    }
+
+    private int SetDamageReduction(float multiplier)
+    {
+        var effectID = NewEffectID();
+        damageReductionEffectIDs.Add(effectID, multiplier);
+        RefreshDamageReduction();
+        return effectID;
+    }
+
+    private void RefreshDamageReduction()
     {
         health.DamageReduction = damageReductionEffectIDs.Values.Aggregate(1f, Multiply);
+    }
+
+    private void ClearDamageReduction(int effectID)
+    {
+        damageReductionEffectIDs.Remove(effectID);
+        RefreshDamageReduction();
     }
 
     private int NewEffectID() => newEffectID++;
