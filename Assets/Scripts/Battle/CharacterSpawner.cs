@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class CharacterSpawner : MonoBehaviour
@@ -12,13 +13,21 @@ public class CharacterSpawner : MonoBehaviour
     [SerializeField]
     private SpawnData[] redTeamCharacters;
 
-    private void Start()
+    public CharacterTag[] GreenTeamCharacters { get; private set; }
+    public CharacterTag[] RedTeamCharacters { get; private set; }
+
+    private void Awake()
     {
-        greenTeamCharacters.ForEach((spawnData) => SpawnCharacter(spawnData, GreenTeamTag));
-        redTeamCharacters.ForEach((spawnData) => SpawnCharacter(spawnData, RedTeamTag));
+        GreenTeamCharacters = greenTeamCharacters
+            .Select((spawnData) => SpawnCharacter(spawnData, GreenTeamTag))
+            .ToArray();
+
+        RedTeamCharacters = redTeamCharacters
+            .Select((spawnData) => SpawnCharacter(spawnData, RedTeamTag))
+            .ToArray();
     }
 
-    private void SpawnCharacter(SpawnData spawnData, string tag)
+    private CharacterTag SpawnCharacter(SpawnData spawnData, string tag)
     {
         var character = Instantiate(
             spawnData.Prefab,
@@ -29,10 +38,11 @@ public class CharacterSpawner : MonoBehaviour
 
         character.tag = tag;
         character.Health.OnDeath += BattleReferee.MakeDecision;
+        return character;
     }
 
     [Serializable]
-    private struct SpawnData
+    public struct SpawnData
     {
         [field: SerializeField]
         public CharacterTag Prefab { get; set; }

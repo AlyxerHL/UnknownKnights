@@ -1,3 +1,4 @@
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -6,8 +7,8 @@ using UnityEngine.UI;
 public class BattlePage : Page
 {
     private readonly State<int> timeLeft = new();
-    private readonly State<float> greenTeamScore = new(1f);
-    private readonly State<float> redTeamScore = new(1f);
+    private readonly State<float> greenTeamTotalHealth = new();
+    private readonly State<float> redTeamTotalHealth = new();
 
     [SerializeField]
     private TextMeshProUGUI timer;
@@ -24,6 +25,9 @@ public class BattlePage : Page
     [SerializeField]
     private BattleReferee referee;
 
+    private float greenTeamMaxHealth;
+    private float redTeamMaxHealth;
+
     private void Awake()
     {
         timeLeft.OnValueChanged += (time) =>
@@ -33,9 +37,45 @@ public class BattlePage : Page
             timer.text = $"{minutes:00}:{seconds:00}";
         };
 
-        greenTeamScore.OnValueChanged += (score) => greenTeamHealth.fillAmount = score;
-        redTeamScore.OnValueChanged += (score) => redTeamHealth.fillAmount = score;
+        greenTeamTotalHealth.OnValueChanged += (totalHealth) =>
+        {
+            var fillAmount = totalHealth / greenTeamMaxHealth;
+            greenTeamHealth.fillAmount = fillAmount;
+        };
+
+        redTeamTotalHealth.OnValueChanged += (totalHealth) =>
+        {
+            var fillAmount = totalHealth / redTeamMaxHealth;
+            redTeamHealth.fillAmount = fillAmount;
+        };
+    }
+
+    private void Start()
+    {
         referee.OnTimeChanged += (time) => timeLeft.Value = time;
+
+        greenTeamMaxHealth = characterSpawner.GreenTeamCharacters.Sum(
+            (character) => character.Health.MaxHealth
+        );
+
+        redTeamMaxHealth = characterSpawner.RedTeamCharacters.Sum(
+            (character) => character.Health.MaxHealth
+        );
+
+        greenTeamTotalHealth.Value = greenTeamMaxHealth;
+        redTeamTotalHealth.Value = redTeamMaxHealth;
+
+        characterSpawner.GreenTeamCharacters.ForEach(
+            (character) =>
+                character.Health.OnHealthChanged += (changeAmount) =>
+                    greenTeamTotalHealth.Value += changeAmount
+        );
+
+        characterSpawner.RedTeamCharacters.ForEach(
+            (character) =>
+                character.Health.OnHealthChanged += (changeAmount) =>
+                    redTeamTotalHealth.Value += changeAmount
+        );
     }
 
     public override UniTask Hide()
