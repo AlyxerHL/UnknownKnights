@@ -4,10 +4,10 @@ using UnityEngine;
 public class Hack : Skill
 {
     [SerializeField]
-    private float range = 15f;
+    private float range;
 
     [SerializeField]
-    private float effectDuration = 1.5f;
+    private float effectDuration;
 
     [SerializeField]
     private NearestEnemyCharacterFinder finder;

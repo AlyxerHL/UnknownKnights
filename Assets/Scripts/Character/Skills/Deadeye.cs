@@ -4,13 +4,13 @@ using UnityEngine;
 public class Deadeye : Skill
 {
     [SerializeField]
-    private float damage = 780f;
+    private float damage;
 
     [SerializeField]
-    private float aimingTime = 3f;
+    private float aimingTime;
 
     [SerializeField]
-    private float recoveryTime = 0.3f;
+    private float recoveryTime;
 
     [SerializeField]
     private NearestEnemyCharacterFinder finder;

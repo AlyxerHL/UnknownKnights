@@ -4,16 +4,16 @@ using UnityEngine;
 public class DragonBlade : Skill
 {
     [SerializeField]
-    private float damage = 110f;
+    private float damage;
 
     [SerializeField]
-    private float range = 1f;
+    private float range;
 
     [SerializeField]
-    private float recoveryTime = 0.9f;
+    private float recoveryTime;
 
     [SerializeField]
-    private int swingCount = 2;
+    private int swingCount;
 
     [SerializeField]
     private NearestEnemyCharacterFinder finder;

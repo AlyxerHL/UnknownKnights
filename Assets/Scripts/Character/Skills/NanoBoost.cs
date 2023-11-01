@@ -4,13 +4,13 @@ using UnityEngine;
 public class NanoBoost : Skill
 {
     [SerializeField]
-    private float damageBuff = 2f;
+    private float damageBuff;
 
     [SerializeField]
-    private float damageReduction = 0.5f;
+    private float damageReduction;
 
     [SerializeField]
-    private float effectDuration = 4f;
+    private float effectDuration;
 
     [SerializeField]
     private NearestFriendlyCharacterFinder finder;

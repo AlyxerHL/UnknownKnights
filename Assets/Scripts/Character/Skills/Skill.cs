@@ -27,6 +27,10 @@ public abstract class Skill : MonoBehaviour
     private void Start()
     {
         Cooldown().Forget();
+    }
+
+    private void OnEnable()
+    {
         StartAutoSkill().Forget();
     }
 

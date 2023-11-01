@@ -153,10 +153,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   greenTeamCharacters:
-  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: 6d2553244090d44879830cd804905870, type: 3}
+  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: 1e792c500330c429495cf2703b83f933, type: 3}
     <Position>k__BackingField: {x: -8, y: 0, z: 0}
   redTeamCharacters:
-  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: d1300388399d54b08bcce754f33d22da, type: 3}
+  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: abcd78a0dd7c7419b926e528f7f8ea1b, type: 3}
     <Position>k__BackingField: {x: 8, y: 0, z: 0}
 --- !u!4 &46794428
 Transform:

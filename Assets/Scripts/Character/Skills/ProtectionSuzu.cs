@@ -4,10 +4,10 @@ using UnityEngine;
 public class ProtectionSuzu : Skill
 {
     [SerializeField]
-    private float healAmount = 40f;
+    private float healAmount;
 
     [SerializeField]
-    private float effectDuration = 0.85f;
+    private float effectDuration;
 
     [SerializeField]
     private FriendlyCharactersFinder finder;

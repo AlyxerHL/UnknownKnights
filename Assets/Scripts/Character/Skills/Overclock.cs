@@ -4,16 +4,16 @@ using UnityEngine;
 public class Overclock : Skill
 {
     [SerializeField]
-    private float damage = 135f;
+    private float damage;
 
     [SerializeField]
-    private float range = 40f;
+    private float range;
 
     [SerializeField]
-    private float recoveryTime = 0.65f;
+    private float recoveryTime;
 
     [SerializeField]
-    private int shotCount = 4;
+    private int shotCount;
 
     [SerializeField]
     private NearestEnemyCharacterFinder finder;
