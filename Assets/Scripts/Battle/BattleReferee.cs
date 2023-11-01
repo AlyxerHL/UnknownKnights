@@ -34,7 +34,7 @@ public class BattleReferee : MonoBehaviour
         }
 
         var firstTag = Character.Active.First().tag;
-        var isFinished = Character.Active.All((tag) => tag.CompareTag(firstTag));
+        var isFinished = Character.Active.All((character) => character.CompareTag(firstTag));
 
         if (isFinished)
         {

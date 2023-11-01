@@ -15,8 +15,8 @@ public class NearestEnemyCharacterFinder : SingleCharacterFinder
         }
 
         Character = Character.Active
-            .Where((tag) => !tag.CompareTag(gameObject.tag))
-            .MinBy((tag) => (transform.position - tag.transform.position).sqrMagnitude);
+            .Where((character) => !character.CompareTag(gameObject.tag))
+            .MinBy((character) => (transform.position - character.transform.position).sqrMagnitude);
 
         if (Character != null)
         {

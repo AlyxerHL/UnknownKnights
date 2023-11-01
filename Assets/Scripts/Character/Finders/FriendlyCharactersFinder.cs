@@ -9,8 +9,8 @@ public class FriendlyCharactersFinder : MultipleCharactersFinder
 
     private void FindFriendlyCharacters()
     {
-        Characters?.ForEach((tag) => tag.Health.Dead -= FindFriendlyCharacters);
-        Characters = Character.Active.Where((tag) => tag.CompareTag(gameObject.tag));
-        Characters?.ForEach((tag) => tag.Health.Dead += FindFriendlyCharacters);
+        Characters?.ForEach((character) => character.Health.Dead -= FindFriendlyCharacters);
+        Characters = Character.Active.Where((character) => character.CompareTag(gameObject.tag));
+        Characters?.ForEach((character) => character.Health.Dead += FindFriendlyCharacters);
     }
 }
