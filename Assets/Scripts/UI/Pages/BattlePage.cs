@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class BattlePage : Page
 {
-    private readonly State<int> timeLeft = new();
     private readonly State<float> greenTeamTotalHealth = new();
     private readonly State<float> redTeamTotalHealth = new();
 
@@ -38,13 +37,6 @@ public class BattlePage : Page
 
     private void Awake()
     {
-        timeLeft.OnValueChanged += (time) =>
-        {
-            var minutes = time / 60;
-            var seconds = time % 60;
-            timer.text = $"{minutes:00}:{seconds:00}";
-        };
-
         greenTeamHealthTweener = greenTeamHealth
             .DOFillAmount(1f, healthFillDuration)
             .SetAutoKill(false);
@@ -65,7 +57,13 @@ public class BattlePage : Page
             redTeamHealthTweener.ChangeEndValue(fillAmount, true).Restart();
         };
 
-        referee.OnTimeChanged += (time) => timeLeft.Value = time;
+        referee.OnTimeChanged += (time) =>
+        {
+            var ceilTime = Mathf.CeilToInt(time);
+            var minutes = ceilTime / 60;
+            var seconds = ceilTime % 60;
+            timer.text = $"{minutes:00}:{seconds:00}";
+        };
 
         characterSpawner.OnCharacterSpawned += (character) =>
         {

@@ -6,13 +6,13 @@ using UnityEngine;
 public class BattleReferee : MonoBehaviour
 {
     [SerializeField]
-    private int timeLimitInSeconds;
+    private float timeLimit;
 
-    private int _time;
+    private float _time;
 
-    public event Action<int> OnTimeChanged;
+    public event Action<float> OnTimeChanged;
 
-    public int Time
+    public float Time
     {
         get => _time;
         set
@@ -24,10 +24,9 @@ public class BattleReferee : MonoBehaviour
 
     private void Start()
     {
-        Time = timeLimitInSeconds;
-
+        Time = timeLimit;
         DOTween
-            .To(() => Time, (x) => Time = x, 0, timeLimitInSeconds)
+            .To(() => Time, (x) => Time = x, 0f, timeLimit)
             .SetEase(Ease.Linear)
             .OnComplete(() => Debug.Log("Time's up!"));
     }
