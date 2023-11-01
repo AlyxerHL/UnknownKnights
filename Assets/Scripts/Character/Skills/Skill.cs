@@ -15,7 +15,8 @@ public abstract class Skill : MonoBehaviour
     private CancellationTokenSource skillCancellation;
     private CancellationTokenSource autoSkillCancellation;
 
-    public event Action Used;
+    public event Action StartedUsing;
+    public event Action EndedUsing;
 
     private void Start()
     {
@@ -38,13 +39,15 @@ public abstract class Skill : MonoBehaviour
 
     public async UniTask Use()
     {
-        Used?.Invoke();
+        StartedUsing?.Invoke();
+        weapon.enabled = false;
+
         Cooldown().Forget();
         skillCancellation = new();
-
-        weapon.enabled = false;
         await UseInternal(skillCancellation.Token);
+
         weapon.enabled = true;
+        EndedUsing?.Invoke();
     }
 
     public void Cancel()
