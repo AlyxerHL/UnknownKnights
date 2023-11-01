@@ -6,6 +6,12 @@ using UnityEngine.UI;
 public class BattlePageScoreboard : MonoBehaviour
 {
     [SerializeField]
+    CharacterSpawner characterSpawner;
+
+    [SerializeField]
+    BattleReferee battleReferee;
+
+    [SerializeField]
     private TextMeshProUGUI timer;
 
     [SerializeField]
@@ -40,10 +46,7 @@ public class BattlePageScoreboard : MonoBehaviour
             var fillAmount = totalHealth / redTeamMaxHealth;
             redTeamGaugeTweener.ChangeEndValue(fillAmount, true).Restart();
         };
-    }
 
-    public void Initialize(CharacterSpawner characterSpawner, BattleReferee battleReferee)
-    {
         characterSpawner.CharacterSpawned += (character) =>
         {
             if (character.CompareTag(CharacterSpawner.GreenTeamTag))

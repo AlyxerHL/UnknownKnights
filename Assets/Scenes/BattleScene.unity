@@ -157,14 +157,14 @@ MonoBehaviour:
     <Position>k__BackingField: {x: -8, y: 0, z: 0}
   - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: 6d2553244090d44879830cd804905870, type: 3}
     <Position>k__BackingField: {x: -6, y: 1, z: 0}
-  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: 6d2553244090d44879830cd804905870, type: 3}
+  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: abcd78a0dd7c7419b926e528f7f8ea1b, type: 3}
     <Position>k__BackingField: {x: -6, y: -1, z: 0}
   redTeamCharacters:
   - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: d3335c3f7695847eab8c47b79b5c174c, type: 3}
     <Position>k__BackingField: {x: 8, y: 0, z: 0}
-  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: 6d2553244090d44879830cd804905870, type: 3}
+  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: 2766dd006435a4eba8208f33f28b313e, type: 3}
     <Position>k__BackingField: {x: 6, y: 1, z: 0}
-  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: 6d2553244090d44879830cd804905870, type: 3}
+  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: d1300388399d54b08bcce754f33d22da, type: 3}
     <Position>k__BackingField: {x: 6, y: -1, z: 0}
 --- !u!4 &46794428
 Transform:
@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 187504991}
   - component: {fileID: 187504992}
   m_Layer: 5
-  m_Name: SkillVfx
+  m_Name: SkillEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 445030206}
   - component: {fileID: 445030207}
   m_Layer: 5
-  m_Name: HealthBar
+  m_Name: HealthPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -360,6 +360,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarPrefab: {fileID: 4802773726509338897, guid: a039183bf4a5b42f081a489a6104ce18, type: 3}
+  damageViewPrefab: {fileID: 8521596734977207096, guid: 48a09ed4abb7f444a81e67102fc312ba, type: 3}
+  characterSpawner: {fileID: 46794427}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,10 +921,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3617a7b1e8e04a13a54f65f478ca8b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 445030207}
-  scoreboard: {fileID: 8141938171586667174}
-  characterSpawner: {fileID: 46794427}
-  battleReferee: {fileID: 1677754513}
 --- !u!1 &1114037793788548110
 GameObject:
   m_ObjectHideFlags: 0
@@ -2397,6 +2395,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0bf48be972b946df97a66641a6dcadb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterSpawner: {fileID: 46794427}
+  battleReferee: {fileID: 1677754513}
   timer: {fileID: 869100457575215157}
   greenTeamGauge: {fileID: 685868426572545020}
   redTeamGauge: {fileID: 4984161419654320654}

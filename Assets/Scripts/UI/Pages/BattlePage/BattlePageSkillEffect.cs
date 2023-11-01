@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class BattlePageSkillVfx : MonoBehaviour
+public class BattlePageSkillEffect : MonoBehaviour
 {
     [SerializeField]
     private CharacterSpawner characterSpawner;
