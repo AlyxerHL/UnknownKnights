@@ -62,34 +62,26 @@ public class BattlePage : Page
             var fillAmount = totalHealth / redTeamMaxHealth;
             redTeamHealthTweener.ChangeEndValue(fillAmount, true).Restart();
         };
-    }
 
-    private void Start()
-    {
         referee.OnTimeChanged += (time) => timeLeft.Value = time;
 
-        greenTeamMaxHealth = characterSpawner.GreenTeamCharacters.Sum(
-            (character) => character.Health.MaxHealth
-        );
-
-        redTeamMaxHealth = characterSpawner.RedTeamCharacters.Sum(
-            (character) => character.Health.MaxHealth
-        );
-
-        greenTeamTotalHealth.Value = greenTeamMaxHealth;
-        redTeamTotalHealth.Value = redTeamMaxHealth;
-
-        characterSpawner.GreenTeamCharacters.ForEach(
-            (character) =>
+        characterSpawner.OnCharacterSpawned += (character) =>
+        {
+            if (character.CompareTag(CharacterSpawner.GreenTeamTag))
+            {
+                greenTeamMaxHealth += character.Health.MaxHealth;
+                greenTeamTotalHealth.Value = greenTeamMaxHealth;
                 character.Health.OnHealthChanged += (changeAmount) =>
-                    greenTeamTotalHealth.Value += changeAmount
-        );
-
-        characterSpawner.RedTeamCharacters.ForEach(
-            (character) =>
+                    greenTeamTotalHealth.Value += changeAmount;
+            }
+            else if (character.CompareTag(CharacterSpawner.RedTeamTag))
+            {
+                redTeamMaxHealth += character.Health.MaxHealth;
+                redTeamTotalHealth.Value = redTeamMaxHealth;
                 character.Health.OnHealthChanged += (changeAmount) =>
-                    redTeamTotalHealth.Value += changeAmount
-        );
+                    redTeamTotalHealth.Value += changeAmount;
+            }
+        };
     }
 
     public override UniTask Hide()

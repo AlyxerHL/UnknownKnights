@@ -13,21 +13,15 @@ public class CharacterSpawner : MonoBehaviour
     [SerializeField]
     private SpawnData[] redTeamCharacters;
 
-    public CharacterTag[] GreenTeamCharacters { get; private set; }
-    public CharacterTag[] RedTeamCharacters { get; private set; }
+    public event Action<CharacterTag> OnCharacterSpawned;
 
-    private void Awake()
+    private void Start()
     {
-        GreenTeamCharacters = greenTeamCharacters
-            .Select((spawnData) => SpawnCharacter(spawnData, GreenTeamTag))
-            .ToArray();
-
-        RedTeamCharacters = redTeamCharacters
-            .Select((spawnData) => SpawnCharacter(spawnData, RedTeamTag))
-            .ToArray();
+        greenTeamCharacters.ForEach((spawnData) => SpawnCharacter(spawnData, GreenTeamTag));
+        redTeamCharacters.ForEach((spawnData) => SpawnCharacter(spawnData, RedTeamTag));
     }
 
-    private CharacterTag SpawnCharacter(SpawnData spawnData, string tag)
+    private void SpawnCharacter(SpawnData spawnData, string tag)
     {
         var character = Instantiate(
             spawnData.Prefab,
@@ -38,7 +32,7 @@ public class CharacterSpawner : MonoBehaviour
 
         character.tag = tag;
         character.Health.OnDeath += BattleReferee.MakeDecision;
-        return character;
+        OnCharacterSpawned?.Invoke(character);
     }
 
     [Serializable]
