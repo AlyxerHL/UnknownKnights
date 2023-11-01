@@ -8,25 +8,19 @@ public class BattleReferee : MonoBehaviour
     [SerializeField]
     private float timeLimit;
 
-    private float _time;
+    private readonly State<float> time = new();
 
-    public event Action<float> OnTimeChanged;
-
-    public float Time
+    public event Action<float> TimePassed
     {
-        get => _time;
-        set
-        {
-            _time = value;
-            OnTimeChanged?.Invoke(_time);
-        }
+        add => time.Updated += value;
+        remove => time.Updated -= value;
     }
 
     private void Start()
     {
-        Time = timeLimit;
+        time.Value = timeLimit;
         DOTween
-            .To(() => Time, (x) => Time = x, 0f, timeLimit)
+            .To(() => time.Value, (x) => time.Value = x, 0f, timeLimit)
             .SetEase(Ease.Linear)
             .OnComplete(() => Debug.Log("Time's up!"));
     }

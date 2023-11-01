@@ -7,7 +7,7 @@ public class State<T>
     public State(T value = default)
     {
         this.value = value;
-        OnValueChanged = null;
+        Updated = null;
     }
 
     public T Value
@@ -16,9 +16,9 @@ public class State<T>
         set
         {
             this.value = value;
-            OnValueChanged?.Invoke(value);
+            Updated?.Invoke(value);
         }
     }
 
-    public event Action<T> OnValueChanged;
+    public event Action<T> Updated;
 }

@@ -28,14 +28,14 @@ public class BattlePageScoreboard : MonoBehaviour
     private void Awake()
     {
         greenTeamGaugeTweener = greenTeamGauge.DOFillAmount(1f, gaugeSpeed).SetAutoKill(false);
-        greenTeamTotalHealth.OnValueChanged += (totalHealth) =>
+        greenTeamTotalHealth.Updated += (totalHealth) =>
         {
             var fillAmount = totalHealth / greenTeamMaxHealth;
             greenTeamGaugeTweener.ChangeEndValue(fillAmount, true).Restart();
         };
 
         redTeamGaugeTweener = redTeamGauge.DOFillAmount(1f, gaugeSpeed).SetAutoKill(false);
-        redTeamTotalHealth.OnValueChanged += (totalHealth) =>
+        redTeamTotalHealth.Updated += (totalHealth) =>
         {
             var fillAmount = totalHealth / redTeamMaxHealth;
             redTeamGaugeTweener.ChangeEndValue(fillAmount, true).Restart();
@@ -62,7 +62,7 @@ public class BattlePageScoreboard : MonoBehaviour
             }
         };
 
-        battleReferee.OnTimeChanged += (time) =>
+        battleReferee.TimePassed += (time) =>
         {
             var ceilTime = Mathf.CeilToInt(time);
             var minutes = ceilTime / 60;
