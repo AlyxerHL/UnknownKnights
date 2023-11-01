@@ -13,7 +13,7 @@ public class CharacterSpawner : MonoBehaviour
     [SerializeField]
     private SpawnData[] redTeamCharacters;
 
-    public event Action<CharacterTag> CharacterSpawned;
+    public event Action<Character> CharacterSpawned;
 
     private void Start()
     {
@@ -39,7 +39,7 @@ public class CharacterSpawner : MonoBehaviour
     public struct SpawnData
     {
         [field: SerializeField]
-        public CharacterTag Prefab { get; set; }
+        public Character Prefab { get; set; }
 
         [field: SerializeField]
         public Vector3 Position { get; set; }

@@ -15,21 +15,21 @@ public class Movement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private bool IsWithinTargetDistance =>
-        (tagFinder.Tag.transform.position - transform.position).sqrMagnitude < targetDistance;
+        (tagFinder.Character.transform.position - transform.position).sqrMagnitude < targetDistance;
 
     private void Update()
     {
-        if (tagFinder.Tag == null)
+        if (tagFinder.Character == null)
         {
             return;
         }
 
         if (!IsWithinTargetDistance)
         {
-            var direction = (tagFinder.Tag.transform.position - transform.position).normalized;
+            var direction = (tagFinder.Character.transform.position - transform.position).normalized;
             transform.Translate(speed * Time.deltaTime * direction);
         }
 
-        spriteRenderer.flipX = tagFinder.Tag.transform.position.x < transform.position.x;
+        spriteRenderer.flipX = tagFinder.Character.transform.position.x < transform.position.x;
     }
 }

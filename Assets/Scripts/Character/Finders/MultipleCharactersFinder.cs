@@ -3,5 +3,5 @@ using UnityEngine;
 
 public abstract class MultipleCharactersFinder : MonoBehaviour
 {
-    public IEnumerable<CharacterTag> Tags { get; protected set; }
+    public IEnumerable<Character> Characters { get; protected set; }
 }

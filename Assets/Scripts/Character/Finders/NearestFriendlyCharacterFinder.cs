@@ -9,19 +9,19 @@ public class NearestFriendlyCharacterFinder : SingleCharacterFinder
 
     private void FindNearestFriendlyCharacter()
     {
-        if (Tag != null)
+        if (Character != null)
         {
-            Tag.Health.Dead -= FindNearestFriendlyCharacter;
+            Character.Health.Dead -= FindNearestFriendlyCharacter;
         }
 
-        Tag = CharacterTag.ActiveTags
+        Character = Character.Active
             .Where((tag) => tag.gameObject != gameObject)
             .Where((tag) => tag.CompareTag(gameObject.tag))
             .MinBy((tag) => (transform.position - tag.transform.position).sqrMagnitude);
 
-        if (Tag != null)
+        if (Character != null)
         {
-            Tag.Health.Dead += FindNearestFriendlyCharacter;
+            Character.Health.Dead += FindNearestFriendlyCharacter;
         }
     }
 }

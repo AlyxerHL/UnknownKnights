@@ -2,5 +2,5 @@ using UnityEngine;
 
 public abstract class SingleCharacterFinder : MonoBehaviour
 {
-    public CharacterTag Tag { get; protected set; }
+    public Character Character { get; protected set; }
 }

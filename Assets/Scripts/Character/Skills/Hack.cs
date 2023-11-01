@@ -14,16 +14,16 @@ public class Hack : Skill
     private NearestEnemyCharacterFinder finder;
 
     private bool IsWithinRange =>
-        (transform.position - finder.Tag.transform.position).sqrMagnitude <= range;
+        (transform.position - finder.Character.transform.position).sqrMagnitude <= range;
 
     protected override UniTask Use(CancellationToken _)
     {
-        if (finder.Tag == null || !IsWithinRange)
+        if (finder.Character == null || !IsWithinRange)
         {
             return UniTask.CompletedTask;
         }
 
-        finder.Tag.Effector.ApplyStun(effectDuration).Forget();
+        finder.Character.Effector.ApplyStun(effectDuration).Forget();
         return UniTask.CompletedTask;
     }
 }

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterTag : MonoBehaviour
+public class Character : MonoBehaviour
 {
-    public static readonly List<CharacterTag> ActiveTags = new();
+    public static readonly List<Character> Active = new();
 
     [field: SerializeField]
     public Health Health { get; private set; }
@@ -13,11 +13,11 @@ public class CharacterTag : MonoBehaviour
 
     private void OnEnable()
     {
-        ActiveTags.Add(this);
+        Active.Add(this);
     }
 
     private void OnDisable()
     {
-        ActiveTags.Remove(this);
+        Active.Remove(this);
     }
 }

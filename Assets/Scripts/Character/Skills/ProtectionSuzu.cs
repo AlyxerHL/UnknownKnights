@@ -16,10 +16,10 @@ public class ProtectionSuzu : Skill
 
     protected override UniTask Use(CancellationToken cancellationToken)
     {
-        foreach (var tag in finder.Tags)
+        foreach (var character in finder.Characters)
         {
-            tag.Health.GetHealed(healAmount);
-            tag.Effector.ApplyDamageReduction(0f, effectDuration).Forget();
+            character.Health.GetHealed(healAmount);
+            character.Effector.ApplyDamageReduction(0f, effectDuration).Forget();
         }
         return UniTask.CompletedTask;
     }

@@ -19,9 +19,9 @@ public class Deadeye : Skill
     protected override async UniTask Use(CancellationToken cancellationToken)
     {
         await UniTask.WaitForSeconds(aimingTime, cancellationToken: cancellationToken);
-        if (finder.Tag != null)
+        if (finder.Character != null)
         {
-            finder.Tag.Health.GetDamaged(damage);
+            finder.Character.Health.GetDamaged(damage);
         }
         await UniTask.WaitForSeconds(recoveryTime, cancellationToken: cancellationToken);
     }

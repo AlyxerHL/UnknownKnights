@@ -21,8 +21,8 @@ public class Weapon : MonoBehaviour
     public float DamageMultiplier { get; set; } = 1f;
 
     private bool CanFire =>
-        finder.Tag != null
-        && (transform.position - finder.Tag.transform.position).sqrMagnitude <= range;
+        finder.Character != null
+        && (transform.position - finder.Character.transform.position).sqrMagnitude <= range;
 
     private void OnEnable()
     {
@@ -44,7 +44,7 @@ public class Weapon : MonoBehaviour
             while (!cancellation.Token.IsCancellationRequested)
             {
                 await UniTask.WaitUntil(() => CanFire, cancellationToken: cancellation.Token);
-                finder.Tag.Health.GetDamaged(damage * DamageMultiplier);
+                finder.Character.Health.GetDamaged(damage * DamageMultiplier);
                 await UniTask.WaitForSeconds(recoveryTime, cancellationToken: cancellation.Token);
             }
         }

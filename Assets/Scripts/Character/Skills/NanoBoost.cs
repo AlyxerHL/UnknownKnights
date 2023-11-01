@@ -18,13 +18,13 @@ public class NanoBoost : Skill
 
     protected override UniTask Use(CancellationToken cancellationToken)
     {
-        if (finder.Tag == null)
+        if (finder.Character == null)
         {
             return UniTask.CompletedTask;
         }
 
-        finder.Tag.Effector.ApplyDamageBuff(damageBuff, effectDuration).Forget();
-        finder.Tag.Effector.ApplyDamageReduction(damageReduction, effectDuration).Forget();
+        finder.Character.Effector.ApplyDamageBuff(damageBuff, effectDuration).Forget();
+        finder.Character.Effector.ApplyDamageReduction(damageReduction, effectDuration).Forget();
         return UniTask.CompletedTask;
     }
 }

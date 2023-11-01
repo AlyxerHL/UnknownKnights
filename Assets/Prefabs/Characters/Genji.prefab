@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4932817865470146585}
   - component: {fileID: 1882709630282880308}
-  - component: {fileID: 7909235214455502689}
   - component: {fileID: 3734937030930835064}
+  - component: {fileID: 7909235214455502689}
   - component: {fileID: 4645805617419349614}
   - component: {fileID: 6171701233884385789}
   - component: {fileID: 4217649862283822665}
@@ -91,18 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7909235214455502689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 18946159159150324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2dee7ae9ad0d4cf4b1da910d1197a43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3734937030930835064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,6 +105,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Health>k__BackingField: {fileID: 6171701233884385789}
   <Effector>k__BackingField: {fileID: 4645805617419349614}
+--- !u!114 &7909235214455502689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18946159159150324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2dee7ae9ad0d4cf4b1da910d1197a43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4645805617419349614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,24 +146,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 1000
-  onDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 18946159159150324}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onHealthChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &4217649862283822665
 MonoBehaviour:
   m_ObjectHideFlags: 0

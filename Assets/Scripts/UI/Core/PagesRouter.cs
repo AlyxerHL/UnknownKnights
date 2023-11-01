@@ -25,11 +25,7 @@ public class PagesRouter : MonoBehaviour
 
     private void Start()
     {
-        foreach (var page in pages)
-        {
-            page.gameObject.SetActive(false);
-        }
-
+        pages.ForEach((page) => page.gameObject.SetActive(false));
         CurrentPage = rootPage;
         CurrentPage.gameObject.SetActive(true);
         ProcessTransitionQueue().Forget();

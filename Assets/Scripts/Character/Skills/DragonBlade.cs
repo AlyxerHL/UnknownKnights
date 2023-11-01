@@ -17,13 +17,13 @@ public class DragonBlade : Skill
     private NearestEnemyCharacterFinder finder;
 
     private bool IsWithinRange =>
-        (transform.position - finder.Tag.transform.position).sqrMagnitude <= range;
+        (transform.position - finder.Character.transform.position).sqrMagnitude <= range;
 
     protected override async UniTask Use(CancellationToken cancellationToken)
     {
-        if (finder.Tag != null && IsWithinRange)
+        if (finder.Character != null && IsWithinRange)
         {
-            finder.Tag.Health.GetDamaged(damage);
+            finder.Character.Health.GetDamaged(damage);
         }
         await UniTask.WaitForSeconds(recoveryTime, cancellationToken: cancellationToken);
     }

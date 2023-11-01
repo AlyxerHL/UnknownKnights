@@ -9,18 +9,18 @@ public class NearestEnemyCharacterFinder : SingleCharacterFinder
 
     private void FindNearestEnemyCharacter()
     {
-        if (Tag != null)
+        if (Character != null)
         {
-            Tag.Health.Dead -= FindNearestEnemyCharacter;
+            Character.Health.Dead -= FindNearestEnemyCharacter;
         }
 
-        Tag = CharacterTag.ActiveTags
+        Character = Character.Active
             .Where((tag) => !tag.CompareTag(gameObject.tag))
             .MinBy((tag) => (transform.position - tag.transform.position).sqrMagnitude);
 
-        if (Tag != null)
+        if (Character != null)
         {
-            Tag.Health.Dead += FindNearestEnemyCharacter;
+            Character.Health.Dead += FindNearestEnemyCharacter;
         }
     }
 }

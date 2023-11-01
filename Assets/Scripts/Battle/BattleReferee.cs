@@ -27,14 +27,14 @@ public class BattleReferee : MonoBehaviour
 
     public static void MakeDecision()
     {
-        if (CharacterTag.ActiveTags.Count == 0)
+        if (Character.Active.Count == 0)
         {
             Debug.Log("Is this even possible?");
             return;
         }
 
-        var firstTag = CharacterTag.ActiveTags.First().tag;
-        var isFinished = CharacterTag.ActiveTags.All((tag) => tag.CompareTag(firstTag));
+        var firstTag = Character.Active.First().tag;
+        var isFinished = Character.Active.All((tag) => tag.CompareTag(firstTag));
 
         if (isFinished)
         {
