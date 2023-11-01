@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 8448233526197495697}
+  <Quote>k__BackingField: It's high noon.
   cooldown: 8
   damage: 250
   aimingTime: 3

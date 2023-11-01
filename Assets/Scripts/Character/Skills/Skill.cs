@@ -8,6 +8,9 @@ public abstract class Skill : MonoBehaviour
     [SerializeField]
     private Weapon weapon;
 
+    [field: SerializeField]
+    public string Quote { get; private set; }
+
     [SerializeField]
     private float cooldown;
 

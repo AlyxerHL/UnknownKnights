@@ -30,7 +30,7 @@ public class BattlePageSkillVfx : MonoBehaviour
     private async UniTask<SkillQuote> Show(Skill skill)
     {
         var skillQuote = Instantiate(skillQuotePrefab, transform);
-        skillQuote.Text = skill.gameObject.name;
+        skillQuote.Initialize(skill);
         skillQuotes.Add(skillQuote);
         gameObject.SetActive(true);
 

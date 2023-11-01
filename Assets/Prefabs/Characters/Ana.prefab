@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 8448233526197495697}
+  <Quote>k__BackingField: You're powered up, get in there.
   cooldown: 10
   damageBuff: 2
   damageReduction: 0.5
