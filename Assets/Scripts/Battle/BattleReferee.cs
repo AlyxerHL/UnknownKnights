@@ -35,15 +35,16 @@ public class BattleReferee : MonoBehaviour
 
         if (isFinished)
         {
-            PagesRouter
-                .GoTo("ResultPage")
-                .ContinueWith(
-                    (page) =>
-                    {
-                        var resultPage = page.GetComponent<ResultPage>();
-                        resultPage.Initialize(firstTag == CharacterSpawner.GreenTeamTag);
-                    }
-                );
+            ShowResult(firstTag).Forget();
         }
+    }
+
+    private static async UniTaskVoid ShowResult(string firstTag)
+    {
+        BattleTime.PauseTimeScale();
+        await UniTask.WaitForSeconds(1f);
+        var page = await PagesRouter.GoTo("ResultPage");
+        var resultPage = page.GetComponent<ResultPage>();
+        resultPage.Initialize(firstTag == CharacterSpawner.GreenTeamTag);
     }
 }
