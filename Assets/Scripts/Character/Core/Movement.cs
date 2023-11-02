@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        if (tagFinder.Character == null)
+        if (tagFinder.Character == null || BattleTime.IsPaused)
         {
             return;
         }

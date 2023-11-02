@@ -9,7 +9,7 @@ public class Health : MonoBehaviour
     public event Action Dead;
     public event Action<float> Changed;
 
-    public bool IsDead => CurrentHealth.Approximately(0f);
+    public bool IsDead => CurrentHealth == 0f;
     public float CurrentHealth { get; private set; }
     public float DamageReduction { get; set; } = 1f;
 
@@ -24,7 +24,7 @@ public class Health : MonoBehaviour
         CurrentHealth -= amount;
         Changed?.Invoke(-amount);
 
-        if (CurrentHealth.Approximately(0f))
+        if (CurrentHealth == 0f)
         {
             gameObject.SetActive(false);
             Dead?.Invoke();

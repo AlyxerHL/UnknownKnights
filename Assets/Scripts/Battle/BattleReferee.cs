@@ -16,13 +16,15 @@ public class BattleReferee : MonoBehaviour
         remove => time.Updated -= value;
     }
 
-    private void Start()
+    private void Awake()
     {
-        time.Value = timeLimit;
-        DOTween
+        var tweener = DOTween
             .To(() => time.Value, (x) => time.Value = x, 0f, timeLimit)
             .SetEase(Ease.Linear)
             .OnComplete(() => Debug.Log("Time's up!"));
+
+        time.Value = timeLimit;
+        BattleTime.TimeScaleChanged += (timeScale) => tweener.timeScale = timeScale;
     }
 
     public static void MakeDecision()

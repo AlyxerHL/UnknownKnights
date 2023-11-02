@@ -45,7 +45,7 @@ public class Weapon : MonoBehaviour
             {
                 await UniTask.WaitUntil(() => CanFire, cancellationToken: cancellation.Token);
                 finder.Character.Health.GetDamaged(damage * DamageMultiplier);
-                await UniTask.WaitForSeconds(recoveryTime, cancellationToken: cancellation.Token);
+                await BattleTime.WaitForSeconds(recoveryTime, cancellation.Token);
             }
         }
     }

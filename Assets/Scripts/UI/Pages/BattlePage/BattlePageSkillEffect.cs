@@ -36,7 +36,7 @@ public class BattlePageSkillEffect : MonoBehaviour
         skillQuotes.Add(skillQuote);
         gameObject.SetActive(true);
 
-        await UniTask.WaitForSeconds(quoteDuration, ignoreTimeScale: true);
+        await UniTask.WaitForSeconds(quoteDuration);
         return skillQuote;
     }
 
@@ -47,7 +47,7 @@ public class BattlePageSkillEffect : MonoBehaviour
             return;
         }
 
-        await UniTask.WaitForSeconds(recoveryDuration, ignoreTimeScale: true);
+        await UniTask.WaitForSeconds(recoveryDuration);
         skillQuotes.Remove(skillQuote);
         Destroy(skillQuote.gameObject);
 

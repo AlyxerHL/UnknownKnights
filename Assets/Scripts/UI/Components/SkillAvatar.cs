@@ -28,7 +28,6 @@ public class SkillAvatar : MonoBehaviour
         avatar.sprite = sprite;
         skill.CooldownBegan += OnCooldownBegan;
         button.onClick.AddListener(() => skill.Use().Forget());
-
         health.Changed += (_) => healthBar.fillAmount = health.CurrentHealth / health.MaxHealth;
         health.Dead += OnDead;
     }
@@ -52,6 +51,7 @@ public class SkillAvatar : MonoBehaviour
                 button.interactable = true;
                 cooldown.text = string.Empty;
             });
+        BattleTime.TimeScaleChanged += (timeScale) => tweener.timeScale = timeScale;
     }
 
     private void OnDead()

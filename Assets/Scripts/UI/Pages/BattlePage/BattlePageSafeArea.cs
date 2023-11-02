@@ -36,6 +36,7 @@ public class BattlePageSafeArea : MonoBehaviour
 
     public void Pause()
     {
+        Time.timeScale = 0f;
         PagesRouter.GoTo("PausePage").Forget();
     }
 
@@ -50,7 +51,7 @@ public class BattlePageSafeArea : MonoBehaviour
 
     public void ToggleGameSpeed()
     {
-        TimeSystem.BaseTimeScale = isTimeAccelerated ? 1f : 1.5f;
+        BattleTime.BaseTimeScale = isTimeAccelerated ? 1f : 1.5f;
         isTimeAccelerated = !isTimeAccelerated;
     }
 }

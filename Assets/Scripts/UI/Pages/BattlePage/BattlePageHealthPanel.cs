@@ -23,7 +23,7 @@ public class BattlePageHealthPanel : MonoBehaviour
 
             character.Health.Changed += (changeAmount) =>
             {
-                if (changeAmount.Approximately(0))
+                if (changeAmount == 0f)
                 {
                     return;
                 }

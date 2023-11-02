@@ -42,7 +42,7 @@ public abstract class Skill : MonoBehaviour
     {
         if (skillQueue.Count == 0)
         {
-            TimeSystem.StopTimeScale();
+            BattleTime.PauseTimeScale();
         }
 
         skillQueue.Enqueue(this);
@@ -52,7 +52,7 @@ public abstract class Skill : MonoBehaviour
 
         if (skillQueue.Count == 0)
         {
-            TimeSystem.ResetTimeScale();
+            BattleTime.ResumeTimeScale();
         }
 
         async UniTask Use()
@@ -97,7 +97,7 @@ public abstract class Skill : MonoBehaviour
     private async UniTask Cooldown()
     {
         isCooldown = true;
-        await UniTask.WaitForSeconds(cooldown);
+        await BattleTime.WaitForSeconds(cooldown);
         isCooldown = false;
     }
 }
