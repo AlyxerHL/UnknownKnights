@@ -11,4 +11,8 @@ public class BattleGrid : ScriptableObject
 
     [field: SerializeField]
     public Character Back { get; set; }
+
+    public static readonly Vector2 TopPosition = new(-6f, 1f);
+    public static readonly Vector2 BottomPosition = new(-6f, -1f);
+    public static readonly Vector2 BackPosition = new(-8f, 0f);
 }

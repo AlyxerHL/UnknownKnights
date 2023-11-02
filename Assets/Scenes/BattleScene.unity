@@ -149,20 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845e0e1766d694374a12e56d7c91b0b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenTeamCharacters:
-  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: 1e792c500330c429495cf2703b83f933, type: 3}
-    <Position>k__BackingField: {x: -8, y: 0, z: 0}
-  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: 6d2553244090d44879830cd804905870, type: 3}
-    <Position>k__BackingField: {x: -6, y: 1, z: 0}
-  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: abcd78a0dd7c7419b926e528f7f8ea1b, type: 3}
-    <Position>k__BackingField: {x: -6, y: -1, z: 0}
-  redTeamCharacters:
-  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: d3335c3f7695847eab8c47b79b5c174c, type: 3}
-    <Position>k__BackingField: {x: 8, y: 0, z: 0}
-  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: 2766dd006435a4eba8208f33f28b313e, type: 3}
-    <Position>k__BackingField: {x: 6, y: 1, z: 0}
-  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: d1300388399d54b08bcce754f33d22da, type: 3}
-    <Position>k__BackingField: {x: 6, y: -1, z: 0}
+  greenTeamGrid: {fileID: 11400000, guid: bc229ab1d9ed842a6a78ec4b281993aa, type: 2}
+  redTeamGrid: {fileID: 11400000, guid: 69045a2bd58cf4d6399b8c40455af3f9, type: 2}
 --- !u!4 &46794428
 Transform:
   m_ObjectHideFlags: 0
@@ -1975,7 +1963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44bd64bdec3d046599b901cf04041513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 60
+  timeLimit: 10
 --- !u!1 &1753419450
 GameObject:
   m_ObjectHideFlags: 0

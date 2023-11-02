@@ -3,6 +3,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HomePage : MonoBehaviour
 {
@@ -16,19 +17,23 @@ public class HomePage : MonoBehaviour
     private TextMeshProUGUI selectedCharacterNames;
 
     [SerializeField]
+    private Button startBattleButton;
+
+    [SerializeField]
     private BattleGrid greenTeamBattleGrid;
 
     [SerializeField]
     private BattleGrid redTeamBattleGrid;
 
-    private IEnumerable<SlotAvatar> slotAvatars;
     private readonly List<Character> selectedCharacters = new(3);
+    private SlotAvatar[] slotAvatars;
 
     private void Awake()
     {
-        slotAvatars = slotAvatarPrefabs.Select(
-            (prefab) => Instantiate(prefab, slotAvatarContainer)
-        );
+        UpdateSelectedCharacterNames();
+        slotAvatars = slotAvatarPrefabs
+            .Select((prefab) => Instantiate(prefab, slotAvatarContainer))
+            .ToArray();
 
         foreach (var slotAvatar in slotAvatars)
         {
@@ -56,7 +61,8 @@ public class HomePage : MonoBehaviour
 
         var randomCharacters = slotAvatars
             .Select((slotAvatar) => slotAvatar.CharacterPrefab)
-            .OrderBy((_) => Random.value);
+            .OrderBy((_) => Random.value)
+            .ToArray();
 
         redTeamBattleGrid.Top = randomCharacters.ElementAtOrDefault(0);
         redTeamBattleGrid.Bottom = randomCharacters.ElementAtOrDefault(1);
@@ -71,5 +77,6 @@ public class HomePage : MonoBehaviour
             "\n",
             selectedCharacters.Select((character) => character != null ? character.name : null)
         );
+        startBattleButton.interactable = selectedCharacters.Count == 3;
     }
 }

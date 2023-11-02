@@ -7,40 +7,28 @@ public class CharacterSpawner : MonoBehaviour
     public static readonly string RedTeamTag = "RedTeam";
 
     [SerializeField]
-    private SpawnData[] greenTeamCharacters;
+    private BattleGrid greenTeamGrid;
 
     [SerializeField]
-    private SpawnData[] redTeamCharacters;
+    private BattleGrid redTeamGrid;
 
     public event Action<Character> CharacterSpawned;
 
     private void Start()
     {
-        greenTeamCharacters.ForEach((spawnData) => SpawnCharacter(spawnData, GreenTeamTag));
-        redTeamCharacters.ForEach((spawnData) => SpawnCharacter(spawnData, RedTeamTag));
+        SpawnCharacter(greenTeamGrid.Top, BattleGrid.TopPosition, GreenTeamTag);
+        SpawnCharacter(greenTeamGrid.Bottom, BattleGrid.BottomPosition, GreenTeamTag);
+        SpawnCharacter(greenTeamGrid.Back, BattleGrid.BackPosition, GreenTeamTag);
+        SpawnCharacter(redTeamGrid.Top, BattleGrid.TopPosition * -1f, RedTeamTag);
+        SpawnCharacter(redTeamGrid.Bottom, BattleGrid.BottomPosition * -1f, RedTeamTag);
+        SpawnCharacter(redTeamGrid.Back, BattleGrid.BackPosition * -1f, RedTeamTag);
     }
 
-    private void SpawnCharacter(SpawnData spawnData, string tag)
+    private void SpawnCharacter(Character prefab, Vector2 position, string tag)
     {
-        var character = Instantiate(
-            spawnData.Prefab,
-            spawnData.Position,
-            Quaternion.identity,
-            transform
-        );
-
+        var character = Instantiate(prefab, position, Quaternion.identity, transform);
         character.tag = tag;
         character.Health.Dead += BattleReferee.MakeDecision;
         CharacterSpawned?.Invoke(character);
-    }
-
-    [Serializable]
-    public struct SpawnData
-    {
-        [field: SerializeField]
-        public Character Prefab { get; set; }
-
-        [field: SerializeField]
-        public Vector3 Position { get; set; }
     }
 }

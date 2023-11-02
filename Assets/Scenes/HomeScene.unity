@@ -943,6 +943,7 @@ MonoBehaviour:
   - {fileID: 1298018236865390991, guid: 51ee299b5a2ff446bbd10a49270c0c6c, type: 3}
   slotAvatarContainer: {fileID: 1823545037}
   selectedCharacterNames: {fileID: 388691633}
+  startBattleButton: {fileID: 827210773}
   greenTeamBattleGrid: {fileID: 11400000, guid: bc229ab1d9ed842a6a78ec4b281993aa, type: 2}
   redTeamBattleGrid: {fileID: 11400000, guid: 69045a2bd58cf4d6399b8c40455af3f9, type: 2}
 --- !u!1660057539 &9223372036854775807
