@@ -67,8 +67,12 @@ public abstract class Skill : MonoBehaviour
 
     public async UniTask StartAutoSkill()
     {
-        autoSkillCancellation = new();
+        if (!isActiveAndEnabled)
+        {
+            return;
+        }
 
+        autoSkillCancellation = new();
         while (!autoSkillCancellation.Token.IsCancellationRequested)
         {
             await UniTask.WaitWhile(

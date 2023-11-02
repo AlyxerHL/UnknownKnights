@@ -150,12 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   greenTeamCharacters:
-  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: 1e792c500330c429495cf2703b83f933, type: 3}
-    <Position>k__BackingField: {x: -8, y: 0, z: 0}
   - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: 6d2553244090d44879830cd804905870, type: 3}
     <Position>k__BackingField: {x: -6, y: 1, z: 0}
-  - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: abcd78a0dd7c7419b926e528f7f8ea1b, type: 3}
-    <Position>k__BackingField: {x: -6, y: -1, z: 0}
   redTeamCharacters:
   - <Prefab>k__BackingField: {fileID: 3734937030930835064, guid: d3335c3f7695847eab8c47b79b5c174c, type: 3}
     <Position>k__BackingField: {x: 8, y: 0, z: 0}
@@ -2200,7 +2196,7 @@ MonoBehaviour:
   timer: {fileID: 869100457575215157}
   greenTeamGauge: {fileID: 685868426572545020}
   redTeamGauge: {fileID: 4984161419654320654}
-  gaugeSpeed: 0.1
+  gaugeSpeed: 0.2
 --- !u!1 &8145209173527083965
 GameObject:
   m_ObjectHideFlags: 0
