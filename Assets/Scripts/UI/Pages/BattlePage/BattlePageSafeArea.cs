@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -15,8 +16,9 @@ public class BattlePageSafeArea : MonoBehaviour
 
     private readonly List<Skill> greenTeamSkills = new();
     private bool isAutoSkillEnabled = true;
+    private bool isTimeAccelerated = false;
 
-    private void Start()
+    private void Awake()
     {
         characterSpawner.CharacterSpawned += (character) =>
         {
@@ -39,20 +41,17 @@ public class BattlePageSafeArea : MonoBehaviour
 
     public void ToggleAutoSkill()
     {
-        if (isAutoSkillEnabled)
-        {
-            greenTeamSkills.ForEach((skill) => skill.StopAutoSkill());
-        }
-        else
-        {
-            greenTeamSkills.ForEach((skill) => skill.StartAutoSkill().Forget());
-        }
-
+        Action<Skill> action = isAutoSkillEnabled
+            ? (skill) => skill.StopAutoSkill()
+            : (skill) => skill.StartAutoSkill().Forget();
+        greenTeamSkills.ForEach(action);
         isAutoSkillEnabled = !isAutoSkillEnabled;
     }
 
     public void ToggleGameSpeed()
     {
-        Debug.Log("ToggleGameSpeed");
+        TimeSystem.BaseTimeScale = isTimeAccelerated ? 1f : 1.5f;
+        TimeSystem.ResetTimeScale();
+        isTimeAccelerated = !isTimeAccelerated;
     }
 }

@@ -42,7 +42,7 @@ public abstract class Skill : MonoBehaviour
     {
         if (skillQueue.Count == 0)
         {
-            Time.timeScale = 0f;
+            TimeSystem.StopTimeScale();
         }
 
         skillQueue.Enqueue(this);
@@ -52,7 +52,7 @@ public abstract class Skill : MonoBehaviour
 
         if (skillQueue.Count == 0)
         {
-            Time.timeScale = 1f;
+            TimeSystem.ResetTimeScale();
         }
 
         async UniTask Use()
