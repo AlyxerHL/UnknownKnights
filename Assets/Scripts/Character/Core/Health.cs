@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     public event Action Dead;
     public event Action<float> Changed;
 
+    public bool IsDead => CurrentHealth.Approximately(0f);
     public float CurrentHealth { get; private set; }
     public float DamageReduction { get; set; } = 1f;
 
