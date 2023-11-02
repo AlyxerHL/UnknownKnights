@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84145e7dd9b644044b768168b58e57cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPrefab: {fileID: 3734937030930835064, guid: 2766dd006435a4eba8208f33f28b313e, type: 3}
+  <CharacterPrefab>k__BackingField: {fileID: 3734937030930835064, guid: 2766dd006435a4eba8208f33f28b313e, type: 3}
 --- !u!222 &1438835979680309971
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class SlotAvatar : MonoBehaviour
 {
-    [SerializeField]
-    private Character characterPrefab;
+    [field: SerializeField]
+    public Character CharacterPrefab { get; private set; }
 
     public event Action<Character> Selected;
 
     public void Select()
     {
-        Selected?.Invoke(characterPrefab);
+        Selected?.Invoke(CharacterPrefab);
     }
 }
- 
