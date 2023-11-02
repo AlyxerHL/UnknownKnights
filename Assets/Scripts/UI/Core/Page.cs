@@ -1,10 +1,25 @@
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 
-public abstract class Page : MonoBehaviour
+public class Page : MonoBehaviour
 {
-    public abstract RectTransform RectTransform { get; }
+    [SerializeField]
+    private Transition transition;
 
-    public abstract UniTask Show();
-    public abstract UniTask Hide();
+    public RectTransform RectTransform { get; private set; }
+
+    private void Awake()
+    {
+        RectTransform = transform as RectTransform;
+    }
+
+    public UniTask Show()
+    {
+        return transition.Show();
+    }
+
+    public UniTask Hide()
+    {
+        return transition.Show();
+    }
 }
