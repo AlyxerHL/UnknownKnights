@@ -73,10 +73,12 @@ public class HomePage : MonoBehaviour
 
     private void UpdateSelectedCharacterNames()
     {
-        selectedCharacterNames.text = string.Join(
+        var text = string.Join(
             "\n",
             selectedCharacters.Select((character) => character != null ? character.name : null)
         );
+
+        selectedCharacterNames.text = string.IsNullOrEmpty(text) ? "Select Heroes" : text;
         startBattleButton.interactable = selectedCharacters.Count == 3;
     }
 }
