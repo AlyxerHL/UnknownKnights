@@ -51,6 +51,8 @@ public class SkillAvatar : MonoBehaviour
                 button.interactable = true;
                 cooldown.text = string.Empty;
             });
+
+        tweener.timeScale = BattleTime.TimeScale;
         BattleTime.TimeScaleChanged += (timeScale) => tweener.timeScale = timeScale;
     }
 

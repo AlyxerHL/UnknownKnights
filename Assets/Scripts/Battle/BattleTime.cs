@@ -8,7 +8,7 @@ public static class BattleTime
     private static float timeScale = 1f;
     private static float baseTimeScale = 1f;
 
-    public static bool IsPaused => timeScale == 0f;
+    public static float TimeScale => timeScale;
 
     public static float BaseTimeScale
     {
@@ -16,7 +16,7 @@ public static class BattleTime
         set
         {
             baseTimeScale = value;
-            if (!IsPaused)
+            if (TimeScale != 0f)
             {
                 timeScale = value;
                 TimeScaleChanged?.Invoke(timeScale);

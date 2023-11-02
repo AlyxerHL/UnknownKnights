@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        if (tagFinder.Character == null || BattleTime.IsPaused)
+        if (tagFinder.Character == null)
         {
             return;
         }
@@ -29,7 +29,7 @@ public class Movement : MonoBehaviour
             var direction = (
                 tagFinder.Character.transform.position - transform.position
             ).normalized;
-            transform.Translate(speed * Time.deltaTime * direction);
+            transform.Translate(BattleTime.TimeScale * Time.deltaTime * speed * direction);
         }
 
         spriteRenderer.flipX = tagFinder.Character.transform.position.x < transform.position.x;

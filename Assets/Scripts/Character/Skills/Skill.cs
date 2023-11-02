@@ -57,10 +57,10 @@ public abstract class Skill : MonoBehaviour
 
         async UniTask Use()
         {
-            await (BeganUsing?.Invoke() ?? UniTask.CompletedTask);
             Cooldown().Forget();
             CooldownBegan?.Invoke(cooldown);
 
+            await (BeganUsing?.Invoke() ?? UniTask.CompletedTask);
             if (CanUse)
             {
                 ApplyEffect();
