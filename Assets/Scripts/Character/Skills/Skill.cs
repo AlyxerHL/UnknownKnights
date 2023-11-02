@@ -22,6 +22,11 @@ public abstract class Skill : MonoBehaviour
 
     protected abstract bool CanUse { get; }
 
+    private void Awake()
+    {
+        skillQueue.Clear();
+    }
+
     private void Start()
     {
         Cooldown().Forget();
