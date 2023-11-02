@@ -14,13 +14,15 @@ public class PausePage : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
+        BattleTime.ResumeTimeScale();
         DOTween.KillAll();
         SceneManager.LoadScene(1);
     }
 
-    public void Surrender()
+    public void GoToHome()
     {
         Time.timeScale = 1f;
+        BattleTime.ResumeTimeScale();
         DOTween.KillAll();
         SceneManager.LoadScene(0);
     }

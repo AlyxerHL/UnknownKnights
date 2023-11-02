@@ -36,21 +36,21 @@ public class Effector
     public async UniTask ApplyStun(float duration)
     {
         var effectID = SetStun();
-        await BattleTime.WaitForSeconds(duration);
+        await BattleTime.WaitForSeconds(duration, health.GetCancellationTokenOnDestroy());
         ClearStun(effectID);
     }
 
     public async UniTask ApplyDamageBuff(float multiplier, float duration)
     {
         var effectID = SetDamageBuff(multiplier);
-        await BattleTime.WaitForSeconds(duration);
+        await BattleTime.WaitForSeconds(duration, health.GetCancellationTokenOnDestroy());
         ClearDamageBuff(effectID);
     }
 
     public async UniTask ApplyDamageReduction(float multiplier, float duration)
     {
         var effectID = SetDamageReduction(multiplier);
-        await BattleTime.WaitForSeconds(duration);
+        await BattleTime.WaitForSeconds(duration, health.GetCancellationTokenOnDestroy());
         ClearDamageReduction(effectID);
     }
 

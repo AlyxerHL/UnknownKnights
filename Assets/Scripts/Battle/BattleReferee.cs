@@ -24,8 +24,9 @@ public class BattleReferee : MonoBehaviour
             .SetEase(Ease.Linear)
             .OnComplete(() => Debug.Log("Time's up!"));
 
-        time.Value = timeLimit;
+        tweener.timeScale = BattleTime.TimeScale;
         BattleTime.TimeScaleChanged += (timeScale) => tweener.timeScale = timeScale;
+        time.Value = timeLimit;
     }
 
     public static void MakeDecision()

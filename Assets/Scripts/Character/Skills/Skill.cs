@@ -46,7 +46,10 @@ public abstract class Skill : MonoBehaviour
         }
 
         skillQueue.Enqueue(this);
-        await UniTask.WaitUntil(() => skillQueue.Peek() == this);
+        await UniTask.WaitUntil(
+            () => skillQueue.Peek() == this,
+            cancellationToken: this.GetCancellationTokenOnDestroy()
+        );
         await Use();
         skillQueue.Dequeue();
 
@@ -97,7 +100,7 @@ public abstract class Skill : MonoBehaviour
     private async UniTask Cooldown()
     {
         isCooldown = true;
-        await BattleTime.WaitForSeconds(cooldown);
+        await BattleTime.WaitForSeconds(cooldown, this.GetCancellationTokenOnDestroy());
         isCooldown = false;
     }
 }
