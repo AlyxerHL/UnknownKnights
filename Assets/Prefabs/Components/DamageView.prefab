@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5714730526841036191}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -166,7 +165,6 @@ RectTransform:
   m_Children:
   - {fileID: 8341897103825629038}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -189,3 +187,5 @@ MonoBehaviour:
   duration: 0.5
   offset: {x: 0, y: 100}
   randomness: {x: 40, y: 20}
+  damageColor: {r: 0.69411767, g: 0.078431375, b: 0.08627451, a: 1}
+  healColor: {r: 0.41960785, g: 0.6117647, b: 0.078431375, a: 1}

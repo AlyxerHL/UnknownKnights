@@ -21,16 +21,16 @@ public class BattlePageHealthPanel : MonoBehaviour
             var healthBar = Instantiate(healthBarPrefab, transform);
             healthBar.Initialize(character.Health);
 
-            character.Health.Changed += (amount) =>
+            character.Health.Changed += (changeAmount) =>
             {
-                if (amount >= 0)
+                if (changeAmount.Approximately(0))
                 {
                     return;
                 }
 
-                var damageAmount = Mathf.RoundToInt(-amount);
+                var amount = Mathf.RoundToInt(changeAmount);
                 var damageView = damageViewPool.Get();
-                damageView.Show(character.transform, damageAmount);
+                damageView.Show(character.transform, amount);
             };
         };
 

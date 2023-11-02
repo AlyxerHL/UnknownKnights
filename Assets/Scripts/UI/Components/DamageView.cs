@@ -17,6 +17,12 @@ public class DamageView : MonoBehaviour
     [SerializeField]
     private Vector2 randomness;
 
+    [SerializeField]
+    private Color damageColor;
+
+    [SerializeField]
+    private Color healColor;
+
     private RectTransform rectTransform;
 
     public IObjectPool<DamageView> PoolToReturn { get; set; }
@@ -26,9 +32,10 @@ public class DamageView : MonoBehaviour
         rectTransform = transform as RectTransform;
     }
 
-    public void Show(Transform target, float damage)
+    public void Show(Transform target, float amount)
     {
-        text.text = damage.ToString();
+        text.text = Mathf.Abs(amount).ToString();
+        text.color = amount < 0 ? damageColor : healColor;
 
         var position =
             (Vector2)Camera.main.WorldToScreenPoint(target.position)
