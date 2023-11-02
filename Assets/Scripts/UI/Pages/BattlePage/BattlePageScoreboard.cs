@@ -33,14 +33,22 @@ public class BattlePageScoreboard : MonoBehaviour
 
     private void Awake()
     {
-        greenTeamGaugeTweener = greenTeamGauge.DOFillAmount(1f, gaugeSpeed).SetAutoKill(false);
+        greenTeamGaugeTweener = greenTeamGauge
+            .DOFillAmount(1f, gaugeSpeed)
+            .SetUpdate(true)
+            .SetAutoKill(false);
+
         greenTeamTotalHealth.Updated += (totalHealth) =>
         {
             var fillAmount = totalHealth / greenTeamMaxHealth;
             greenTeamGaugeTweener.ChangeEndValue(fillAmount, true).Restart();
         };
 
-        redTeamGaugeTweener = redTeamGauge.DOFillAmount(1f, gaugeSpeed).SetAutoKill(false);
+        redTeamGaugeTweener = redTeamGauge
+            .DOFillAmount(1f, gaugeSpeed)
+            .SetUpdate(true)
+            .SetAutoKill(false);
+
         redTeamTotalHealth.Updated += (totalHealth) =>
         {
             var fillAmount = totalHealth / redTeamMaxHealth;
