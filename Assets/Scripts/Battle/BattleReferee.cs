@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -29,18 +30,20 @@ public class BattleReferee : MonoBehaviour
 
     public static void MakeDecision()
     {
-        if (Character.Active.Count == 0)
-        {
-            Debug.Log("Is this even possible?");
-            return;
-        }
-
         var firstTag = Character.Active.First().tag;
         var isFinished = Character.Active.All((character) => character.CompareTag(firstTag));
 
         if (isFinished)
         {
-            Debug.Log(firstTag + " Win!");
+            PagesRouter
+                .GoTo("ResultPage")
+                .ContinueWith(
+                    (page) =>
+                    {
+                        var resultPage = page.GetComponent<ResultPage>();
+                        resultPage.Initialize(firstTag == CharacterSpawner.GreenTeamTag);
+                    }
+                );
         }
     }
 }
