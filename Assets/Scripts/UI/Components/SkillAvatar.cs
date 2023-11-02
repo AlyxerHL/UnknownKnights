@@ -21,7 +21,6 @@ public class SkillAvatar : MonoBehaviour
     [SerializeField]
     private Image healthBar;
 
-    private float cooldownLeft;
     private Tweener tweener;
 
     public void Initialize(Sprite sprite, Skill skill, Health health)
@@ -31,21 +30,17 @@ public class SkillAvatar : MonoBehaviour
         button.onClick.AddListener(() => skill.Use().Forget());
         health.Changed += (_) => healthBar.fillAmount = health.CurrentHealth / health.MaxHealth;
         health.Dead += OnDead;
-
-        tweener = DOTween
-            .To(() => cooldownLeft, (x) => cooldownLeft = x, 0f, 0f)
-            .SetEase(Ease.Linear)
-            .SetAutoKill(false);
-        BattleTime.TimeScaleChanged += (timeScale) => tweener.timeScale = timeScale;
     }
 
     private void OnCooldownBegan(float cooldownTime)
     {
+        tweener?.Kill();
         button.interactable = false;
-        cooldownLeft = cooldownTime;
+        var cooldownLeft = cooldownTime;
 
-        tweener
-            .ChangeStartValue(cooldownLeft, cooldownTime)
+        tweener = DOTween
+            .To(() => cooldownLeft, (x) => cooldownLeft = x, 0f, cooldownTime)
+            .SetEase(Ease.Linear)
             .OnUpdate(() =>
             {
                 cooldownGauge.fillAmount = cooldownLeft / cooldownTime;
@@ -55,8 +50,10 @@ public class SkillAvatar : MonoBehaviour
             {
                 button.interactable = true;
                 cooldown.text = string.Empty;
-            })
-            .Restart();
+            }); 
+
+        tweener.timeScale = BattleTime.TimeScale;
+        BattleTime.TimeScaleChanged += (timeScale) => tweener.timeScale = timeScale;
     }
 
     private void OnDead()
