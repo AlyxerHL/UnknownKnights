@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class CharacterSpawner : MonoBehaviour
 {
-    public static readonly string GreenTeamTag = "GreenTeam";
-    public static readonly string RedTeamTag = "RedTeam";
+    public const string GreenTeamTag = "GreenTeam";
+    public const string RedTeamTag = "RedTeam";
 
     [SerializeField]
     private BattleGrid greenTeamGrid;

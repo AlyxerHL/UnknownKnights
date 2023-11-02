@@ -22,7 +22,7 @@ public class BattleReferee : MonoBehaviour
         var tweener = DOTween
             .To(() => time.Value, (x) => time.Value = x, 0f, timeLimit)
             .SetEase(Ease.Linear)
-            .OnComplete(() => Debug.Log("Time's up!"));
+            .OnComplete(() => ShowResult(Result.Draw).Forget());
 
         tweener.timeScale = BattleTime.TimeScale;
         BattleTime.TimeScaleChanged += (timeScale) => tweener.timeScale = timeScale;
@@ -36,16 +36,29 @@ public class BattleReferee : MonoBehaviour
 
         if (isFinished)
         {
-            ShowResult(firstTag).Forget();
+            var result = firstTag switch
+            {
+                CharacterSpawner.GreenTeamTag => Result.Victory,
+                CharacterSpawner.RedTeamTag => Result.Defeat,
+                _ => Result.Draw
+            };
+            ShowResult(result).Forget();
         }
     }
 
-    private static async UniTaskVoid ShowResult(string firstTag)
+    private static async UniTaskVoid ShowResult(Result result)
     {
         BattleTime.PauseTimeScale();
         await UniTask.WaitForSeconds(1f);
         var page = await PagesRouter.GoTo("ResultPage");
         var resultPage = page.GetComponent<ResultPage>();
-        resultPage.Initialize(firstTag == CharacterSpawner.GreenTeamTag);
+        resultPage.Initialize(result);
+    }
+
+    public enum Result
+    {
+        Victory,
+        Defeat,
+        Draw
     }
 }

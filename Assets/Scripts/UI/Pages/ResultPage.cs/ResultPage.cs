@@ -8,9 +8,9 @@ public class ResultPage : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI result;
 
-    public void Initialize(bool hasWin)
+    public void Initialize(BattleReferee.Result battleResult)
     {
-        result.text = hasWin ? "VICTORY" : "DEFEAT";
+        result.text = battleResult.ToString().ToUpper();
     }
 
     public void GoToHome()
