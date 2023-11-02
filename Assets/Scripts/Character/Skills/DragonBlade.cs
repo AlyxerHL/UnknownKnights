@@ -24,9 +24,10 @@ public class DragonBlade : Skill
 
     protected override async UniTask ApplyEffect()
     {
-        for (int i = 0; i < swingCount; i++)
+        var target = finder.Character;
+        for (int i = 0; i < swingCount && target != null; i++)
         {
-            finder.Character.Health.GetDamaged(damage);
+            target.Health.GetDamaged(damage);
             await UniTask.WaitForSeconds(recoveryTime, ignoreTimeScale: true);
         }
     }
