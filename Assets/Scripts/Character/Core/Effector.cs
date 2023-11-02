@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
@@ -21,6 +22,10 @@ public class Effector
         weapon = character.Weapon;
         skill = character.Skill;
     }
+
+    public event Action<bool> StunRefreshed;
+    public event Action<float> DamageBuffRefreshed;
+    public event Action<float> DamageReductionRefreshed;
 
     public void Purify()
     {
@@ -59,9 +64,11 @@ public class Effector
 
     private void RefreshStun()
     {
-        movement.enabled = stunEffectIDs.Count == 0;
-        weapon.enabled = stunEffectIDs.Count == 0;
-        skill.enabled = stunEffectIDs.Count == 0;
+        var isStunned = stunEffectIDs.Count > 0;
+        movement.enabled = !isStunned;
+        weapon.enabled = !isStunned;
+        skill.enabled = !isStunned;
+        StunRefreshed?.Invoke(isStunned);
     }
 
     private void ClearStun(int effectID)
@@ -81,6 +88,7 @@ public class Effector
     private void RefreshDamageBuff()
     {
         weapon.DamageMultiplier = damageBuffEffectIDs.Values.Aggregate(1f, Multiply);
+        DamageBuffRefreshed?.Invoke(weapon.DamageMultiplier);
     }
 
     private void ClearDamageBuff(int effectID)
@@ -100,6 +108,7 @@ public class Effector
     private void RefreshDamageReduction()
     {
         health.DamageReduction = damageReductionEffectIDs.Values.Aggregate(1f, Multiply);
+        DamageReductionRefreshed?.Invoke(health.DamageReduction);
     }
 
     private void ClearDamageReduction(int effectID)

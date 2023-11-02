@@ -19,7 +19,7 @@ public class BattlePageHealthPanel : MonoBehaviour
         characterSpawner.CharacterSpawned += (character) =>
         {
             var healthBar = Instantiate(healthBarPrefab, transform);
-            healthBar.Initialize(character.Health);
+            healthBar.Initialize(character.Health, character.Effector);
 
             character.Health.Changed += (changeAmount) =>
             {

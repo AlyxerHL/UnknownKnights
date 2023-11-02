@@ -9,6 +9,16 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     private Vector2 offset;
 
+    [Header("Effects")]
+    [SerializeField]
+    private GameObject stunEffect;
+
+    [SerializeField]
+    private GameObject damageBuffEffect;
+
+    [SerializeField]
+    private GameObject damageReductionEffect;
+
     private Transform target;
     private RectTransform rectTransform;
 
@@ -28,11 +38,16 @@ public class HealthBar : MonoBehaviour
         rectTransform.anchoredPosition = (Vector2)screenPosition + offset;
     }
 
-    public void Initialize(Health health)
+    public void Initialize(Health health, Effector effector)
     {
         target = health.transform;
         image.fillAmount = health.CurrentHealth / health.MaxHealth;
         health.Changed += (_) => image.fillAmount = health.CurrentHealth / health.MaxHealth;
         health.Dead += () => gameObject.SetActive(false);
+
+        effector.StunRefreshed += (isStunned) => stunEffect.SetActive(isStunned);
+        effector.DamageBuffRefreshed += (isBuffed) => damageBuffEffect.SetActive(isBuffed > 1f);
+        effector.DamageReductionRefreshed += (isReduced) =>
+            damageReductionEffect.SetActive(isReduced < 1f);
     }
 }
