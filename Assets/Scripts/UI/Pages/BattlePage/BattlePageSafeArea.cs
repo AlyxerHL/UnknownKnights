@@ -16,7 +16,6 @@ public class BattlePageSafeArea : MonoBehaviour
 
     private readonly List<Skill> greenTeamSkills = new();
     private bool isAutoSkillEnabled = true;
-    private bool isTimeAccelerated = false;
 
     private void Awake()
     {
@@ -51,7 +50,6 @@ public class BattlePageSafeArea : MonoBehaviour
 
     public void ToggleGameSpeed()
     {
-        BattleTime.BaseTimeScale = isTimeAccelerated ? 1f : 1.5f;
-        isTimeAccelerated = !isTimeAccelerated;
+        BattleTime.BaseTimeScale = BattleTime.BaseTimeScale > 1f ? 1f : 1.5f;
     }
 }

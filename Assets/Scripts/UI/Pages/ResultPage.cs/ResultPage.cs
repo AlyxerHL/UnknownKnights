@@ -15,6 +15,7 @@ public class ResultPage : MonoBehaviour
 
     public void GoToHome()
     {
+        BattleTime.ResumeTimeScale();
         Time.timeScale = 1f;
         DOTween.KillAll();
         SceneManager.LoadScene(0);
