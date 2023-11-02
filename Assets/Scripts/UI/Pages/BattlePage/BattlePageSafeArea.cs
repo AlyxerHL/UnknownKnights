@@ -51,7 +51,6 @@ public class BattlePageSafeArea : MonoBehaviour
     public void ToggleGameSpeed()
     {
         TimeSystem.BaseTimeScale = isTimeAccelerated ? 1f : 1.5f;
-        TimeSystem.ResetTimeScale();
         isTimeAccelerated = !isTimeAccelerated;
     }
 }
