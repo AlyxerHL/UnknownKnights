@@ -18,12 +18,14 @@ public abstract class Skill : MonoBehaviour
 
     public event Func<UniTask> BeganUsing;
     public event Func<UniTask> EndedUsing;
+    public event Action<float> CooldownBegan;
 
     protected abstract bool CanUse { get; }
 
     private void Start()
     {
         Cooldown().Forget();
+        CooldownBegan?.Invoke(cooldown);
     }
 
     private void OnEnable()
@@ -34,13 +36,6 @@ public abstract class Skill : MonoBehaviour
     private void OnDisable()
     {
         StopAutoSkill();
-    }
-
-    public async UniTask Cooldown()
-    {
-        isCooldown = true;
-        await UniTask.WaitForSeconds(cooldown);
-        isCooldown = false;
     }
 
     public async UniTask Use()
@@ -64,6 +59,7 @@ public abstract class Skill : MonoBehaviour
         {
             await (BeganUsing?.Invoke() ?? UniTask.CompletedTask);
             Cooldown().Forget();
+            CooldownBegan?.Invoke(cooldown);
             await ApplyEffect();
             await (EndedUsing?.Invoke() ?? UniTask.CompletedTask);
         }
@@ -89,4 +85,11 @@ public abstract class Skill : MonoBehaviour
     }
 
     protected abstract UniTask ApplyEffect();
+
+    private async UniTask Cooldown()
+    {
+        isCooldown = true;
+        await UniTask.WaitForSeconds(cooldown);
+        isCooldown = false;
+    }
 }

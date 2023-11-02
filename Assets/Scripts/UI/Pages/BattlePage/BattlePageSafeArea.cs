@@ -7,6 +7,12 @@ public class BattlePageSafeArea : MonoBehaviour
     [SerializeField]
     private CharacterSpawner characterSpawner;
 
+    [SerializeField]
+    private SkillAvatar skillAvatarPrefab;
+
+    [SerializeField]
+    private RectTransform skillAvatarContainer;
+
     private readonly List<Skill> greenTeamSkills = new();
     private bool isAutoSkillEnabled = true;
 
@@ -14,10 +20,15 @@ public class BattlePageSafeArea : MonoBehaviour
     {
         characterSpawner.CharacterSpawned += (character) =>
         {
-            if (character.CompareTag(CharacterSpawner.GreenTeamTag))
+            if (!character.CompareTag(CharacterSpawner.GreenTeamTag))
             {
-                greenTeamSkills.Add(character.Skill);
+                return;
             }
+
+            greenTeamSkills.Add(character.Skill);
+            var sprite = character.GetComponent<SpriteRenderer>().sprite;
+            var skillAvatar = Instantiate(skillAvatarPrefab, skillAvatarContainer);
+            skillAvatar.Initialize(sprite, character.Skill, character.Health);
         };
     }
 
