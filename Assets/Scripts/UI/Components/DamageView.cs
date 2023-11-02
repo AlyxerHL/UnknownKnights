@@ -44,7 +44,6 @@ public class DamageView : MonoBehaviour
         rectTransform
             .DOAnchorPos(position + offset, duration)
             .SetEase(Ease.OutExpo)
-            .SetUpdate(true)
             .OnComplete(() => PoolToReturn.Release(this));
     }
 }
