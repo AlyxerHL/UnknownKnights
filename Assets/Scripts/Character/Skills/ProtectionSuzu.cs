@@ -14,7 +14,7 @@ public class ProtectionSuzu : Skill
 
     protected override bool CanUse => true;
 
-    protected override UniTask ApplyEffect()
+    protected override void ApplyEffect()
     {
         foreach (var character in finder.Characters)
         {
@@ -22,6 +22,5 @@ public class ProtectionSuzu : Skill
             character.Effector.Purify();
             character.Effector.ApplyDamageReduction(0f, effectDuration).Forget();
         }
-        return UniTask.CompletedTask;
     }
 }

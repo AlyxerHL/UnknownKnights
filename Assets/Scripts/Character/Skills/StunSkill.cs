@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class Hack : Skill
+public class StunSkill : Skill
 {
     [SerializeField]
     private float range;
@@ -16,9 +16,8 @@ public class Hack : Skill
     private bool IsWithinRange =>
         (transform.position - finder.Character.transform.position).sqrMagnitude <= range;
 
-    protected override UniTask ApplyEffect()
+    protected override void ApplyEffect()
     {
         finder.Character.Effector.ApplyStun(effectDuration).Forget();
-        return UniTask.CompletedTask;
     }
 }

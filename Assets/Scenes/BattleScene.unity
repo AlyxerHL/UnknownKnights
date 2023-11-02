@@ -305,6 +305,7 @@ MonoBehaviour:
   characterSpawner: {fileID: 46794427}
   skillQuotePrefab: {fileID: 7632348246687878546, guid: 6ea341d2695d349f3a7ad4c095e224e3, type: 3}
   quoteDuration: 0.65
+  recoveryDuration: 0.35
 --- !u!1 &445030205
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,9 @@ public class BattlePageSkillEffect : MonoBehaviour
     [SerializeField]
     private float quoteDuration;
 
+    [SerializeField]
+    private float recoveryDuration;
+
     private readonly HashSet<SkillQuote> skillQuotes = new();
 
     private void Awake()
@@ -22,7 +25,7 @@ public class BattlePageSkillEffect : MonoBehaviour
         {
             SkillQuote skillQuote = null;
             character.Skill.BeganUsing += async () => skillQuote = await Show(character.Skill);
-            character.Skill.EndedUsing += () => Hide(skillQuote);
+            character.Skill.EndedUsing += async () => await Hide(skillQuote);
         };
     }
 
@@ -37,13 +40,14 @@ public class BattlePageSkillEffect : MonoBehaviour
         return skillQuote;
     }
 
-    private UniTask Hide(SkillQuote skillQuote)
+    private async UniTask Hide(SkillQuote skillQuote)
     {
         if (skillQuote == null)
         {
-            return UniTask.CompletedTask;
+            return;
         }
 
+        await UniTask.WaitForSeconds(recoveryDuration, ignoreTimeScale: true);
         skillQuotes.Remove(skillQuote);
         Destroy(skillQuote.gameObject);
 
@@ -51,6 +55,5 @@ public class BattlePageSkillEffect : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-        return UniTask.CompletedTask;
     }
 }

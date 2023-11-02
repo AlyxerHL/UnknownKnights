@@ -60,7 +60,7 @@ public abstract class Skill : MonoBehaviour
             await (BeganUsing?.Invoke() ?? UniTask.CompletedTask);
             Cooldown().Forget();
             CooldownBegan?.Invoke(cooldown);
-            await ApplyEffect();
+            ApplyEffect();
             await (EndedUsing?.Invoke() ?? UniTask.CompletedTask);
         }
     }
@@ -88,7 +88,7 @@ public abstract class Skill : MonoBehaviour
         autoSkillCancellation?.Cancel();
     }
 
-    protected abstract UniTask ApplyEffect();
+    protected abstract void ApplyEffect();
 
     private async UniTask Cooldown()
     {

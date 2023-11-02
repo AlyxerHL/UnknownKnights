@@ -17,10 +17,9 @@ public class NanoBoost : Skill
 
     protected override bool CanUse => finder.Character != null;
 
-    protected override UniTask ApplyEffect()
+    protected override void ApplyEffect()
     {
         finder.Character.Effector.ApplyDamageBuff(damageBuff, effectDuration).Forget();
         finder.Character.Effector.ApplyDamageReduction(damageReduction, effectDuration).Forget();
-        return UniTask.CompletedTask;
     }
 }
