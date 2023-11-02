@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public static class Linq
+public static class LinqExtension
 {
     public static TSource MinBy<TSource, TKey>(
         this IEnumerable<TSource> source,

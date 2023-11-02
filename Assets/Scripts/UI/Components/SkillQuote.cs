@@ -24,8 +24,8 @@ public class SkillQuote : MonoBehaviour
             return;
         }
 
-        var screenPosition = Camera.main.WorldToScreenPoint(target.position);
-        rectTransform.anchoredPosition = (Vector2)screenPosition + offset;
+        var canvasPosition = Camera.main.WorldToCanvasPoint(target.position);
+        rectTransform.anchoredPosition = canvasPosition + offset;
     }
 
     public void Initialize(Skill skill)

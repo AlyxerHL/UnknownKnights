@@ -38,8 +38,7 @@ public class DamageView : MonoBehaviour
         text.color = amount < 0 ? damageColor : healColor;
 
         var position =
-            (Vector2)Camera.main.WorldToScreenPoint(target.position)
-            + Random.insideUnitCircle * randomness;
+            Camera.main.WorldToCanvasPoint(target.position) + Random.insideUnitCircle * randomness;
         rectTransform.anchoredPosition = position;
 
         rectTransform
