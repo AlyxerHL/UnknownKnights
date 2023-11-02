@@ -7,7 +7,10 @@ using UnityEngine.UI;
 public class SkillAvatar : MonoBehaviour
 {
     [SerializeField]
-    private Button avatar;
+    private Button button;
+
+    [SerializeField]
+    private Image avatar;
 
     [SerializeField]
     private TextMeshProUGUI cooldown;
@@ -18,20 +21,25 @@ public class SkillAvatar : MonoBehaviour
     [SerializeField]
     private Image healthBar;
 
+    private Tweener tweener;
+
     public void Initialize(Sprite sprite, Skill skill, Health health)
     {
-        avatar.image.sprite = sprite;
+        avatar.sprite = sprite;
         skill.CooldownBegan += OnCooldownBegan;
+        button.onClick.AddListener(() => skill.Use().Forget());
+
         health.Changed += (_) => healthBar.fillAmount = health.CurrentHealth / health.MaxHealth;
-        avatar.onClick.AddListener(() => skill.Use().Forget());
+        health.Dead += OnDead;
     }
 
     private void OnCooldownBegan(float time)
     {
-        avatar.interactable = false;
+        tweener?.Kill();
+        button.interactable = false;
         var cooldownTime = time;
 
-        DOTween
+        tweener = DOTween
             .To(() => cooldownTime, (x) => cooldownTime = x, 0f, cooldownTime)
             .SetEase(Ease.Linear)
             .OnUpdate(() =>
@@ -41,8 +49,17 @@ public class SkillAvatar : MonoBehaviour
             })
             .OnComplete(() =>
             {
-                avatar.interactable = true;
+                button.interactable = true;
                 cooldown.text = string.Empty;
             });
+    }
+
+    private void OnDead()
+    {
+        tweener?.Kill();
+        button.interactable = false;
+        avatar.color = Color.red;
+        cooldown.gameObject.SetActive(false);
+        cooldownGauge.gameObject.SetActive(false);
     }
 }
