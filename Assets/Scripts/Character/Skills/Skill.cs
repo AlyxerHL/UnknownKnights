@@ -6,9 +6,6 @@ using UnityEngine;
 
 public abstract class Skill : MonoBehaviour
 {
-    [SerializeField]
-    private Weapon weapon;
-
     [field: SerializeField]
     public string Quote { get; private set; }
 
@@ -48,23 +45,27 @@ public abstract class Skill : MonoBehaviour
 
     public async UniTask Use()
     {
+        if (skillQueue.Count == 0)
+        {
+            Time.timeScale = 0f;
+        }
+
         skillQueue.Enqueue(this);
         await UniTask.WaitUntil(() => skillQueue.Peek() == this);
         await Use();
         skillQueue.Dequeue();
 
+        if (skillQueue.Count == 0)
+        {
+            Time.timeScale = 1f;
+        }
+
         async UniTask Use()
         {
-            Time.timeScale = 0f;
-            weapon.enabled = false;
             await (BeganUsing?.Invoke() ?? UniTask.CompletedTask);
-
             Cooldown().Forget();
             await ApplyEffect();
-
             await (EndedUsing?.Invoke() ?? UniTask.CompletedTask);
-            weapon.enabled = true;
-            Time.timeScale = 1f;
         }
     }
 
