@@ -19,6 +19,7 @@ public class ProtectionSuzu : Skill
         foreach (var character in finder.Characters)
         {
             character.Health.GetHealed(healAmount);
+            character.Effector.Purify();
             character.Effector.ApplyDamageReduction(0f, effectDuration).Forget();
         }
         return UniTask.CompletedTask;

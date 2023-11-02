@@ -22,6 +22,12 @@ public class Effector
         skill = character.Skill;
     }
 
+    public void Purify()
+    {
+        stunEffectIDs.Clear();
+        RefreshStun();
+    }
+
     public async UniTask ApplyStun(float duration)
     {
         var effectID = SetStun();
